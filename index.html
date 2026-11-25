@@ -1469,6 +1469,46 @@
       .busca {
         margin-bottom: 12px;
       }
+
+      /* desempenho */
+      .dt-linha {
+        margin-bottom: 14px;
+      }
+      .dt-linha:last-child {
+        margin-bottom: 0;
+      }
+      .dt-cab {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 8px;
+        font-weight: 700;
+        font-size: 15px;
+        margin-bottom: 5px;
+      }
+      .dt-tag {
+        color: #fff;
+        font-size: 11px;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 99px;
+        white-space: nowrap;
+      }
+      .dt-barra {
+        height: 10px;
+        background: #eef3f1;
+        border-radius: 99px;
+        overflow: hidden;
+      }
+      .dt-barra i {
+        display: block;
+        height: 100%;
+        border-radius: 99px;
+      }
+      .dt-linha small {
+        color: var(--cinza);
+        font-size: 12px;
+      }
     </style>
   </head>
   <body>
@@ -3218,6 +3258,19 @@
               .eq("id", id)
           );
         },
+        async registrarRespostas(lista) {
+          ok(await sb.from("respostas").insert(lista));
+        },
+        async desempenhoTema(uid) {
+          let q = sb.from("desempenho_tema").select("*");
+          if (uid) q = q.eq("user_id", uid);
+          return ok(await q.limit(5000));
+        },
+        async desempenhoPergunta(uid) {
+          let q = sb.from("desempenho_pergunta").select("*");
+          if (uid) q = q.eq("user_id", uid);
+          return ok(await q.limit(10000));
+        },
         async mudarPapel(id, papel) {
           ok(await sb.from("perfis").update({ papel }).eq("id", id));
         }
@@ -4014,6 +4067,7 @@
       }
       let DUELO_PEND = null;
       async function fimDuelo() {
+        enviarRespostas();
         pararTimer();
         const d = J.duelo;
         J.encerrado = true;
@@ -4281,7 +4335,8 @@
           if (ADM.aba === "convites") ADM.convites = await api.convites();
           if (ADM.aba === "quizzes") ADM.quizzes = await api.quizzesEnviados();
           if (ADM.aba === "correcoes") ADM.correcoes = await api.correcoes();
-          if (ADM.aba === "equipe") JOGADORES = await api.jogadores();
+          if (ADM.aba === "equipe" || ADM.aba === "desempenho") JOGADORES = await api.jogadores();
+          if (ADM.aba === "desempenho") ADM.desemp = await desenhaAdminDesempenho();
         } catch (e) {
           toast(msgErro(e));
         }
@@ -4296,6 +4351,7 @@
           ["convites", "🎟️ Convites"],
           ["quizzes", "📥 Quizzes" + (ADM.quizzes && ADM.quizzes.length ? ` (${ADM.quizzes.length})` : "")],
           ["correcoes", "🚩 Correções"],
+          ["desempenho", "📊 Desempenho"],
           ["equipe", "👥 Equipe"]
         ];
         let corpo = "";
@@ -4361,6 +4417,7 @@
                   .join("")
               : `<div class="vazio">Nada por aqui. 🎉</div>`);
         }
+        if (ADM.aba === "desempenho") corpo = ADM.desemp || "";
         if (ADM.aba === "equipe") {
           corpo = JOGADORES.slice()
             .sort((a, b) => b.xp - a.xp)
@@ -4378,6 +4435,184 @@
       }
       function acharConvite(c) {
         return (ADM.novos || []).find(x => x.codigo === c) || (ADM.convites || []).find(x => x.codigo === c) || { codigo: c };
+      }
+
+      /* ---------- Desempenho ---------- */
+      let RESP_BUF = [];
+      function anotaResposta(modo, tema, ref, pergunta, certo) {
+        if (!EU) return;
+        RESP_BUF.push({
+          modo: String(modo || "pn").slice(0, 20),
+          tema: String(tema || "comunidade").slice(0, 40),
+          ref: ref ? String(ref).slice(0, 80) : null,
+          pergunta: String(pergunta || "").slice(0, 700),
+          certo: !!certo
+        });
+      }
+      function enviarRespostas() {
+        if (!EU || !RESP_BUF.length) return;
+        const lote = RESP_BUF.splice(0).map(r => Object.assign({ user_id: EU.id }, r));
+        api.registrarRespostas(lote).catch(() => {
+          RESP_BUF = lote
+            .map(({ user_id, ...r }) => r)
+            .concat(RESP_BUF)
+            .slice(-300);
+        });
+      }
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden") enviarRespostas();
+      });
+
+      const MIN_RESP = 5;
+      function nivelTema(t) {
+        if (t.total < MIN_RESP) return { k: "pouco", rot: "Pouco jogado", cor: "#8A9A94" };
+        const p = t.acertos / t.total;
+        if (p >= 0.8) return { k: "forte", rot: "Domina", cor: "#12805F" };
+        if (p >= 0.6) return { k: "medio", rot: "Em desenvolvimento", cor: "#DDA23A" };
+        return { k: "fraco", rot: "Precisa melhorar", cor: "#D6402F" };
+      }
+      const nomeTema = k => (TEMAS[k] ? TEMAS[k].ic + " " + TEMAS[k].n : k);
+      function somaTemas(linhas) {
+        const m = {};
+        linhas.forEach(l => {
+          const t = (m[l.tema] = m[l.tema] || { tema: l.tema, total: 0, acertos: 0 });
+          t.total += l.total;
+          t.acertos += l.acertos;
+        });
+        return Object.values(m).sort((a, b) => b.total - a.total);
+      }
+      function barrasTemas(temas) {
+        if (!temas.length) return `<div class="vazio">Ainda não há respostas registradas.</div>`;
+        return temas
+          .map(t => {
+            const n = nivelTema(t),
+              pct = Math.round((100 * t.acertos) / t.total);
+            return `<div class="dt-linha"><div class="dt-cab"><span>${esc(nomeTema(t.tema))}</span><span class="dt-tag" style="background:${n.cor}">${n.rot}</span></div>
+      <div class="dt-barra"><i style="width:${pct}%;background:${n.cor}"></i></div><small>${pct}% de acerto · ${t.acertos}/${t.total} respostas</small></div>`;
+          })
+          .join("");
+      }
+      function resumoTexto(temas, nome) {
+        const fortes = temas.filter(t => nivelTema(t).k === "forte").map(t => TEMAS[t.tema]?.n || t.tema);
+        const fracos = temas.filter(t => nivelTema(t).k === "fraco").map(t => TEMAS[t.tema]?.n || t.tema);
+        const medios = temas.filter(t => nivelTema(t).k === "medio").map(t => TEMAS[t.tema]?.n || t.tema);
+        const total = temas.reduce((a, t) => a + t.total, 0),
+          ac = temas.reduce((a, t) => a + t.acertos, 0);
+        if (!total) return `<p>${esc(nome)} ainda não respondeu nenhuma carta desde que o registro de desempenho começou.</p>`;
+        return `<p style="margin:0 0 8px"><b>${Math.round((100 * ac) / total)}%</b> de acerto em <b>${total}</b> respostas.</p>
+    ${fortes.length ? `<p style="margin:4px 0">💪 <b>Domina:</b> ${esc(fortes.join(", "))}.</p>` : ""}
+    ${medios.length ? `<p style="margin:4px 0">📈 <b>Em desenvolvimento:</b> ${esc(medios.join(", "))}.</p>` : ""}
+    ${fracos.length ? `<p style="margin:4px 0">🎯 <b>Precisa melhorar:</b> ${esc(fracos.join(", "))}.</p>` : ""}
+    ${!fortes.length && !fracos.length && !medios.length ? `<p style="margin:4px 0">Ainda poucas respostas por tema para tirar conclusões (mínimo ${MIN_RESP} por tema).</p>` : ""}`;
+      }
+      function gabarito(pergunta) {
+        const c = PERGUNTAS.find(p => p.q === pergunta);
+        if (c) return { r: c.ok ? "✅ Pode" : "⛔ Não pode", e: c.e, ev: c.ev };
+        const txt = pergunta.replace(/ \(estava certo\)$/, "");
+        for (const a of CACA) {
+          const p = a.partes.find(x => x.txt === txt);
+          if (p)
+            return p.ok
+              ? { r: "✅ Estava correto", e: "Esta parte do anúncio estava certa — foi marcada como erro." }
+              : { r: "🔍 Erro para encontrar", e: p.e, ev: p.ev };
+        }
+        return null;
+      }
+      function listaErradas(linhas, limite) {
+        const l = linhas
+          .filter(x => x.erros > 0)
+          .sort((a, b) => b.erros - a.erros || String(b.ultimo_erro).localeCompare(String(a.ultimo_erro)));
+        if (!l.length) return `<div class="vazio">Nenhum erro registrado. 🎉</div>`;
+        return `<div class="revisao" style="margin:0"><ul>${l
+          .slice(0, limite)
+          .map(x => {
+            const g = gabarito(x.pergunta);
+            return `<li><b>${esc(x.pergunta)}</b><small style="display:block;color:var(--cinza)">${esc(nomeTema(x.tema))} · errou ${x.erros} de ${x.total} vez${x.total === 1 ? "" : "es"}${x.ultimo_erro ? " · último erro " + dataBR(x.ultimo_erro) : ""}</small>
+      ${g ? `${g.r} — ${esc(g.e)}${g.ev ? verDoc(g.ev) : ""}` : ""}</li>`;
+          })
+          .join("")}</ul>${l.length > limite ? `<p class="nota">+ ${l.length - limite} outras perguntas com erro.</p>` : ""}</div>`;
+      }
+      let DES_UID = null;
+      async function telaDesempenho(uid) {
+        DES_UID = uid || EU.id;
+        const proprio = DES_UID === EU.id,
+          titulo = proprio ? "📊 Meu desempenho" : "📊 " + nomeDe(DES_UID);
+        const voltar = h => (proprio ? h : h.replace('data-ir="home"', 'data-ir="admin"'));
+        carregando(titulo);
+        try {
+          const [tm, pg] = await Promise.all([api.desempenhoTema(DES_UID), api.desempenhoPergunta(DES_UID)]);
+          if (!String(telaAtual).startsWith("desempenho")) return;
+          const temas = somaTemas(tm);
+          app.innerHTML =
+            voltar(topo(titulo)) +
+            `
+      <div class="cartao">${!proprio ? `<div class="item" style="box-shadow:none;padding:0;margin-bottom:10px"><div class="av">${esc(avatarDe(DES_UID))}</div><div class="tx"><h3>${esc(nomeDe(DES_UID))}</h3></div></div>` : ""}
+        ${resumoTexto(temas, proprio ? "Você" : primeiroNomeDe(DES_UID))}</div>
+      <div class="secao-t">Por tema</div><div class="cartao">${barrasTemas(temas)}</div>
+      <div class="secao-t">${proprio ? "Perguntas que você mais erra" : "Perguntas que errou"}</div>${listaErradas(pg, 30)}
+      <p class="nota">“Domina”: 80% ou mais · “Em desenvolvimento”: 60–79% · “Precisa melhorar”: abaixo de 60% · com pelo menos ${MIN_RESP} respostas no tema.</p>`;
+        } catch (e) {
+          app.innerHTML = voltar(topo(titulo)) + `<div class="erro-form">${esc(msgErro(e))}</div>`;
+        }
+      }
+      async function desenhaAdminDesempenho() {
+        const [tm, pg] = await Promise.all([api.desempenhoTema(), api.desempenhoPergunta()]);
+        const porJog = {};
+        tm.forEach(l => (porJog[l.user_id] = porJog[l.user_id] || []).push(l));
+        const equipe = somaTemas(tm);
+        const porPerg = {};
+        pg.forEach(l => {
+          const x = (porPerg[l.pergunta] = porPerg[l.pergunta] || {
+            pergunta: l.pergunta,
+            tema: l.tema,
+            total: 0,
+            erros: 0,
+            jog: 0,
+            ultimo_erro: null
+          });
+          x.total += l.total;
+          x.erros += l.erros;
+          if (l.erros) x.jog++;
+          if (l.ultimo_erro && (!x.ultimo_erro || l.ultimo_erro > x.ultimo_erro)) x.ultimo_erro = l.ultimo_erro;
+        });
+        const top = Object.values(porPerg)
+          .filter(x => x.erros)
+          .sort((a, b) => b.jog - a.jog || b.erros - a.erros)
+          .slice(0, 10);
+        const jogadores = JOGADORES.map(j => {
+          const t = somaTemas(porJog[j.id] || []),
+            tot = t.reduce((a, x) => a + x.total, 0),
+            ac = t.reduce((a, x) => a + x.acertos, 0);
+          return { j, t, tot, pct: tot ? Math.round((100 * ac) / tot) : null };
+        }).sort((a, b) => (b.tot ? 1 : 0) - (a.tot ? 1 : 0) || (a.pct ?? 0) - (b.pct ?? 0));
+        return `<div class="secao-t">Equipe por tema</div><div class="cartao">${barrasTemas(equipe)}</div>
+    <div class="secao-t">Perguntas que a equipe mais erra</div>
+    ${
+      top.length
+        ? `<div class="revisao" style="margin:0"><ul>${top
+            .map(x => {
+              const g = gabarito(x.pergunta);
+              return `<li><b>${esc(x.pergunta)}</b><small style="display:block;color:var(--cinza)">${esc(nomeTema(x.tema))} · ${x.jog} pessoa${x.jog === 1 ? " errou" : "s erraram"} · ${x.erros} erro${x.erros === 1 ? "" : "s"} em ${x.total} respostas</small>${g ? `${g.r} — ${esc(g.e)}` : ""}</li>`;
+            })
+            .join("")}</ul></div>`
+        : `<div class="vazio">Ainda sem erros registrados.</div>`
+    }
+    <div class="secao-t">Jogadores <small style="font-weight:400;color:var(--cinza);font-size:13px">(quem mais precisa de apoio primeiro)</small></div>
+    ${jogadores
+      .map(({ j, t, tot, pct }) => {
+        const fortes = t
+          .filter(x => nivelTema(x).k === "forte")
+          .map(x => TEMAS[x.tema]?.ic || "•")
+          .join(" ");
+        const fracos = t
+          .filter(x => nivelTema(x).k === "fraco")
+          .map(x => TEMAS[x.tema]?.ic || "•")
+          .join(" ");
+        return `<button class="item" data-a="ver-jogador" data-id="${j.id}"><div class="av">${esc(j.avatar)}</div><div class="tx"><h3>${esc(j.nome)}</h3>
+        <small>${tot ? `${pct}% de acerto · ${tot} respostas` : "Ainda sem respostas registradas"}${fortes ? ` · 💪 ${fortes}` : ""}${fracos ? ` · 🎯 ${fracos}` : ""}</small></div><span style="font-size:22px">›</span></button>`;
+      })
+      .join("")}
+    <p class="nota">💪 = domina · 🎯 = precisa melhorar. O registro começou nesta atualização; as partidas anteriores não entram.</p>`;
       }
 
       /* ---------- Ações (cliques) ---------- */
@@ -4455,6 +4690,11 @@
           telaNovoDuelo({ oponente: outroDe(d) });
         },
         "reenviar-duelo": () => enviarDuelo(),
+        "ver-jogador": el => {
+          telaAtual = "desempenho-jog";
+          window.scrollTo({ top: 0 });
+          telaDesempenho(el.dataset.id);
+        },
         "novo-quiz": () => abrirEditor(null),
         "editar-quiz": el => abrirEditor(acharQuiz(el.dataset.id)),
         "copiar-quiz": el => abrirEditor(acharQuiz(el.dataset.id), true),
@@ -4808,7 +5048,7 @@
       <button class="modo" data-ir="equipe"><span class="ic">🤝</span><h3>Da equipe</h3><p>${QUIZ_APROV.length} quiz${QUIZ_APROV.length === 1 ? "" : "zes"} aprovado${QUIZ_APROV.length === 1 ? "" : "s"}.</p><span class="canto" style="background:#C98A12"></span></button>
     </div>
     <div class="rodape-home"><button data-ir="medalhas">🏅 Conquistas (${Object.keys(P.medalhas).length}/${MEDALHAS.length})</button><button data-ir="ranking">🏆 Ranking</button></div>
-    <div class="rodape-home"><button data-ir="correcoes">🚩 Minhas correções</button>${EU.papel === "admin" ? `<button data-ir="admin">🛠️ Coordenação</button>` : ""}</div>
+    <div class="rodape-home"><button data-ir="desempenho">📊 Meu desempenho</button><button data-ir="correcoes">🚩 Minhas correções</button>${EU.papel === "admin" ? `<button data-ir="admin">🛠️ Coordenação</button>` : ""}</div>
     ${!instalado() ? `<div class="rodape-home"><button data-a="instalar">📲 ${pedidoInstalar ? "Instalar o jogo no celular" : "Como colocar na tela inicial"}</button></div>` : ""}`;
       }
 
@@ -4963,6 +5203,7 @@
           certo = pode === c.ok,
           el = $("#carta");
         cartaAtual = c;
+        anotaResposta(J.modo, c.t, c.ref, c.q, certo);
         if (el) {
           el.style.transform = `translateX(${pode ? 110 : -110}%) rotate(${pode ? 14 : -14}deg)`;
           el.style.opacity = "0";
@@ -5042,6 +5283,7 @@
       let fbDepois = null;
 
       function fimRodada() {
+        enviarRespostas();
         pararTimer();
         const modo = J.modo;
         let estrelas = 0,
@@ -5137,6 +5379,7 @@
         if (!p.ok) {
           if (C.achados.has(k)) return;
           C.achados.add(k);
+          anotaResposta("caca", C.a.tipo === "imp" ? "imp" : "online", "caca:" + C.i + ":" + k, p.txt, true);
           C.pts += 15;
           bip("certo");
           vibra(20);
@@ -5152,6 +5395,7 @@
             p.ev
           );
         } else {
+          anotaResposta("caca", C.a.tipo === "imp" ? "imp" : "online", "caca:" + C.i + ":" + k, p.txt + " (estava certo)", false);
           C.vidas--;
           bip("errado");
           vibra([60, 40, 60]);
@@ -5171,6 +5415,11 @@
         }
         P.xp += C.pts;
         P.rodadas++;
+        C.a.partes.forEach((x, k) => {
+          if (!x.ok && !C.achados.has(k))
+            anotaResposta("caca", C.a.tipo === "imp" ? "imp" : "online", "caca:" + C.i + ":" + k, x.txt, false);
+        });
+        enviarRespostas();
         registraRanking(C.pts, "Caça ao Erro", C.a.tit, C.achados.size, C.a.partes.filter(x => !x.ok).length);
         const novas = checaMedalhas();
         salvar();
@@ -5285,6 +5534,7 @@
           !confirm("Sair do duelo agora? Ele volta para a lista e você pode jogar depois do começo.")
         )
           return;
+        enviarRespostas();
         pararTimer();
         $("#fb").className = "feedback";
         fbDepois = null;
@@ -5368,7 +5618,8 @@
         duelos: telaDuelos,
         quizzes: telaQuizzes,
         equipe: telaEquipe,
-        admin: telaAdmin
+        admin: telaAdmin,
+        desempenho: () => telaDesempenho(EU.id)
       });
       /* App instalável */
       let pedidoInstalar = null;
