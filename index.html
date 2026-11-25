@@ -1,0 +1,4907 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://*.supabase.co wss://*.supabase.co; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="theme-color" content="#12805F" />
+    <title>Missão Anúncio — MedGuias</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --verde: #12805f;
+        --verde-esc: #0b5e45;
+        --verde-cl: #e3f4ec;
+        --verm: #d6402f;
+        --verm-cl: #fce7e4;
+        --ouro: #dda23a;
+        --ouro-cl: #fbf0da;
+        --tinta: #17302a;
+        --cinza: #61746d;
+        --fundo: #f3f8f5;
+        --branco: #fff;
+        --linha: #dce8e2;
+      }
+      * {
+        box-sizing: border-box;
+        -webkit-tap-highlight-color: transparent;
+      }
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        overflow-x: hidden;
+        max-width: 100vw;
+      }
+      html {
+        overflow-x: clip;
+      }
+      body {
+        overflow-x: clip;
+      }
+      body {
+        font-family: Inter, system-ui, sans-serif;
+        background: var(--fundo);
+        color: var(--tinta);
+        overflow-x: hidden;
+        padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+      }
+      h1,
+      h2,
+      h3,
+      .baloo {
+        font-family: "Baloo 2", system-ui, sans-serif;
+        margin: 0;
+        line-height: 1.1;
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+        border: 0;
+      }
+      .blob {
+        position: fixed;
+        border-radius: 50%;
+        filter: blur(2px);
+        opacity: 0.55;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .b1 {
+        width: 340px;
+        height: 340px;
+        background: #cfebdd;
+        top: -120px;
+        right: -120px;
+      }
+      .b2 {
+        width: 260px;
+        height: 260px;
+        background: #fbe3c2;
+        bottom: -100px;
+        left: -90px;
+      }
+      #app {
+        position: relative;
+        z-index: 1;
+        max-width: 560px;
+        margin: 0 auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding: 16px 16px 40px;
+        display: flex;
+        flex-direction: column;
+        overflow-x: clip;
+      }
+      .barra-topo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 14px;
+      }
+      .barra-topo .voltar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--branco);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        font-size: 18px;
+        display: grid;
+        place-items: center;
+        flex: none;
+      }
+      .barra-topo .tit {
+        flex: 1;
+        font-family: "Baloo 2", system-ui, sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        background: var(--branco);
+        border-radius: 99px;
+        padding: 6px 11px;
+        font-weight: 700;
+        font-size: 14px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+      .som {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--branco);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+        font-size: 17px;
+      }
+      /* home */
+      .hero {
+        background: linear-gradient(140deg, var(--verde), #18a37a);
+        color: #fff;
+        border-radius: 28px;
+        padding: 22px 20px;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 16px;
+      }
+      .hero::after {
+        content: "";
+        position: absolute;
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.12);
+        right: -50px;
+        top: -60px;
+      }
+      .hero h1 {
+        font-size: 34px;
+        font-weight: 800;
+      }
+      .hero p {
+        margin: 6px 0 14px;
+        opacity: 0.92;
+        font-size: 15px;
+      }
+      .nivel {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .nivel .circ {
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        background: #fff;
+        color: var(--verde);
+        display: grid;
+        place-items: center;
+        font-family: "Baloo 2", system-ui, sans-serif;
+        font-weight: 800;
+        font-size: 22px;
+        flex: none;
+      }
+      .nivel .info {
+        flex: 1;
+      }
+      .nivel .bar {
+        height: 10px;
+        border-radius: 99px;
+        background: rgba(255, 255, 255, 0.3);
+        overflow: hidden;
+        margin-top: 5px;
+      }
+      .nivel .bar i {
+        display: block;
+        height: 100%;
+        background: var(--ouro);
+        border-radius: 99px;
+        transition: width 0.6s;
+      }
+      .nome-in {
+        width: 100%;
+        border: 0;
+        border-radius: 14px;
+        padding: 11px 14px;
+        font: inherit;
+        font-size: 15px;
+        margin-top: 14px;
+      }
+      .modos {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      .modo {
+        background: var(--branco);
+        border-radius: 24px;
+        padding: 16px;
+        text-align: left;
+        box-shadow: 0 4px 14px rgba(18, 128, 95, 0.08);
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.15s;
+      }
+      .modo:active {
+        transform: scale(0.97);
+      }
+      .modo .ic {
+        font-size: 32px;
+      }
+      .modo h3 {
+        font-size: 19px;
+        margin-top: 6px;
+      }
+      .modo p {
+        margin: 4px 0 0;
+        font-size: 13px;
+        color: var(--cinza);
+      }
+      .modo.largo {
+        grid-column: span 2;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .modo.largo .ic {
+        font-size: 40px;
+      }
+      .modo .canto {
+        position: absolute;
+        right: -24px;
+        bottom: -24px;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        opacity: 0.15;
+      }
+      .rodape-home {
+        display: flex;
+        gap: 10px;
+        margin-top: 14px;
+      }
+      .rodape-home button {
+        flex: 1;
+        background: var(--branco);
+        border-radius: 18px;
+        padding: 12px;
+        font-weight: 600;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+      /* temas */
+      .tema {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: var(--branco);
+        border-radius: 22px;
+        padding: 14px 16px;
+        margin-bottom: 10px;
+        width: 100%;
+        text-align: left;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+      }
+      .tema .ic {
+        width: 52px;
+        height: 52px;
+        border-radius: 16px;
+        display: grid;
+        place-items: center;
+        font-size: 26px;
+        flex: none;
+      }
+      .tema .tx {
+        flex: 1;
+      }
+      .tema h3 {
+        font-size: 18px;
+      }
+      .tema small {
+        color: var(--cinza);
+      }
+      .estrelas {
+        letter-spacing: 2px;
+        font-size: 16px;
+      }
+      .estrelas .on {
+        color: var(--ouro);
+      }
+      .estrelas .off {
+        color: #d5ded9;
+      }
+      /* jogo pode/não pode */
+      .hud {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 10px;
+      }
+      .hud .prog {
+        flex: 1;
+        height: 12px;
+        background: #ddeae3;
+        border-radius: 99px;
+        overflow: hidden;
+      }
+      .hud .prog i {
+        display: block;
+        height: 100%;
+        background: var(--verde);
+        border-radius: 99px;
+        transition: width 0.4s;
+      }
+      .vidas {
+        font-size: 18px;
+        letter-spacing: 1px;
+      }
+      .combo {
+        font-family: "Baloo 2", system-ui, sans-serif;
+        font-weight: 800;
+        color: var(--ouro);
+        font-size: 18px;
+        min-width: 44px;
+        text-align: right;
+      }
+      .palco {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        min-height: 300px;
+        overflow: hidden;
+        padding: 10px 6px 4px;
+        margin: 0 -6px;
+      }
+      .carta {
+        background: var(--branco);
+        border-radius: 28px;
+        padding: 26px 22px;
+        box-shadow: 0 10px 30px rgba(18, 128, 95, 0.14);
+        text-align: center;
+        touch-action: pan-y;
+        user-select: none;
+        position: relative;
+        transition:
+          transform 0.25s,
+          opacity 0.25s;
+      }
+      .carta .tag {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 99px;
+        color: #fff;
+        margin-bottom: 12px;
+      }
+      .carta .q {
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 1.35;
+        min-height: 110px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .carta .dica {
+        font-size: 12px;
+        color: var(--cinza);
+        margin-top: 12px;
+      }
+      .carta .selo {
+        position: absolute;
+        top: 18px;
+        font-family: "Baloo 2", system-ui, sans-serif;
+        font-weight: 800;
+        font-size: 22px;
+        padding: 2px 12px;
+        border-radius: 10px;
+        border: 3px solid;
+        opacity: 0;
+        transform: rotate(-12deg);
+      }
+      .carta .selo.pode {
+        left: 16px;
+        color: var(--verde);
+        border-color: var(--verde);
+      }
+      .carta .selo.nao {
+        right: 16px;
+        color: var(--verm);
+        border-color: var(--verm);
+        transform: rotate(12deg);
+      }
+      .botoes {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 18px;
+      }
+      .bt {
+        border-radius: 99px;
+        padding: 16px;
+        font-weight: 700;
+        font-size: 17px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12);
+        transition: transform 0.1s;
+      }
+      .bt:active {
+        transform: translateY(2px);
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.12);
+      }
+      .bt.nao {
+        background: var(--verm);
+      }
+      .bt.pode {
+        background: var(--verde);
+      }
+      .bt.neutro {
+        background: var(--tinta);
+      }
+      .bt.claro {
+        background: var(--branco);
+        color: var(--tinta);
+        box-shadow: 0 3px 0 #d9e4df;
+      }
+      .feedback {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 20;
+        max-height: 82vh;
+        max-height: 82dvh;
+        overflow-y: auto;
+        padding: 18px 18px calc(18px + env(safe-area-inset-bottom));
+        border-radius: 26px 26px 0 0;
+        transform: translateY(110%);
+        transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+        max-width: 560px;
+        margin: 0 auto;
+      }
+      .feedback.on {
+        transform: none;
+      }
+      .feedback.certo {
+        background: #ddf3e7;
+      }
+      .feedback.errado {
+        background: #fce3df;
+      }
+      .feedback h3 {
+        font-size: 24px;
+      }
+      .feedback.certo h3 {
+        color: var(--verde-esc);
+      }
+      .feedback.errado h3 {
+        color: #a8261a;
+      }
+      .feedback p {
+        margin: 6px 0 14px;
+        font-size: 15px;
+        line-height: 1.45;
+      }
+      .feedback .bt {
+        width: 100%;
+      }
+      .btn-doc {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #fff;
+        color: var(--tinta);
+        border-radius: 99px;
+        padding: 8px 14px;
+        font-weight: 700;
+        font-size: 14px;
+        margin: 0 0 12px;
+        box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
+      }
+      .prova {
+        background: #fff;
+        border-radius: 16px;
+        padding: 12px 14px;
+        margin: 0 0 14px;
+        border-left: 5px solid var(--verde);
+        font-size: 14px;
+        line-height: 1.45;
+      }
+      .prova .fonte {
+        font-weight: 700;
+        font-size: 13px;
+        color: var(--verde-esc);
+      }
+      .prova .secao {
+        font-size: 12px;
+        color: var(--cinza);
+        margin: 2px 0 8px;
+      }
+      .prova blockquote {
+        margin: 0 0 8px;
+        padding: 0;
+        font-style: italic;
+        color: #2b3d37;
+      }
+      .prova blockquote:last-child {
+        margin-bottom: 0;
+      }
+      .prova.eli {
+        border-left-color: var(--ouro);
+      }
+      .prova.eli .fonte {
+        color: #8a6410;
+      }
+      details.ver-doc {
+        margin-top: 6px;
+      }
+      details.ver-doc summary {
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 13px;
+        color: var(--verde);
+        list-style: none;
+      }
+      details.ver-doc summary::-webkit-details-marker {
+        display: none;
+      }
+      details.ver-doc .prova {
+        margin: 8px 0 0;
+      }
+      .timer {
+        font-family: "Baloo 2", system-ui, sans-serif;
+        font-weight: 800;
+        font-size: 22px;
+        min-width: 56px;
+        text-align: center;
+      }
+      .timer.pouco {
+        color: var(--verm);
+        animation: pulsa 0.6s infinite;
+      }
+      @keyframes pulsa {
+        50% {
+          transform: scale(1.15);
+        }
+      }
+      .shake {
+        animation: shake 0.35s;
+      }
+      @keyframes shake {
+        20%,
+        60% {
+          transform: translateX(-8px);
+        }
+        40%,
+        80% {
+          transform: translateX(8px);
+        }
+      }
+      .pop {
+        animation: pop 0.35s;
+      }
+      @keyframes pop {
+        50% {
+          transform: scale(1.06);
+        }
+      }
+      .flutua {
+        position: fixed;
+        font-family: "Baloo 2", system-ui, sans-serif;
+        font-weight: 800;
+        font-size: 26px;
+        pointer-events: none;
+        z-index: 40;
+        animation: flutua 1s forwards;
+      }
+      @keyframes flutua {
+        to {
+          transform: translateY(-70px);
+          opacity: 0;
+        }
+      }
+      /* caça */
+      .anuncio {
+        border-radius: 20px;
+        padding: 18px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
+      }
+      .anuncio.imp {
+        background: #fff;
+        border: 2px solid #1d1d1d;
+      }
+      .anuncio.imp.verde {
+        border-color: var(--verde);
+      }
+      .anuncio.imp.azul {
+        border-color: #2563eb;
+        background: #eef4ff;
+      }
+      .anuncio.online {
+        background: #fff;
+        border: 1px solid var(--linha);
+      }
+      .anuncio .barra-url {
+        width: 100%;
+        background: #eef3f1;
+        border-radius: 10px;
+        padding: 6px 10px;
+        font-size: 12px;
+        color: var(--cinza);
+      }
+      .parte {
+        background: transparent;
+        border: 2px dashed transparent;
+        border-radius: 10px;
+        padding: 4px 8px;
+        text-align: left;
+        color: var(--tinta);
+        transition: background 0.2s;
+      }
+      .parte:hover {
+        border-color: #cfdcd6;
+      }
+      .parte.titulo {
+        font-family: "Baloo 2", system-ui, sans-serif;
+        font-weight: 800;
+        font-size: 24px;
+      }
+      .parte.titulo-min {
+        font-family: "Baloo 2", system-ui, sans-serif;
+        font-weight: 700;
+        font-size: 22px;
+      }
+      .parte.sub {
+        font-weight: 700;
+        color: var(--verde);
+      }
+      .parte.reg {
+        font-weight: 600;
+        font-size: 14px;
+      }
+      .parte.slogan {
+        font-style: italic;
+        font-weight: 600;
+      }
+      .parte.cta {
+        background: #1d1d1d;
+        color: #fff;
+        border-radius: 99px;
+        font-weight: 700;
+      }
+      .parte.qr {
+        font-family: monospace;
+        font-size: 13px;
+        border: 2px solid #1d1d1d;
+        border-radius: 8px;
+        align-self: flex-end;
+      }
+      .parte.kw {
+        background: #eef3f1;
+        border-radius: 99px;
+        font-size: 14px;
+      }
+      .parte.arquivo {
+        background: #fff6e6;
+        font-size: 14px;
+        font-family: monospace;
+      }
+      .parte.linha {
+        font-size: 14px;
+      }
+      .parte.achou {
+        background: var(--verm-cl);
+        border: 2px solid var(--verm);
+        text-decoration: line-through;
+        text-decoration-color: rgba(214, 64, 47, 0.6);
+      }
+      .parte.certinho {
+        background: var(--verde-cl);
+        border: 2px solid var(--verde);
+      }
+      .dica-caca {
+        font-size: 14px;
+        color: var(--cinza);
+        margin: 0 0 12px;
+        text-align: center;
+      }
+      .restam {
+        font-family: "Baloo 2", system-ui, sans-serif;
+        font-weight: 800;
+        font-size: 18px;
+      }
+      /* ordem */
+      .slots {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+      .slot {
+        min-height: 46px;
+        border-radius: 16px;
+        border: 2px dashed #c8d8d0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 12px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--cinza);
+      }
+      .slot.cheio {
+        border: 2px solid var(--verde);
+        background: var(--verde-cl);
+        color: var(--verde-esc);
+      }
+      .slot .n {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: #fff;
+        display: grid;
+        place-items: center;
+        font-family: "Baloo 2", system-ui, sans-serif;
+        font-weight: 800;
+        flex: none;
+      }
+      .opcoes {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .opc {
+        background: var(--branco);
+        border-radius: 14px;
+        padding: 10px 12px;
+        font-size: 14px;
+        font-weight: 600;
+        box-shadow: 0 3px 0 #d9e4df;
+        text-align: left;
+      }
+      .opc:active {
+        transform: translateY(2px);
+      }
+      /* resultado */
+      .resultado {
+        text-align: center;
+        padding-top: 10px;
+      }
+      .resultado .big {
+        font-size: 64px;
+      }
+      .resultado h2 {
+        font-size: 32px;
+        margin: 6px 0;
+      }
+      .resultado .pts {
+        font-family: "Baloo 2", system-ui, sans-serif;
+        font-weight: 800;
+        font-size: 44px;
+        color: var(--verde);
+      }
+      .resultado .estrelas {
+        font-size: 40px;
+        margin: 6px 0 14px;
+      }
+      .revisao {
+        text-align: left;
+        background: var(--branco);
+        border-radius: 20px;
+        padding: 14px 16px;
+        margin: 14px 0;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+      }
+      .revisao h3 {
+        font-size: 18px;
+        margin-bottom: 6px;
+      }
+      .revisao li {
+        margin-bottom: 8px;
+        font-size: 14px;
+        line-height: 1.4;
+      }
+      .revisao li b {
+        display: block;
+      }
+      .medalha-nova {
+        background: var(--ouro-cl);
+        border: 2px solid var(--ouro);
+        border-radius: 18px;
+        padding: 10px 14px;
+        margin: 10px 0;
+        font-weight: 600;
+      }
+      /* conquistas / ranking */
+      .grade {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .med {
+        background: var(--branco);
+        border-radius: 20px;
+        padding: 14px;
+        text-align: center;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+      }
+      .med .ic {
+        font-size: 36px;
+      }
+      .med.bloq {
+        opacity: 0.4;
+        filter: grayscale(1);
+      }
+      .med h3 {
+        font-size: 15px;
+        margin-top: 4px;
+      }
+      .med small {
+        color: var(--cinza);
+        font-size: 12px;
+      }
+      .rank {
+        background: var(--branco);
+        border-radius: 20px;
+        padding: 6px 14px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+      }
+      .rank div {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--linha);
+        font-weight: 600;
+      }
+      .rank div:last-child {
+        border: 0;
+      }
+      .confete {
+        position: fixed;
+        width: 10px;
+        height: 14px;
+        top: -20px;
+        z-index: 50;
+        pointer-events: none;
+        animation: cai linear forwards;
+      }
+      @keyframes cai {
+        to {
+          transform: translateY(110vh) rotate(720deg);
+        }
+      }
+      .oculto {
+        display: none !important;
+      }
+      @media (min-width: 700px) {
+        .carta .q {
+          font-size: 22px;
+        }
+        #app {
+          padding-top: 28px;
+        }
+      }
+
+      /* ===== versão on-line ===== */
+      .feedback:not(.on) {
+        visibility: hidden;
+        transition:
+          transform 0.3s,
+          visibility 0s 0.3s;
+      }
+      .feedback.on {
+        visibility: visible;
+      }
+      .avatar-bt {
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: var(--branco);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        font-size: 22px;
+        display: grid;
+        place-items: center;
+        flex: none;
+      }
+      .sync {
+        font-size: 16px;
+        min-width: 22px;
+        text-align: center;
+      }
+      .badge {
+        display: inline-grid;
+        place-items: center;
+        min-width: 24px;
+        height: 24px;
+        padding: 0 6px;
+        border-radius: 99px;
+        background: var(--verm);
+        color: #fff;
+        font-size: 14px;
+        vertical-align: middle;
+        animation: pulsa 1.2s infinite;
+      }
+      .contador {
+        position: absolute;
+        right: 16px;
+        top: 16px;
+        font-weight: 700;
+        font-size: 13px;
+        color: var(--cinza);
+      }
+      .auth {
+        max-width: 420px;
+        margin: 0 auto;
+        width: 100%;
+        padding-top: 4vh;
+      }
+      .auth .logo {
+        width: 84px;
+        height: 84px;
+        border-radius: 26px;
+        background: linear-gradient(140deg, var(--verde), #18a37a);
+        display: grid;
+        place-items: center;
+        font-size: 44px;
+        margin: 0 auto 10px;
+        box-shadow: 0 10px 24px rgba(18, 128, 95, 0.25);
+      }
+      .auth h1 {
+        text-align: center;
+        font-size: 32px;
+        font-weight: 800;
+      }
+      .auth .sub {
+        text-align: center;
+        color: var(--cinza);
+        margin: 4px 0 18px;
+      }
+      .cartao {
+        background: var(--branco);
+        border-radius: 24px;
+        padding: 18px;
+        box-shadow: 0 4px 14px rgba(18, 128, 95, 0.08);
+        margin-bottom: 14px;
+      }
+      .cartao h3 {
+        font-size: 19px;
+        margin-bottom: 8px;
+      }
+      .campo {
+        display: block;
+        font-weight: 600;
+        font-size: 14px;
+        margin-bottom: 12px;
+      }
+      .campo input,
+      .campo textarea,
+      .campo select,
+      .inp {
+        display: block;
+        width: 100%;
+        margin-top: 5px;
+        border: 2px solid var(--linha);
+        border-radius: 14px;
+        padding: 11px 13px;
+        font: inherit;
+        font-size: 16px;
+        font-weight: 400;
+        background: #fff;
+        color: var(--tinta);
+      }
+      .campo textarea,
+      .inp.area {
+        min-height: 84px;
+        resize: vertical;
+      }
+      .campo input:focus,
+      .campo textarea:focus,
+      .campo select:focus,
+      .inp:focus {
+        outline: none;
+        border-color: var(--verde);
+      }
+      .campo small {
+        display: block;
+        color: var(--cinza);
+        font-weight: 400;
+        margin-top: 4px;
+      }
+      .bt.cheio {
+        width: 100%;
+      }
+      .bt.mini {
+        padding: 9px 14px;
+        font-size: 14px;
+        border-radius: 99px;
+      }
+      .bt.azul {
+        background: #1f6fb2;
+      }
+      .bt.ouro {
+        background: var(--ouro);
+      }
+      .bt:disabled {
+        opacity: 0.55;
+      }
+      .link {
+        background: none;
+        color: var(--verde);
+        font-weight: 700;
+        padding: 10px;
+        display: block;
+        margin: 4px auto;
+        text-decoration: underline;
+      }
+      .nota {
+        text-align: center;
+        color: var(--cinza);
+        font-size: 14px;
+        margin: 8px 0;
+      }
+      .erro-form {
+        color: #a8261a;
+        background: var(--verm-cl);
+        border-radius: 12px;
+        padding: 10px 12px;
+        font-size: 14px;
+        margin-bottom: 12px;
+        font-weight: 600;
+      }
+      .erro-form:empty {
+        display: none;
+      }
+      .okmsg {
+        color: var(--verde-esc);
+        background: var(--verde-cl);
+        border-radius: 12px;
+        padding: 12px;
+        font-size: 14px;
+        margin-bottom: 12px;
+        line-height: 1.45;
+      }
+      .avatares {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 6px;
+      }
+      .avatares button {
+        width: 44px;
+        height: 44px;
+        border-radius: 14px;
+        background: #f3f8f5;
+        font-size: 24px;
+        border: 2px solid transparent;
+      }
+      .avatares button.sel {
+        border-color: var(--verde);
+        background: var(--verde-cl);
+      }
+      .item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        background: var(--branco);
+        border-radius: 20px;
+        padding: 12px 14px;
+        margin-bottom: 10px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        width: 100%;
+        text-align: left;
+      }
+      .item .av {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: #f3f8f5;
+        display: grid;
+        place-items: center;
+        font-size: 24px;
+        flex: none;
+        position: relative;
+      }
+      .item .tx {
+        flex: 1;
+        min-width: 0;
+      }
+      .item h3 {
+        font-size: 17px;
+        overflow-wrap: anywhere;
+      }
+      .item small {
+        color: var(--cinza);
+        display: block;
+        font-size: 13px;
+      }
+      .item .acoes {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 8px;
+      }
+      .on-dot {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: 13px;
+        height: 13px;
+        border-radius: 50%;
+        background: #2bc48a;
+        border: 2px solid #fff;
+      }
+      .secao-t {
+        font-family: "Baloo 2", system-ui, sans-serif;
+        font-weight: 700;
+        font-size: 18px;
+        margin: 16px 0 8px;
+      }
+      .vazio {
+        background: var(--branco);
+        border-radius: 20px;
+        padding: 18px;
+        text-align: center;
+        color: var(--cinza);
+        margin-bottom: 10px;
+      }
+      .st {
+        display: inline-block;
+        font-size: 12px;
+        font-weight: 700;
+        padding: 3px 9px;
+        border-radius: 99px;
+        margin-top: 4px;
+      }
+      .st.privado {
+        background: #eef3f1;
+        color: var(--cinza);
+      }
+      .st.enviado {
+        background: var(--ouro-cl);
+        color: #8a6410;
+      }
+      .st.aprovado {
+        background: var(--verde-cl);
+        color: var(--verde-esc);
+      }
+      .st.recusado {
+        background: var(--verm-cl);
+        color: #a8261a;
+      }
+      .st.aberta {
+        background: var(--ouro-cl);
+        color: #8a6410;
+      }
+      .st.resolvida {
+        background: var(--verde-cl);
+        color: var(--verde-esc);
+      }
+      .st.descartada {
+        background: #eef3f1;
+        color: var(--cinza);
+      }
+      .abas {
+        display: flex;
+        gap: 6px;
+        overflow-x: auto;
+        margin-bottom: 12px;
+        padding-bottom: 2px;
+      }
+      .abas button {
+        flex: none;
+        background: var(--branco);
+        border-radius: 99px;
+        padding: 9px 14px;
+        font-weight: 700;
+        font-size: 14px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      }
+      .abas button.on {
+        background: var(--tinta);
+        color: #fff;
+      }
+      .pq {
+        background: #f3f8f5;
+        border-radius: 14px;
+        padding: 10px 12px;
+        font-weight: 600;
+        margin: 6px 0 12px;
+        font-size: 15px;
+        overflow-wrap: anywhere;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 12px;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: #f3f8f5;
+        border-radius: 99px;
+        padding: 8px 12px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        border: 2px solid transparent;
+      }
+      .chip:has(input:checked) {
+        border-color: var(--verde);
+        background: var(--verde-cl);
+      }
+      .chip input {
+        accent-color: var(--verde);
+      }
+      .btn-corr {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: transparent;
+        color: var(--tinta);
+        border: 2px solid rgba(23, 48, 42, 0.18);
+        border-radius: 99px;
+        padding: 6px 12px;
+        font-weight: 700;
+        font-size: 13px;
+        margin: 0 0 12px 6px;
+      }
+      .mini-corr {
+        background: none;
+        color: #8a6410;
+        font-weight: 700;
+        font-size: 12px;
+        padding: 4px 0;
+        margin-top: 4px;
+        display: block;
+      }
+      .modal {
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        background: rgba(23, 48, 42, 0.45);
+        display: none;
+        align-items: flex-end;
+        justify-content: center;
+      }
+      .modal.on {
+        display: flex;
+      }
+      .modal .caixa {
+        background: #fff;
+        width: 100%;
+        max-width: 560px;
+        max-height: 88vh;
+        max-height: 88dvh;
+        overflow-y: auto;
+        border-radius: 26px 26px 0 0;
+        padding: 20px 18px calc(20px + env(safe-area-inset-bottom));
+      }
+      .modal h3 {
+        font-size: 22px;
+        margin-bottom: 6px;
+      }
+      @media (min-width: 700px) {
+        .modal {
+          align-items: center;
+        }
+        .modal .caixa {
+          border-radius: 26px;
+        }
+      }
+      .toast {
+        position: fixed;
+        left: 50%;
+        top: 14px;
+        transform: translate(-50%, -150%);
+        z-index: 70;
+        background: var(--tinta);
+        color: #fff;
+        border-radius: 18px;
+        padding: 12px 16px;
+        font-weight: 600;
+        font-size: 14px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s;
+        max-width: 92vw;
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .toast.on {
+        transform: translate(-50%, 0);
+      }
+      .toast button {
+        background: var(--ouro);
+        color: var(--tinta);
+        border-radius: 99px;
+        padding: 6px 12px;
+        font-weight: 700;
+        flex: none;
+      }
+      .placar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 16px;
+        margin: 10px 0;
+      }
+      .placar div {
+        background: var(--branco);
+        border-radius: 20px;
+        padding: 12px 16px;
+        min-width: 110px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+      }
+      .placar .av {
+        font-size: 32px;
+      }
+      .placar b {
+        display: block;
+        font-family: "Baloo 2", system-ui, sans-serif;
+        font-size: 30px;
+        color: var(--verde);
+      }
+      .placar small {
+        color: var(--cinza);
+      }
+      .ed-q {
+        background: var(--branco);
+        border-radius: 20px;
+        padding: 14px;
+        margin-bottom: 12px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        border-left: 5px solid var(--linha);
+      }
+      .ed-q.erro {
+        border-left-color: var(--verm);
+      }
+      .ed-q .cab {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+        font-weight: 700;
+      }
+      .ed-q .del {
+        background: none;
+        color: var(--verm);
+        font-weight: 700;
+        font-size: 14px;
+      }
+      .pn-tog {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+      .pn-tog button {
+        border-radius: 14px;
+        padding: 11px;
+        font-weight: 700;
+        background: #f3f8f5;
+        border: 2px solid transparent;
+      }
+      .pn-tog button.sel.s {
+        background: var(--verde-cl);
+        border-color: var(--verde);
+        color: var(--verde-esc);
+      }
+      .pn-tog button.sel.n {
+        background: var(--verm-cl);
+        border-color: var(--verm);
+        color: #a8261a;
+      }
+      details.mais summary {
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 14px;
+        color: var(--verde);
+        margin-bottom: 8px;
+      }
+      .cod {
+        font-family: ui-monospace, monospace;
+        font-weight: 700;
+        font-size: 16px;
+        letter-spacing: 1px;
+      }
+      .prev-q {
+        border-top: 1px solid var(--linha);
+        padding: 8px 0;
+        font-size: 14px;
+        line-height: 1.4;
+      }
+      .prev-q:first-child {
+        border-top: 0;
+      }
+      .prev-q .r {
+        font-weight: 700;
+      }
+      .carregando {
+        text-align: center;
+        color: var(--cinza);
+        padding: 30px 0;
+      }
+      .carregando::before {
+        content: "";
+        display: block;
+        width: 34px;
+        height: 34px;
+        margin: 0 auto 10px;
+        border-radius: 50%;
+        border: 4px solid var(--linha);
+        border-top-color: var(--verde);
+        animation: gira 0.8s linear infinite;
+      }
+      @keyframes gira {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      .busca {
+        margin-bottom: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div id="app"></div>
+    <div class="modal" id="modal"><div class="caixa" id="modalC"></div></div>
+    <div class="toast" id="toast"></div>
+    <div class="feedback" id="fb">
+      <h3 id="fbT"></h3>
+      <p id="fbP"></p>
+      <button class="btn-doc" id="fbDoc">📄 Ver no documento</button><button class="btn-corr" id="fbCorr">🚩 Sugerir correção</button>
+      <div id="fbProva" class="oculto"></div>
+      <button class="bt neutro" id="fbB">Continuar</button>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2/dist/umd/supabase.js"
+      integrity="sha384-A97u3Qnt9GZHURO9YJZRe7VQgGUeFzcv6I1oIGnUTxQrCxnpQMwR0/G8F2zt9abZ"
+      crossorigin="anonymous"
+    ></script>
+    <script src="config.js"></script>
+    <script>
+      /* ================== COMPROVAÇÕES (trechos dos documentos) ================== */
+      const F_DOC = "Documento de layout — Processo de Layout e Publicação de Anúncios";
+      const F_CFM = "Resolução CFM nº 2.336/2023 (publicidade médica)";
+      const F_ELI = "Orientação da coordenação de diagramação (MedGuias)";
+      const EV = {
+        /* ---------- CFM ---------- */
+        cfm_super: {
+          f: F_CFM,
+          s: "Art. 11, XVI e §3º",
+          x: [
+            "“portar-se de forma sensacionalista ou autopromocional, praticar concorrência desleal ou divulgar conteúdo inverídico.”",
+            "§3º (autopromoção): “referir-se a si próprio, a serviço onde atue ou a técnicas e procedimentos”…"
+          ]
+        },
+        cfm_preco: { f: F_CFM, s: "Art. 9º, VI", x: ["É permitido “informar sobre valores de consultas, meios e formas de pagamento;”"] },
+        cfm_antes: {
+          f: F_CFM,
+          s: "Art. 14, II, “a”, “b”, “e” e “f”",
+          x: [
+            "“qualquer uso de imagem deve ser acompanhado de texto educativo contendo as indicações terapêuticas”…",
+            "“demonstrações de antes e depois devem ser apresentadas em um conjunto de imagens contendo indicações, evoluções satisfatórias, insatisfatórias e complicações decorrentes da intervenção”",
+            "“é vedado o uso de imagens de procedimentos que identifique o paciente;”",
+            "“é vedada qualquer edição, manipulação ou melhoramento das imagens;”"
+          ]
+        },
+        cfm_garantia: { f: F_CFM, s: "Art. 11, XII", x: ["É vedado “garantir, prometer ou insinuar bons resultados do tratamento;”"] },
+        cfm_naoesp: {
+          f: F_CFM,
+          s: "Art. 11, I",
+          x: ["É vedado “divulgar, quando não especialista, que trata de sistemas orgânicos, órgãos ou doenças específicas”"]
+        },
+        cfm_marca: {
+          f: F_CFM,
+          s: "Art. 9º, XVIII, “c” e Art. 11, IX",
+          x: [
+            "…desde que “não anuncie marcas comerciais e fabricantes.”",
+            "É vedado “anunciar a utilização de técnicas de forma a lhe atribuir capacidade privilegiada, mesmo que seja o único a fazê-la;”"
+          ]
+        },
+        cfm_sorteio: { f: F_CFM, s: "Art. 9º, VIII", x: ["…“sendo proibido vincular as promoções a vendas casadas, premiações e outros”"] },
+        cfm_ambiente: {
+          f: F_CFM,
+          s: "Art. 9º, I e IX",
+          x: [
+            "É permitido “utilizar fotografia ou vídeo com detalhes de seu ambiente de trabalho, sua própria imagem,”…",
+            "“apresentar seu ambiente de trabalho, incluindo equipamentos com indicações de uso,”…"
+          ]
+        },
+        cfm_selfie: {
+          f: F_CFM,
+          s: "Art. 8º, III e Art. 11, XVI",
+          x: [
+            "“a publicação nas redes sociais de autorretrato (selfie), imagens e/ou áudios está permitida,”…",
+            "…sem “portar-se de forma sensacionalista ou autopromocional”"
+          ]
+        },
+        cfm_pos: {
+          f: F_CFM,
+          s: "Art. 13, §1º, “c” e “d”",
+          x: [
+            "“sendo seu direito também anunciar outros títulos, como pós-graduações lato sensu ou stricto sensu”",
+            "Pós lato sensu: “MÉDICO(A) com pós-graduação em (área da pós-graduação), seguido de NÃO ESPECIALISTA, em caixa alta;”"
+          ]
+        },
+        cfm_duas: {
+          f: F_CFM,
+          s: "Art. 13, §1º, “f” — e documento de layout",
+          x: [
+            "“é permitida a divulgação de até 2 (duas) especialidades e as áreas de atuação relacionadas”",
+            "Documento de layout: “Médicos podem divulgar até 2 especialidades com RQE, mais que 3 RQEs só se for área de atuação”"
+          ]
+        },
+        cfm_paciente: {
+          f: F_CFM,
+          s: "Art. 14, II, “e” e “i.3”",
+          x: [
+            "“é vedado o uso de imagens de procedimentos que identifique o paciente;”",
+            "“garantir o anonimato do paciente que cedeu as imagens, mesmo que tenha recebido autorização”"
+          ]
+        },
+        cfm_obrig: {
+          f: F_CFM,
+          s: "Art. 4º, I e II",
+          x: [
+            "“nome, número(s) de registro(s) no(s) CRM(s) onde esteja exercendo a medicina, acompanhados da palavra MÉDICO;”",
+            "“especialidade e/ou área de atuação, quando registrada no CRM” … “seguida pelo número de Registro de Qualificação de Especialista (RQE)”"
+          ]
+        },
+
+        /* ---------- REGISTRO E TÍTULO ---------- */
+        reg_uf: {
+          f: F_DOC,
+          s: "Itens obrigatórios nos impressos / Padronização ortográfica",
+          x: [
+            "“CRM com sigla do estado, como CRM-MS, CRM-BA, CRM-GO.”",
+            "“Registros profissionais Usar CRM com estado e RQE, por exemplo: CRM-GO 2205 | RQE 58241”"
+          ]
+        },
+        reg_formato: {
+          f: F_DOC,
+          s: "Padronização ortográfica",
+          x: ["“Registros profissionais Usar CRM com estado e RQE, por exemplo: CRM-GO 2205 | RQE 58241”"]
+        },
+        reg_travessao: {
+          f: F_DOC,
+          s: "Guia de Estilo — Registro médico",
+          x: ["Correto: “CRM-SC 0000 | RQE 000”", "Incorreto: “CRM – SC 000 | RQE 000”"]
+        },
+        reg_semrqe: {
+          f: F_CFM,
+          s: "Art. 4º, II — e documento de layout",
+          x: [
+            "“especialidade e/ou área de atuação, quando registrada no CRM” … “seguida pelo número de Registro de Qualificação de Especialista (RQE)”",
+            "Documento de layout: a confirmação do registro “evita a publicação de informações incorretas ou especialidades sem comprovação.”"
+          ]
+        },
+        reg_reduzido: {
+          f: F_DOC,
+          s: "URL (link) do anúncio",
+          x: ["“Quando pedem pra colocar Dr. Dra ou reduzir/alterar o nome?”", "“Alterar somente o TÍTULO” · “Manter a URL”"]
+        },
+        reg_dra: {
+          f: F_DOC,
+          s: "Dr. e Dra. / Ordem de processo",
+          x: [
+            "“A partir de novembro de 2026 Dr. e Dra. serão usados amplamente no início dos anúncios, independente do estado e somente para médicos.”",
+            "“Título do anúncio em CAIXA ALTA + Dr./Dra. para médicos”",
+            "“Sempre usar ponto após Dr. e Dra. e conferir o gênero correto da pessoa.”"
+          ]
+        },
+        reg_campo: {
+          f: F_DOC,
+          s: "Rendas — revisão",
+          x: ["“O campo de CRM é somente para o número de registro (CRM-MS 0000), qualquer texto deve ser excluído.”"]
+        },
+        reg_publicar: {
+          f: F_DOC,
+          s: "Ordem de processo / Confirmação obrigatória do registro",
+          x: [
+            "“Registro profissional O MAIS IMPORTANTE, SEM ELE NÃO HÁ PUBLICAÇÃO;”",
+            "“Antes de publicar qualquer anúncio, é obrigatório confirmar o registro profissional.”"
+          ]
+        },
+        reg_caixa: { f: F_DOC, s: "Ordem de processo e publicação", x: ["“Título do anúncio em CAIXA ALTA + Dr./Dra. para médicos”"] },
+        reg_copiar: {
+          f: F_DOC,
+          s: "Ordem de processo e publicação",
+          x: ["“COPIAR NOME DO REGISTRO para criar a arte e cadastrar, jamais escrever, vamos evitar erros de digitação”"]
+        },
+        reg_rt: {
+          f: F_DOC,
+          s: "Responsável técnico — e Resolução CFM, Art. 5º",
+          x: [
+            "“Clínica, Centros Médicos, Hospitais DEVEM incluir responsável técnico.”",
+            "Resolução CFM, Art. 5º, I, “b”: “o nome do Diretor Técnico-Médico com o respectivo número de inscrição no CRM”"
+          ]
+        },
+
+        /* ---------- ANÚNCIO ON-LINE ---------- */
+        on_pag1: {
+          f: F_DOC,
+          s: "Contrato — dados para publicação",
+          x: [
+            "“Na primeira página do contrato, utilizar apenas o e-mail do cliente e figuração. Os demais dados são pessoais, como telefone e endereço, não devem ser publicados a partir dessa página.”",
+            "“As informações que devem ser consideradas para publicação são as do anexo ou segunda página”…"
+          ]
+        },
+        on_nomearq: {
+          f: F_DOC,
+          s: "Fotos, nomes de arquivos e ALT",
+          x: [
+            "“Os arquivos devem ter nomes descritivos, simples e com palavras-chave relacionadas ao cliente, especialidade e cidade.”",
+            "Exemplo: “dr-leonardo-ortopedista-goiania.webp”",
+            "“Evite nomes genéricos como: imagem1.webp, foto-cliente.webp, whatsapp-image-2026.webp, print.png”"
+          ]
+        },
+        on_webp: {
+          f: F_DOC,
+          s: "Ordem de processo e publicação",
+          x: ["“Criar/atualizar arte do perfil nos programas e exportar em .webp (obrigatório, nada de jpg, png…)”"]
+        },
+        on_tamanho: {
+          f: F_DOC,
+          s: "Formato obrigatório da arte",
+          x: ["“Quadrada;”", "“Tamanho mínimo de 600x600px até 1000px x 1000px;”", "“Exportar em formato .webp.”"]
+        },
+        on_alt: {
+          f: F_DOC,
+          s: "Texto ALT das imagens",
+          x: [
+            "“O ALT deve descrever a imagem de forma clara, ajudando na acessibilidade e no SEO.”",
+            "Exemplo: “Dr. Leonardo Vieira Santos Moraes, ortopedista especialista em ombro em Goiânia.”"
+          ]
+        },
+        on_kwcat: {
+          f: F_DOC,
+          s: "Palavras-chave no admin",
+          x: [
+            "“Evitar palavras que sejam especialidades, pois o cliente comprou em uma especialidade e será indexado no link de outra, que nem sempre tem registro.”",
+            "A lista oficial de categorias vendidas no site define o que é “outra categoria”."
+          ]
+        },
+        on_kwesp: {
+          f: F_DOC,
+          s: "Palavras-chave no admin",
+          x: [
+            "“Inserir palavras-chave … sempre relacionadas à especialidade e aos serviços que o cliente oferece, além do profissional (ginecologista).”",
+            "“Evitar palavras que sejam especialidades … Exemplos: Ginecologia e Obstetrícia, Endocrinologia e Metabologia, Cardiologia, etc.”"
+          ]
+        },
+        on_vigencia: { f: F_DOC, s: "Rendas", x: ["“A vigência padrão é: 1 ano e 6 meses (18 meses) a partir da renovação.”"] },
+        on_email: {
+          f: F_DOC,
+          s: "Demandas e e-mail",
+          x: [
+            "“Toda alteração deve ser respondida no mesmo e-mail do cliente, sempre usando “responder a todos”, para manter o histórico da solicitação.”"
+          ]
+        },
+        on_whats: {
+          f: F_ELI,
+          s: "Regra confirmada em 25/11/2026",
+          x: [
+            "O WhatsApp principal é obrigatório quando vem descrito no contrato ou quando o administrativo informou.",
+            "Não é obrigatório para ativar o anúncio quando a consultora não informou o WhatsApp do médico ou quando o médico não tem agendamento por WhatsApp — nesse caso o número fica só como telefone.",
+            "⚠️ O documento de layout traz só “WhatsApp Principal (obrigatório)” e precisa ser atualizado com essas exceções."
+          ]
+        },
+        on_url: {
+          f: F_DOC,
+          s: "URL (link) do anúncio",
+          x: [
+            "“Quando pedem pra colocar Dr. Dra ou reduzir/alterar o nome?” — “Alterar somente o TÍTULO” · “Manter a URL”",
+            "“Ex: João Silva passará a ser Dr. João Silva, insere o Dr. apenas no título”"
+          ]
+        },
+        on_redirect: {
+          f: F_DOC,
+          s: "URL (link) do anúncio",
+          x: [
+            "Quando alterar a URL: “1. Cliente mudou de cidade · 2. URL está com erro, falta algo · 3. Nome/cidade está errado”",
+            "“Redirect: Admin > menu lateral > Ferramentas > Redirection.”"
+          ]
+        },
+        on_renda: {
+          f: F_DOC,
+          s: "Revisão antes de atualizar uma renda",
+          x: [
+            "“As rendas exigem atenção redobrada, principalmente com as DATAS DE VIGÊNCIA.”",
+            "“Antes de atualizar o anúncio, confira se houve alguma mudança nas informações do cliente.”"
+          ]
+        },
+        on_banner: {
+          f: F_DOC,
+          s: "Etapas finais — Trello",
+          x: ["“Caso tenha Banner: copiar o card para a Lista “Banners a Fazer”, quadro A Fazer”"]
+        },
+        on_cep: { f: F_DOC, s: "Guia de Estilo — Endereço", x: ["“Conferir nome e bairro de acordo com correios”"] },
+        on_pasta: {
+          f: F_DOC,
+          s: "Ordem de processo — e orientação da coordenação",
+          x: [
+            "“E-mail: Salvar contrato e materiais na pasta do cliente em seu estado”",
+            "Orientação da coordenação: em anúncio novo e em renda, acessar a pasta do ano, criar a pasta do cliente e colocar nela o contrato baixado."
+          ]
+        },
+
+        /* ---------- ARTE IMPRESSA ---------- */
+        imp_cta: {
+          f: F_DOC,
+          s: "Proibição: Agende sua consulta nos impressos",
+          x: ["“Não inserir em impressos frases de ação. CTA / Call to action:”", "“Agende sua/uma consulta · Agende aqui · Agendar agora”"]
+        },
+        imp_cores: {
+          f: F_DOC,
+          s: "Formatos do impresso padrão",
+          x: ["“Cores: obrigatoriamente em preto e branco ou tons de verde da paleta em anexo.”"]
+        },
+        imp_qrcl: {
+          f: F_DOC,
+          s: "Itens obrigatórios / Artes menores",
+          x: [
+            "“QR Code em anúncios padrão (exceto 3cl, 4cl, 6cl e 8cl) e coloridos”…",
+            "Artes menores: “Apenas informações básicas” … “Não contém QR Code.”"
+          ]
+        },
+        imp_qrcor: {
+          f: F_ELI,
+          s: "Regra confirmada em 25/11/2026",
+          x: [
+            "Artes padrão (preto e verde): QR Code em tons de cinza (incluindo o preto) ou Pantone 347 C.",
+            "Artes coloridas: a cor do QR Code é livre.",
+            "⚠️ O documento de layout ainda diz “QR Code … sempre em preto e branco” e precisa ser atualizado."
+          ]
+        },
+        imp_pdf: {
+          f: F_DOC,
+          s: "Formatos / Como exportar",
+          x: ["“Exportar em: PDF x-1a, CMYK”", "“Em saída, selecione o destino como CMKY - Coated FOGRA39 (ISO 12647-2:2004)”"]
+        },
+        imp_curvas: {
+          f: F_DOC,
+          s: "Como converter o texto em curvas",
+          x: [
+            "“Como converter o texto em curvas após salvar o PDF (ainda dentro do pdf) - Illustrator”",
+            "“1. Selecionar ➡ Objeto ➡ Todos os objetos de texto”"
+          ]
+        },
+        imp_borda: { f: F_DOC, s: "Itens obrigatórios nos impressos", x: ["“Borda interna, máx 1px.”"] },
+        imp_site: {
+          f: F_DOC,
+          s: "Anúncios impressos",
+          x: [
+            "“Os anúncios impressos devem ser feitos com base nas informações atualizadas do site, mesmo que exista arte da edição anterior.”"
+          ]
+        },
+        imp_naoesp: {
+          f: F_DOC,
+          s: "Ortopedia — Áreas de atuação",
+          x: [
+            "O que pode: “Inserção somente na descrição no SITE, sem destaque, como área de atuação.” Ex.: “Cirurgia do Ombro e Cotovelo (Não Especialista)”",
+            "Onde não pode: “Impresso”",
+            "Exceções: “MS e MT (impresso e site)” · “Para outras especialidades a mesma regra é válida.”"
+          ]
+        },
+        imp_exame: {
+          f: F_DOC,
+          s: "Guia de Estilo — Exame",
+          x: [
+            "“Exame: Apenas iniciais com letra maiúscula”",
+            "Correto: “Tomografia computadorizada (TC).” · Incorreto: “Tomografia Computadorizada (TC).”"
+          ]
+        },
+        imp_esp: {
+          f: F_DOC,
+          s: "Guia de Estilo — Especialidade",
+          x: ["“Especialidade: Seguir padrão do CFM”", "Correto: “Cirurgia Geral” · Incorreto: “Cirurgia geral”"]
+        },
+        imp_ddd: {
+          f: F_DOC,
+          s: "Itens obrigatórios / Padronização ortográfica",
+          x: [
+            "“Telefones com DDD e nono dígito quando for celular.”",
+            "“Usar DDD e nono dígito em celulares, por exemplo: (98) 3333-2258 / (98) 99926-8798”"
+          ]
+        },
+        imp_seguranca: {
+          f: F_DOC,
+          s: "Página colorida",
+          x: ["“Rosa - 23x30 cm (total de fundo com sangria)”", "“Azul - 19x26 cm (área de segurança, informações importantes e textos)”"]
+        },
+        imp_logo: {
+          f: F_DOC,
+          s: "Anúncios impressos",
+          x: [
+            "“Usar somente arquivos em vetor para alta qualidade. Caso o material esteja em baixa qualidade, solicite o arquivo original por e-mail.”"
+          ]
+        },
+        imp_banco: {
+          f: F_DOC,
+          s: "Anúncios impressos",
+          x: [
+            "“Imagens de apoio devem vir de bancos de imagens gratuitos, como pexels, magnifc (freepik). Não utilize imagens aleatórias do Google.”"
+          ]
+        },
+        imp_endereco: {
+          f: F_DOC,
+          s: "Guia de Estilo — Endereço",
+          x: [
+            "“Complementos inicial maiúscula Sala, Andar, Térreo, separados em vírgula e traço,” · “Manter padrão Traço antes de bairro.”",
+            "Correto: “Visum Oftalmologia | Ed. Premier - R. Padre Roma, 482, Sala 604 - Centro, Florianópolis - SC”"
+          ]
+        },
+        imp_figuracao: {
+          f: F_ELI,
+          s: "Regra atualizada em 23/11/2026",
+          x: [
+            "Ver nas duas páginas do contrato (1ª página e anexo) todas as figurações impressas compradas — pode haver mais de uma.",
+            "Documento de layout: a figuração aparece na 1ª página e também no “anexo ou segunda página, onde constam … especialidade, figuração e demais informações comerciais.”"
+          ]
+        },
+        imp_revisao: {
+          f: F_ELI,
+          s: "Regra atualizada em 23/11/2026",
+          x: ["Arte pronta e salva: mover o card para a lista “Revisão” no Trello."]
+        },
+
+        /* ---------- DENTISTAS, FISIO E OUTRAS ÁREAS ---------- */
+        rs_lista: {
+          f: F_DOC,
+          s: "Dentistas e fisioterapeutas — restrição de termos",
+          x: [
+            "“Restrição de termos em anúncios de odonto e fisio (impresso e on-line):”",
+            "“❌ Toxina botulínica - botox · ❌ Preenchimento facial · ❌ Harmonização facial · ❌ Harmonização Orofacial · ❌ Preenchimento labial · ❌ Sculptra · ❌ Radiesse…”",
+            "“Estes termos são permitidos apenas para Dermatologistas e Cirurgiões Plásticos.”"
+          ]
+        },
+        rs_permitido: {
+          f: F_DOC,
+          s: "Dentistas e fisioterapeutas — permitidos",
+          x: [
+            "“✅ Pacote de drenagem 10 Sessão · ✅ Pós Operatório 10 sessão · ✅ Fisioterapia Pélvica · ✅ Limpeza de pele especial para gestantes e puérperas · ✅ Ozonioterapia”"
+          ]
+        },
+        rs_acup: {
+          f: F_DOC,
+          s: "Fisioterapia",
+          x: [
+            "“Anúncios de Fisioterapia NÃO PODEM INCLUIR - ACUPUNTURA ou qualquer especialidade médica.”",
+            "“❌ ESTÉTICA · ❌ Agulhamento a seco dry needling (autorizado apenas em PI)”"
+          ]
+        },
+        rs_botox: {
+          f: F_DOC,
+          s: "Botox",
+          x: [
+            "“Usamos a nomenclatura toxina botulínica e não botox (marca), para o google não derrubar o anúncio pago com todos os especialistas.”"
+          ]
+        },
+        rs_outras: {
+          f: F_DOC,
+          s: "Regras gerais",
+          x: [
+            "“Outras categorias no site, como Psicologia, fisioterapia, fonoaudiologia, nutrição, etc, NÃO PODEM INCLUIR ESPECIALIDADES MÉDICAS NA DESCRIÇÃO”"
+          ]
+        },
+        rs_fiv: {
+          f: F_DOC,
+          s: "Reprodução Humana",
+          x: ["“Esses termos só podem ser inseridos com RQE em Reprodução Humana”", "“Fertilização in vitro · Inseminação Artificial”"]
+        },
+        rs_odonto: {
+          f: F_DOC,
+          s: "Palavras-chave no admin",
+          x: [
+            "Exemplo de palavras-chave do documento: “ginecologista, endocrinologista, clareamento dental, podólogo, inserção de DIU…”",
+            "Procedimentos odontológicos não estão na lista de restrição — a restrição é para procedimentos médicos e de estética facial."
+          ]
+        },
+        rs_bio: {
+          f: F_DOC,
+          s: "Dentistas e fisioterapeutas — restrição de termos",
+          x: [
+            "“❌ Bioestimulador elleva (Face) · ❌ Fio pdo filler · ❌ Fio pdo tração…”",
+            "“Entre outros que sejam invasivos ou termos médicos e de estética facial.”"
+          ]
+        }
+      };
+      /* ================== CONTEÚDO DO JOGO ================== */
+      const TEMAS = {
+        cfm: { n: "Normas do CFM", ic: "⚖️", cor: "#12805F" },
+        reg: { n: "Registro e título", ic: "🪪", cor: "#1F6FB2" },
+        online: { n: "Anúncio on-line", ic: "🌐", cor: "#7A4FBF" },
+        imp: { n: "Arte impressa", ic: "🖨️", cor: "#D6402F" },
+        restr: { n: "Dentistas, fisio e outras áreas", ic: "🦷", cor: "#C98A12" },
+        comunidade: { n: "Quizzes da equipe", ic: "🤝", cor: "#0E7C86" }
+      };
+
+      /* ok:true = PODE / ok:false = NÃO PODE */
+      const PERGUNTAS = [
+        // ---------- CFM ----------
+        {
+          ev: "cfm_super",
+          t: "cfm",
+          q: "Anúncio de médico: “O melhor cardiologista de Cuiabá”.",
+          ok: false,
+          e: "Superlativos como “o melhor”, “o único” ou “referência” são sensacionalismo — proibido pelo CFM. Use “cardiologista em Cuiabá”."
+        },
+        {
+          ev: "cfm_preco",
+          t: "cfm",
+          q: "Anúncio de médico informando o preço da consulta.",
+          ok: true,
+          e: "A Resolução CFM 2.336/2023 permite divulgar o preço da consulta."
+        },
+        {
+          ev: "cfm_antes",
+          t: "cfm",
+          q: "Foto de “antes e depois” educativa, com indicações e possíveis complicações, sem identificar o paciente.",
+          ok: true,
+          e: "Pode, desde que seja educativa, sem manipulação e sem identificar o paciente."
+        },
+        {
+          ev: "cfm_garantia",
+          t: "cfm",
+          q: "“Resultado garantido em 30 dias!”",
+          ok: false,
+          e: "Promessa ou garantia de resultado é proibida para médicos."
+        },
+        {
+          ev: "cfm_naoesp",
+          t: "cfm",
+          q: "Médico sem RQE em Cardiologia anunciando “tratamento de arritmias”.",
+          ok: false,
+          e: "Médico não especialista não pode divulgar que trata órgão, sistema ou doença específica."
+        },
+        {
+          ev: "cfm_marca",
+          t: "cfm",
+          q: "Citar a marca do aparelho de laser no anúncio do médico.",
+          ok: false,
+          e: "Marcas comerciais e fabricantes de equipamentos, medicamentos ou produtos não podem aparecer."
+        },
+        {
+          ev: "cfm_sorteio",
+          t: "cfm",
+          q: "“Sorteio de uma consulta grátis para quem seguir o perfil.”",
+          ok: false,
+          e: "Sorteios, premiações e vendas casadas são proibidos."
+        },
+        {
+          ev: "cfm_ambiente",
+          t: "cfm",
+          q: "Fotos do consultório e dos equipamentos, sem marca e sem dizer que são superiores.",
+          ok: true,
+          e: "O médico pode mostrar o ambiente de trabalho e os equipamentos."
+        },
+        {
+          ev: "cfm_selfie",
+          t: "cfm",
+          q: "Selfie do médico no consultório, sem sensacionalismo.",
+          ok: true,
+          e: "Selfies são permitidas, desde que sem sensacionalismo ou concorrência desleal."
+        },
+        {
+          ev: "cfm_pos",
+          t: "cfm",
+          q: "Pós-graduação lato sensu em Dermatologia apresentada como “Dermatologista”.",
+          ok: false,
+          e: "Pós-graduação pode ser citada, mas nunca como se fosse especialidade. “Dermatologista” exige RQE."
+        },
+        {
+          ev: "cfm_duas",
+          t: "cfm",
+          q: "Médico com RQE em 3 especialidades divulgando as 3.",
+          ok: false,
+          e: "Médicos divulgam até 2 especialidades com RQE. Mais que isso, só como área de atuação."
+        },
+        {
+          ev: "cfm_paciente",
+          t: "cfm",
+          q: "Foto de paciente reconhecível no anúncio, sem ser educativa.",
+          ok: false,
+          e: "O paciente não pode ser identificado."
+        },
+
+        // ---------- REGISTRO E TÍTULO ----------
+        {
+          ev: "reg_uf",
+          t: "reg",
+          q: "Registro escrito “CRM 12345”, sem a sigla do estado.",
+          ok: false,
+          e: "CRM sempre com a sigla do estado: CRM-MT 12345."
+        },
+        {
+          ev: "reg_formato",
+          t: "reg",
+          q: "Registro escrito “CRM-MT 12345 | RQE 6789”.",
+          ok: true,
+          e: "Esse é o formato padrão da MedGuias."
+        },
+        {
+          ev: "reg_travessao",
+          t: "reg",
+          q: "Registro escrito “CRM – SC 1234” (com espaços e travessão).",
+          ok: false,
+          e: "O certo é CRM-SC 1234, com hífen e sem espaços."
+        },
+        {
+          ev: "reg_semrqe",
+          t: "reg",
+          q: "Publicar a especialidade de um médico que não tem RQE nela.",
+          ok: false,
+          e: "Especialidade só é publicada com RQE. Sem RQE, não aparece como especialista."
+        },
+        {
+          ev: "reg_reduzido",
+          t: "reg",
+          q: "O Dr. João Albuquerque Vieira pediu o título “DR. JOÃO VIEIRA”.",
+          ok: true,
+          e: "O título pode ter o nome reduzido que o cliente pediu, com a grafia do conselho."
+        },
+        {
+          ev: "reg_dra",
+          t: "reg",
+          q: "Título de anúncio de médica sem o “DRA.” no início.",
+          ok: false,
+          e: "Título de médico começa com DR. ou DRA., com ponto e gênero correto."
+        },
+        {
+          ev: "reg_campo",
+          t: "reg",
+          q: "Campo CRM do admin: “CRM-GO 2205 | RQE 58241 – cardiologista e ecocardiografista”.",
+          ok: false,
+          e: "O campo CRM leva só o registro, sem texto extra."
+        },
+        {
+          ev: "reg_publicar",
+          t: "reg",
+          q: "Publicar o anúncio sem conferir o registro, pensando “confiro depois”.",
+          ok: false,
+          e: "Sem registro conferido, o anúncio não pode ser publicado."
+        },
+        { ev: "reg_caixa", t: "reg", q: "Título do anúncio em CAIXA ALTA.", ok: true, e: "Título sempre em CAIXA ALTA." },
+        {
+          ev: "reg_copiar",
+          t: "reg",
+          q: "Digitar o nome do médico em vez de copiar da consulta do CFM.",
+          ok: false,
+          e: "O nome é copiado do registro — evita erro de digitação."
+        },
+        {
+          ev: "reg_rt",
+          t: "reg",
+          q: "Clínica com várias especialidades anunciando o responsável técnico com registro.",
+          ok: true,
+          e: "Clínicas, centros médicos e hospitais precisam do responsável técnico identificado."
+        },
+
+        // ---------- ANÚNCIO ON-LINE ----------
+        {
+          ev: "on_pag1",
+          t: "online",
+          q: "Usar no anúncio o endereço residencial que está na 1ª página do contrato.",
+          ok: false,
+          e: "Da 1ª página só se usa o e-mail do cliente e a figuração. Os outros dados são pessoais."
+        },
+        {
+          ev: "on_nomearq",
+          t: "online",
+          q: "Imagem do perfil com o nome “whatsapp-image-2026.webp”.",
+          ok: false,
+          e: "Nome descritivo: dr-nome-especialidade-cidade.webp."
+        },
+        { ev: "on_webp", t: "online", q: "Imagem do perfil salva em .png.", ok: false, e: "Imagens do site sempre em .webp." },
+        {
+          ev: "on_tamanho",
+          t: "online",
+          q: "Arte do perfil quadrada, 800x800 px, em .webp.",
+          ok: true,
+          e: "Arte quadrada entre 600x600 e 1000x1000 px, em .webp."
+        },
+        {
+          ev: "on_alt",
+          t: "online",
+          q: "ALT: “Dr. Leonardo Moraes, ortopedista especialista em ombro em Goiânia/GO”.",
+          ok: true,
+          e: "ALT com nome, especialidade, área de atuação e cidade/estado."
+        },
+        {
+          ev: "on_kwcat",
+          t: "online",
+          q: "Palavra-chave “cardiologia” no anúncio de uma pediatra.",
+          ok: false,
+          e: "Palavra-chave não pode invadir outra categoria vendida no site."
+        },
+        {
+          ev: "on_vigencia",
+          t: "online",
+          q: "Vigência do anúncio cadastrada para 12 meses.",
+          ok: false,
+          e: "A vigência padrão é de 18 meses."
+        },
+        {
+          ev: "on_email",
+          t: "online",
+          q: "Responder o cliente no mesmo e-mail, com “Responder a todos”.",
+          ok: true,
+          e: "Sempre no mesmo e-mail, com Responder a todos e o link final."
+        },
+        {
+          ev: "on_whats",
+          t: "online",
+          q: "Contrato sem WhatsApp informado e médico que não agenda por WhatsApp: ativar o anúncio só com telefone.",
+          ok: true,
+          e: "Sem WhatsApp no contrato nem informado pelo administrativo, o anúncio pode ser ativado sem ele."
+        },
+        {
+          ev: "on_whats",
+          t: "online",
+          q: "O WhatsApp veio no contrato, mas o anúncio foi ativado sem ele.",
+          ok: false,
+          e: "Se o WhatsApp vem no contrato ou foi informado pelo administrativo, é obrigatório inseri-lo no anúncio."
+        },
+        {
+          ev: "on_url",
+          t: "online",
+          q: "Mudar a URL do anúncio só para incluir “Dr.”.",
+          ok: false,
+          e: "Para incluir Dr./Dra., muda só o TÍTULO. A URL fica como está."
+        },
+        {
+          ev: "on_redirect",
+          t: "online",
+          q: "O cliente mudou de cidade: alterar a URL e criar o Redirect.",
+          ok: true,
+          e: "Mudou a URL? Crie o Redirect em Ferramentas → Redirection."
+        },
+        {
+          ev: "on_renda",
+          t: "online",
+          q: "Na renda, atualizar tudo “no automático”, sem comparar com o contrato novo.",
+          ok: false,
+          e: "Na renda, compare foto, telefone, endereço, especialidade, registro e serviços."
+        },
+        {
+          ev: "on_banner",
+          t: "online",
+          q: "Anúncio com banner: copiar o card para “Banners a Fazer”.",
+          ok: true,
+          e: "Com banner, o card é copiado para o quadro A Fazer, lista Banners a Fazer."
+        },
+        {
+          ev: "on_cep",
+          t: "online",
+          q: "Usar o bairro diferente do que aparece no Busca CEP dos Correios.",
+          ok: false,
+          e: "O bairro segue o nome que está nos Correios."
+        },
+        {
+          ev: "on_pasta",
+          t: "online",
+          q: "Salvar o contrato numa pasta nova com o nome do cliente, dentro da pasta do ano.",
+          ok: true,
+          e: "Anúncio novo ou renda: pasta do ano → pasta do cliente → contrato."
+        },
+        {
+          ev: "on_kwesp",
+          t: "online",
+          q: "Palavra-chave “Ginecologia e Obstetrícia” no anúncio de uma ginecologista.",
+          ok: false,
+          e: "Médicos não usam o nome da especialidade como palavra-chave. Use como o paciente busca: “ginecologista”."
+        },
+
+        // ---------- ARTE IMPRESSA ----------
+        {
+          ev: "imp_cta",
+          t: "imp",
+          q: "“Agende sua consulta!” na arte impressa.",
+          ok: false,
+          e: "Chamada para ação é proibida no impresso."
+        },
+        {
+          ev: "imp_cores",
+          t: "imp",
+          q: "Arte 1/4 Pág. padrão toda em azul.",
+          ok: false,
+          e: "Formato padrão: só preto e branco ou tons de verde (Pantone 347 C + preto)."
+        },
+        {
+          ev: "imp_qrcl",
+          t: "imp",
+          q: "QR Code numa arte 4CL.",
+          ok: false,
+          e: "Artes CL (3CL, 4CL, 6CL, 8CL) são pequenas demais e não levam QR Code."
+        },
+        {
+          ev: "imp_qrcor",
+          t: "imp",
+          q: "QR Code em Pantone 347 C numa arte padrão verde.",
+          ok: true,
+          e: "Na arte padrão, o QR Code pode ser em tons de cinza (incluindo o preto) ou Pantone 347 C."
+        },
+        {
+          ev: "imp_qrcor",
+          t: "imp",
+          q: "QR Code azul numa arte padrão preto e verde.",
+          ok: false,
+          e: "Na arte padrão, o QR Code fica em tons de cinza (incluindo o preto) ou Pantone 347 C — azul não."
+        },
+        {
+          ev: "imp_qrcor",
+          t: "imp",
+          q: "QR Code colorido, combinando com a marca, numa Página Colorida.",
+          ok: true,
+          e: "Nas artes coloridas, a cor do QR Code é livre."
+        },
+        {
+          ev: "imp_pdf",
+          t: "imp",
+          q: "PDF exportado em PDF/X-1a:2001, com saída Coated FOGRA39.",
+          ok: true,
+          e: "Esse é o padrão de exportação do impresso."
+        },
+        {
+          ev: "imp_curvas",
+          t: "imp",
+          q: "Enviar o PDF com os textos sem converter em curvas.",
+          ok: false,
+          e: "Todos os textos convertidos em curvas (Shift+Ctrl+O no Illustrator)."
+        },
+        { ev: "imp_borda", t: "imp", q: "Borda interna de 3 px num formato padrão.", ok: false, e: "Borda interna de no máximo 1 px." },
+        {
+          ev: "imp_site",
+          t: "imp",
+          q: "Fazer a arte com os dados da edição anterior, sem conferir o site.",
+          ok: false,
+          e: "A arte usa as informações atualizadas do anúncio on-line."
+        },
+        {
+          ev: "imp_naoesp",
+          t: "imp",
+          q: "“Cirurgia do Joelho (Não Especialista)” na arte impressa de Goiás.",
+          ok: false,
+          e: "“Não Especialista” não vai no impresso — exceto em MS e MT."
+        },
+        {
+          ev: "imp_naoesp",
+          t: "imp",
+          q: "“Cirurgia do Joelho (Não Especialista)” na arte impressa de Mato Grosso.",
+          ok: true,
+          e: "MS e MT são a exceção: lá pode no impresso e no site."
+        },
+        {
+          ev: "imp_exame",
+          t: "imp",
+          q: "Escrever “Tomografia computadorizada” (só a primeira letra maiúscula).",
+          ok: true,
+          e: "Exames, cirurgias e procedimentos levam só a inicial maiúscula."
+        },
+        {
+          ev: "imp_esp",
+          t: "imp",
+          q: "Escrever a especialidade como “Cirurgia geral”.",
+          ok: false,
+          e: "Especialidades seguem o CFM: “Cirurgia Geral”."
+        },
+        { ev: "imp_ddd", t: "imp", q: "Telefone “3216-7979”, sem DDD.", ok: false, e: "Telefone sempre com DDD: (65) 3216-7979." },
+        {
+          ev: "imp_seguranca",
+          t: "imp",
+          q: "Página colorida com texto fora da área de segurança (19 x 26 cm).",
+          ok: false,
+          e: "Textos e informações importantes ficam dentro da área de segurança."
+        },
+        {
+          ev: "imp_logo",
+          t: "imp",
+          q: "Logo pixelado, copiado do Instagram.",
+          ok: false,
+          e: "Logo em vetor ou alta resolução. Se estiver ruim, peça o original por e-mail."
+        },
+        {
+          ev: "imp_banco",
+          t: "imp",
+          q: "Imagem de apoio baixada do Pexels.",
+          ok: true,
+          e: "Imagens de apoio só de banco gratuito (Pexels, Freepik)."
+        },
+        {
+          ev: "imp_endereco",
+          t: "imp",
+          q: "Endereço: “Ed. Premier - R. Padre Roma, 482, Sala 604 - Centro, Florianópolis - SC”.",
+          ok: true,
+          e: "Clínica/edifício antes, complemento com maiúscula, traço antes do bairro."
+        },
+        {
+          ev: "imp_figuracao",
+          t: "imp",
+          q: "Conferir as figurações compradas só na 1ª página do contrato.",
+          ok: false,
+          e: "Veja as duas páginas do contrato — pode haver mais de uma figuração."
+        },
+        {
+          ev: "imp_revisao",
+          t: "imp",
+          q: "Ao terminar a arte, mover o card para a lista “Revisão” no Trello.",
+          ok: true,
+          e: "Arte pronta e salva → card na lista Revisão."
+        },
+
+        // ---------- DENTISTAS, FISIO E OUTRAS ÁREAS ----------
+        {
+          ev: "rs_lista",
+          t: "restr",
+          q: "Dentista anunciando “harmonização orofacial”.",
+          ok: false,
+          e: "Procedimentos estéticos faciais são médicos — só dermatologistas e cirurgiões plásticos."
+        },
+        {
+          ev: "rs_lista",
+          t: "restr",
+          q: "Dentista anunciando “toxina botulínica”.",
+          ok: false,
+          e: "Dentista não pode anunciar toxina botulínica: é procedimento médico."
+        },
+        {
+          ev: "rs_permitido",
+          t: "restr",
+          q: "Fisioterapeuta anunciando “drenagem linfática”.",
+          ok: true,
+          e: "Drenagem está na lista do que é permitido."
+        },
+        {
+          ev: "rs_acup",
+          t: "restr",
+          q: "Fisioterapeuta anunciando “acupuntura”.",
+          ok: false,
+          e: "Fisioterapia não pode anunciar acupuntura, estética ou especialidade médica."
+        },
+        {
+          ev: "rs_botox",
+          t: "restr",
+          q: "Dermatologista anunciando “aplicação de botox”.",
+          ok: false,
+          e: "Mesmo quando pode citar, é “toxina botulínica” — “botox” é marca."
+        },
+        {
+          ev: "rs_permitido",
+          t: "restr",
+          q: "Fisioterapeuta anunciando “fisioterapia pélvica”.",
+          ok: true,
+          e: "Fisioterapia pélvica é permitida."
+        },
+        {
+          ev: "rs_outras",
+          t: "restr",
+          q: "Psicóloga com “Psiquiatria” na descrição.",
+          ok: false,
+          e: "Psicologia, fono, nutrição e outras áreas não incluem especialidades médicas."
+        },
+        {
+          ev: "rs_fiv",
+          t: "restr",
+          q: "Ginecologista sem RQE em Reprodução Humana anunciando “fertilização in vitro”.",
+          ok: false,
+          e: "Fertilização in vitro e inseminação exigem RQE em Reprodução Humana."
+        },
+        {
+          ev: "rs_permitido",
+          t: "restr",
+          q: "Fisioterapeuta anunciando “limpeza de pele para gestantes”.",
+          ok: true,
+          e: "Limpeza de pele para gestantes e puérperas está na lista do que é permitido."
+        },
+        {
+          ev: "rs_lista",
+          t: "restr",
+          q: "Dentista anunciando “preenchimento labial”.",
+          ok: false,
+          e: "Preenchimento é procedimento estético facial — proibido para dentistas."
+        },
+        {
+          ev: "rs_odonto",
+          t: "restr",
+          q: "Dentista anunciando “implante dentário” e “clareamento dental”.",
+          ok: true,
+          e: "São procedimentos odontológicos."
+        },
+        {
+          ev: "rs_outras",
+          t: "restr",
+          q: "Nutricionista anunciando “Endocrinologia”.",
+          ok: false,
+          e: "Outras categorias não incluem especialidades médicas."
+        }
+      ];
+
+      /* ---------- CAÇA AO ERRO ---------- */
+      const CACA = [
+        {
+          tit: "Arte impressa · 1/4 Pág. padrão",
+          tipo: "imp",
+          cor: "verde",
+          partes: [
+            { txt: "DR. JOÃO VIEIRA", cls: "titulo", ok: true },
+            { txt: "Cardiologista", cls: "sub", ok: true },
+            {
+              txt: "CRM 12345 | RQE 6789",
+              cls: "reg",
+              ok: false,
+              ev: "reg_uf",
+              e: "CRM sem a sigla do estado. Certo: CRM-MT 12345 | RQE 6789."
+            },
+            { txt: "O melhor cardiologista da cidade", cls: "slogan", ok: false, ev: "cfm_super", e: "Superlativo — proibido pelo CFM." },
+            { txt: "Check-up cardiológico; Holter; Eletrocardiograma.", cls: "linha", ok: true },
+            { txt: "Av. Getúlio Vargas, 150, Sala 2 - Centro, Cuiabá - MT", cls: "linha", ok: true },
+            { txt: "(65) 99988-7766", cls: "linha", ok: true },
+            { txt: "Agende sua consulta!", cls: "cta", ok: false, ev: "imp_cta", e: "Chamada para ação é proibida no impresso." },
+            { txt: "▦ QR Code", cls: "qr", ok: true }
+          ]
+        },
+        {
+          tit: "Anúncio on-line · Dentista",
+          tipo: "online",
+          partes: [
+            { txt: "DRA. ANA LIMA", cls: "titulo", ok: true },
+            { txt: "Cirurgiã-dentista | CRO-MT 4567", cls: "reg", ok: true },
+            { txt: "Clareamento dental; Implante dentário; Restaurações.", cls: "linha", ok: true },
+            {
+              txt: "Harmonização orofacial",
+              cls: "linha",
+              ok: false,
+              ev: "rs_lista",
+              e: "Procedimento estético facial é médico — dentista não pode anunciar."
+            },
+            {
+              txt: "Aplicação de botox",
+              cls: "linha",
+              ok: false,
+              ev: "rs_lista",
+              e: "Dentista não pode anunciar toxina botulínica (e “botox” é marca)."
+            },
+            {
+              txt: "📷 foto-perfil.png",
+              cls: "arquivo",
+              ok: false,
+              ev: "on_nomearq",
+              e: "Imagem em .webp e com nome descritivo: dra-ana-lima-dentista-cuiaba.webp."
+            },
+            { txt: "(65) 3322-1100 · WhatsApp (65) 99911-2233", cls: "linha", ok: true }
+          ]
+        },
+        {
+          tit: "Anúncio on-line · Pediatra (admin)",
+          tipo: "online",
+          partes: [
+            { txt: "Dra. Paula Souza", cls: "titulo-min", ok: false, ev: "reg_caixa", e: "Título em CAIXA ALTA: DRA. PAULA SOUZA." },
+            { txt: "CRM-MT 8899 | RQE 1122", cls: "reg", ok: true },
+            { txt: "🔑 pediatra em cuiabá", cls: "kw", ok: true },
+            { txt: "🔑 puericultura", cls: "kw", ok: true },
+            {
+              txt: "🔑 cardiologia pediátrica",
+              cls: "kw",
+              ok: false,
+              ev: "on_kwcat",
+              e: "Invade a categoria Cardiologia Pediátrica, que é de outro cliente."
+            },
+            { txt: "🔑 vacinação", cls: "kw", ok: false, ev: "on_kwcat", e: "Invade a categoria Vacinas." },
+            { txt: "📅 Vigência: 12 meses", cls: "linha", ok: false, ev: "on_vigencia", e: "A vigência padrão é de 18 meses." },
+            { txt: "☑ Active", cls: "linha", ok: true }
+          ]
+        },
+        {
+          tit: "Arte impressa · Ortopedista (guia de GO)",
+          tipo: "imp",
+          cor: "verde",
+          partes: [
+            { txt: "DR. CARLOS MENDES", cls: "titulo", ok: true },
+            { txt: "Ortopedia e Traumatologia", cls: "sub", ok: true },
+            { txt: "CRM-GO 2205 | RQE 58241", cls: "reg", ok: true },
+            {
+              txt: "Cirurgia do Joelho (Não Especialista)",
+              cls: "linha",
+              ok: false,
+              ev: "imp_naoesp",
+              e: "“Não Especialista” não vai no impresso — só em MS e MT."
+            },
+            {
+              txt: "Infiltração Guiada Por Ultrassom",
+              cls: "linha",
+              ok: false,
+              ev: "imp_exame",
+              e: "Procedimento leva só a inicial maiúscula: “Infiltração guiada por ultrassom”."
+            },
+            { txt: "R. 9, 300, Sala 12 - Setor Oeste, Goiânia - GO", cls: "linha", ok: true },
+            { txt: "Tel.: 3216-7979", cls: "linha", ok: false, ev: "imp_ddd", e: "Telefone sem DDD. Certo: (62) 3216-7979." },
+            { txt: "▦ QR Code", cls: "qr", ok: true }
+          ]
+        },
+        {
+          tit: "Anúncio on-line · Fisioterapeuta",
+          tipo: "online",
+          partes: [
+            { txt: "CAMILA ROCHA", cls: "titulo", ok: true },
+            { txt: "Fisioterapeuta | CREFITO-9 12345-F", cls: "reg", ok: true },
+            { txt: "RPG; Drenagem linfática; Fisioterapia pélvica.", cls: "linha", ok: true },
+            { txt: "Acupuntura", cls: "linha", ok: false, ev: "rs_acup", e: "Fisioterapia não pode anunciar acupuntura." },
+            {
+              txt: "Bioestimuladores de colágeno",
+              cls: "linha",
+              ok: false,
+              ev: "rs_bio",
+              e: "Procedimento estético/invasivo — só dermatologistas e cirurgiões plásticos."
+            },
+            { txt: "Atendimento domiciliar em Cuiabá/MT", cls: "linha", ok: true }
+          ]
+        },
+        {
+          tit: "Arte impressa · 4CL",
+          tipo: "imp",
+          cor: "azul",
+          partes: [
+            { txt: "DRA. LÍVIA PRADO", cls: "titulo", ok: true },
+            { txt: "Dermatologista · CRM-MT 7788 | RQE 3344", cls: "reg", ok: true },
+            {
+              txt: "🎨 Arte toda em azul",
+              cls: "arquivo",
+              ok: false,
+              ev: "imp_cores",
+              e: "Formato padrão: só preto e branco ou tons de verde."
+            },
+            { txt: "(65) 3344-5566", cls: "linha", ok: true },
+            { txt: "▦ QR Code", cls: "qr", ok: false, ev: "imp_qrcl", e: "Artes CL não levam QR Code." }
+          ]
+        }
+      ];
+
+      /* ---------- MONTE O PROCESSO ---------- */
+      const ORDENS = [
+        {
+          tit: "Anúncio on-line",
+          ic: "🌐",
+          passos: [
+            "Ingressar no card do Trello",
+            "Criar a pasta do cliente e salvar o contrato",
+            "Conferir o registro no conselho (CFM)",
+            "Colar o print do registro na capa do card",
+            "Criar a arte .webp e cadastrar no admin",
+            "Publicar e testar WhatsApp e links",
+            "Responder o e-mail com o link final",
+            "Mover o card para a praça do estado"
+          ]
+        },
+        {
+          tit: "Arte impressa",
+          ic: "🖨️",
+          passos: [
+            "Ingressar no card do Trello",
+            "Ver as figurações e a observação do contrato",
+            "Abrir o anúncio on-line (fonte das informações)",
+            "Montar a arte no formato comprado",
+            "Gerar e testar o QR Code",
+            "Exportar em PDF/X-1a (FOGRA39)",
+            "Converter os textos em curvas",
+            "Mover o card para a lista Revisão"
+          ]
+        }
+      ];
+      /* ================== VERSÃO ON-LINE (Supabase) ================== */
+      const CFG = window.MISSAO_CONFIG || {};
+      const MOCK = window.MISSAO_API_MOCK || null;
+      const URL_SB = String(CFG.SUPABASE_URL || "")
+        .trim()
+        .replace(/\/+$/, "");
+      const CHAVE_SB = String(CFG.SUPABASE_ANON_KEY || "").trim();
+      const configurado =
+        !!MOCK || (/^https:\/\/\S+$/.test(URL_SB) && !/COLE/i.test(URL_SB) && CHAVE_SB.length > 30 && !/COLE/i.test(CHAVE_SB));
+      let sb = null;
+      let modoRecuperacao = /type=recovery/.test(location.hash);
+      try {
+        if (!MOCK && configurado && window.supabase) sb = window.supabase.createClient(URL_SB, CHAVE_SB);
+      } catch (_) {}
+      const urlBase = () => location.origin + location.pathname;
+
+      function ok(r) {
+        if (r.error) throw r.error;
+        return r.data;
+      }
+      const apiReal = {
+        ouvirAuth(cb) {
+          sb.auth.onAuthStateChange((ev, s) => setTimeout(() => cb(ev, s), 0));
+        },
+        async sessao() {
+          return ok(await sb.auth.getSession()).session;
+        },
+        async entrar(email, senha) {
+          return ok(await sb.auth.signInWithPassword({ email, password: senha }));
+        },
+        async cadastrar(email, senha) {
+          return ok(await sb.auth.signUp({ email, password: senha, options: { emailRedirectTo: urlBase() } }));
+        },
+        async sair() {
+          await sb.auth.signOut();
+        },
+        async recuperar(email) {
+          ok(await sb.auth.resetPasswordForEmail(email, { redirectTo: urlBase() }));
+        },
+        async novaSenha(senha) {
+          ok(await sb.auth.updateUser({ password: senha }));
+        },
+        async validarConvite(c) {
+          return ok(await sb.rpc("validar_convite", { p_codigo: c }));
+        },
+        async usarConvite(c, nome, avatar) {
+          return ok(await sb.rpc("usar_convite", { p_codigo: c, p_nome: nome, p_avatar: avatar }));
+        },
+        async meuPerfil(uid) {
+          return ok(await sb.from("perfis").select("*").eq("id", uid).maybeSingle());
+        },
+        async atualizarPerfil(id, campos) {
+          return ok(await sb.from("perfis").update(campos).eq("id", id).select().single());
+        },
+        async carregarProgresso(uid) {
+          const d = ok(await sb.from("progresso").select("dados").eq("user_id", uid).maybeSingle());
+          return d ? d.dados : null;
+        },
+        async salvarProgresso(dados) {
+          ok(await sb.rpc("salvar_progresso", { p_dados: dados }));
+        },
+        async estouOnline() {
+          ok(await sb.rpc("estou_online"));
+        },
+        async registrarPartida(p) {
+          ok(await sb.from("partidas").insert(p));
+        },
+        async minhasPartidas(uid) {
+          return ok(await sb.from("partidas").select("*").eq("user_id", uid).order("criado_em", { ascending: false }).limit(40));
+        },
+        async ranking() {
+          return ok(await sb.from("ranking").select("*").limit(100));
+        },
+        async jogadores() {
+          return ok(await sb.from("perfis").select("id,nome,avatar,xp,vitorias,papel,visto_em").order("nome"));
+        },
+        async quizzesAprovados() {
+          return ok(
+            await sb.from("quizzes").select("*, quiz_perguntas(*)").eq("status", "aprovado").order("atualizado_em", { ascending: false })
+          );
+        },
+        async meusQuizzes(uid) {
+          return ok(await sb.from("quizzes").select("*, quiz_perguntas(*)").eq("autor", uid).order("atualizado_em", { ascending: false }));
+        },
+        async salvarQuiz(q) {
+          return ok(
+            await sb.rpc("salvar_quiz", {
+              p_id: q.id || null,
+              p_titulo: q.titulo,
+              p_tema: q.tema,
+              p_descricao: q.descricao || null,
+              p_perguntas: q.perguntas
+            })
+          );
+        },
+        async statusQuiz(id, status) {
+          ok(await sb.from("quizzes").update({ status }).eq("id", id));
+        },
+        async apagarQuiz(id) {
+          ok(await sb.from("quizzes").delete().eq("id", id));
+        },
+        async enviarCorrecao(c) {
+          ok(await sb.from("correcoes").insert(c));
+        },
+        async minhasCorrecoes(uid) {
+          return ok(await sb.from("correcoes").select("*").eq("user_id", uid).order("criado_em", { ascending: false }));
+        },
+        async duelos(uid) {
+          return ok(
+            await sb
+              .from("duelos")
+              .select("*")
+              .or(`criador.eq.${uid},desafiado.eq.${uid}`)
+              .order("criado_em", { ascending: false })
+              .limit(60)
+          );
+        },
+        async criarDuelo(d) {
+          return ok(await sb.from("duelos").insert(d).select().single());
+        },
+        async jogarDuelo(id, pts, ac) {
+          return ok(await sb.rpc("jogar_duelo", { p_duelo: id, p_pontos: pts, p_acertos: ac }));
+        },
+        async recusarDuelo(id) {
+          ok(await sb.rpc("recusar_duelo", { p_duelo: id }));
+        },
+        assinarDuelos(uid, cb) {
+          try {
+            sb.channel("duelos-" + uid)
+              .on("postgres_changes", { event: "*", schema: "public", table: "duelos", filter: `desafiado=eq.${uid}` }, cb)
+              .on("postgres_changes", { event: "UPDATE", schema: "public", table: "duelos", filter: `criador=eq.${uid}` }, cb)
+              .subscribe();
+          } catch (_) {}
+        },
+        // coordenação
+        async convites() {
+          return ok(await sb.from("convites").select("*").order("criado_em", { ascending: false }).limit(200));
+        },
+        async criarConvites(qtd, papel, obs, dias) {
+          return ok(await sb.rpc("criar_convites", { p_qtd: qtd, p_papel: papel, p_obs: obs || null, p_dias: dias }));
+        },
+        async apagarConvite(c) {
+          ok(await sb.from("convites").delete().eq("codigo", c));
+        },
+        async quizzesEnviados() {
+          return ok(await sb.from("quizzes").select("*, quiz_perguntas(*)").eq("status", "enviado").order("atualizado_em"));
+        },
+        async moderarQuiz(id, aprovar, motivo) {
+          ok(await sb.rpc("moderar_quiz", { p_quiz: id, p_aprovar: aprovar, p_motivo: motivo || null }));
+        },
+        async correcoes() {
+          return ok(await sb.from("correcoes").select("*").order("criado_em", { ascending: false }).limit(200));
+        },
+        async responderCorrecao(id, status, resposta, uid) {
+          ok(
+            await sb
+              .from("correcoes")
+              .update({ status, resposta: resposta || null, respondido_por: uid, respondido_em: new Date().toISOString() })
+              .eq("id", id)
+          );
+        },
+        async mudarPapel(id, papel) {
+          ok(await sb.from("perfis").update({ papel }).eq("id", id));
+        }
+      };
+      const api = MOCK || apiReal;
+
+      /* ---------- Estado ---------- */
+      let EU = null,
+        JOGADORES = [],
+        DUELOS = [],
+        QUIZ_APROV = [],
+        MEUS_QUIZZES = [];
+      let telaAtual = "home",
+        cartaAtual = null,
+        CORR_TMP = [],
+        CORR_ATUAL = null;
+      const BASE_N = PERGUNTAS.length;
+      PERGUNTAS.forEach((p, i) => {
+        p.ref = "base:" + i;
+      });
+      const AVATARES = ["🦉", "🐼", "🦊", "🐯", "🐨", "🦁", "🐸", "🐙", "🦄", "🐝", "🐢", "🦜", "🌿", "🌻", "⭐", "🚀"];
+      const TEMPO_DUELO = 15,
+        ONLINE_MIN = 3;
+      const TIPOS_CORR = [
+        ["ambigua", "Ficou ambígua"],
+        ["errada", "Resposta errada"],
+        ["divergencia", "Diverge do documento"],
+        ["duvida", "Tenho uma dúvida"],
+        ["outro", "Outro"]
+      ];
+      const FONTES = ["Documento de layout", "Resolução CFM nº 2.336/2023", "Orientação da coordenação", "Outra fonte"];
+
+      /* ---------- Utilidades ---------- */
+      const primeiroNome = () => String(EU?.nome || "").split(" ")[0];
+      const nomeDe = id => (JOGADORES.find(j => j.id === id) || {}).nome || "Alguém da equipe";
+      const avatarDe = id => (JOGADORES.find(j => j.id === id) || {}).avatar || "🙂";
+      const estaOnline = j => j && j.visto_em && Date.now() - new Date(j.visto_em).getTime() < ONLINE_MIN * 60000;
+      const dataBR = d => (d ? new Date(d).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit", year: "2-digit" }) : "");
+      const dataHoraBR = d =>
+        d ? new Date(d).toLocaleString("pt-BR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }) : "";
+      function msgErro(e) {
+        const m = String(e?.message || e || "");
+        if (/Invalid login credentials/i.test(m)) return "E-mail ou senha incorretos.";
+        if (/already registered|already been registered/i.test(m)) return "Este e-mail já tem conta. Use “Entrar” com a sua senha.";
+        if (/at least 6/i.test(m)) return "A senha precisa ter pelo menos 6 caracteres.";
+        if (/Email not confirmed/i.test(m)) return "Confirme seu e-mail primeiro (abra o link que chegou na sua caixa de entrada).";
+        if (/rate limit|too many/i.test(m)) return "Muitas tentativas seguidas. Espere alguns minutos e tente de novo.";
+        if (/Failed to fetch|NetworkError|network/i.test(m)) return "Sem conexão com a internet. Confira e tente de novo.";
+        if (/invalid.*email|valid email/i.test(m)) return "Confira o e-mail digitado.";
+        return m || "Algo deu errado. Tente de novo.";
+      }
+      let toastT = null;
+      function toast(msg, acao) {
+        const t = $("#toast");
+        t.innerHTML = `<span>${esc(msg)}</span>${acao ? `<button data-toast="1">${esc(acao.rotulo)}</button>` : ""}`;
+        t._acao = acao ? acao.fn : null;
+        t.classList.add("on");
+        clearTimeout(toastT);
+        toastT = setTimeout(() => t.classList.remove("on"), acao ? 7000 : 3200);
+      }
+      function modal(html) {
+        $("#modalC").innerHTML = html;
+        $("#modal").classList.add("on");
+        $("#modalC").scrollTop = 0;
+      }
+      function fecharModal() {
+        const m = $("#modal");
+        if (m) m.classList.remove("on");
+      }
+      function carregando(titulo, msg) {
+        app.innerHTML = (titulo ? topo(titulo) : "") + `<div class="carregando">${esc(msg || "Carregando…")}</div>`;
+      }
+      async function copiar(txt) {
+        try {
+          await navigator.clipboard.writeText(txt);
+          return true;
+        } catch (_) {
+          try {
+            const a = document.createElement("textarea");
+            a.value = txt;
+            a.style.position = "fixed";
+            a.style.opacity = "0";
+            document.body.appendChild(a);
+            a.select();
+            const r = document.execCommand("copy");
+            a.remove();
+            return r;
+          } catch (__) {
+            return false;
+          }
+        }
+      }
+      function corrBtn(c) {
+        CORR_TMP.push(c);
+        return `<button class="mini-corr" data-corr="${CORR_TMP.length - 1}">🚩 Sugerir correção</button>`;
+      }
+      function seletorAvatar(sel) {
+        return `<div class="avatares">${AVATARES.map(a => `<button type="button" data-avatar="${a}" class="${a === sel ? "sel" : ""}">${a}</button>`).join("")}</div>`;
+      }
+      function avatarEscolhido() {
+        return document.querySelector(".avatares .sel")?.dataset.avatar || "🦉";
+      }
+      function erroForm(msg) {
+        const e = $("#erro");
+        if (e) e.textContent = msg || "";
+      }
+      function travaBotao(form, travar, rotulo) {
+        const b = form.querySelector("[type=submit]");
+        if (!b) return;
+        if (travar) {
+          b.dataset.rot = b.textContent;
+          b.textContent = rotulo || "Aguarde…";
+          b.disabled = true;
+        } else {
+          b.textContent = b.dataset.rot || b.textContent;
+          b.disabled = false;
+        }
+      }
+
+      /* ---------- Salvamento na nuvem ---------- */
+      let syncEstado = "ok",
+        syncT = null;
+      function iconeSync() {
+        return { ok: "☁️", salvando: "⏳", erro: "⚠️" }[syncEstado];
+      }
+      function marcaSync(e) {
+        syncEstado = e;
+        const s = $("#sync");
+        if (s) {
+          s.textContent = iconeSync();
+          s.title = {
+            ok: "Progresso salvo na sua conta",
+            salvando: "Salvando…",
+            erro: "Sem conexão — vamos salvar assim que a internet voltar"
+          }[e];
+        }
+      }
+      function agendarSync(atraso = 500) {
+        if (!EU) return;
+        marcaSync("salvando");
+        clearTimeout(syncT);
+        syncT = setTimeout(async () => {
+          try {
+            await api.salvarProgresso(P);
+            marcaSync("ok");
+          } catch (_) {
+            marcaSync("erro");
+            syncT = setTimeout(() => agendarSync(0), 15000);
+          }
+        }, atraso);
+      }
+      window.addEventListener("online", () => {
+        if (syncEstado === "erro") agendarSync(0);
+      });
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden" && syncEstado === "salvando") {
+          clearTimeout(syncT);
+          api.salvarProgresso(P).catch(() => {});
+        }
+        if (document.visibilityState === "visible" && EU) api.estouOnline().catch(() => {});
+      });
+      function registrarPartidaNuvem(p) {
+        if (!EU) return;
+        api.registrarPartida(Object.assign({ user_id: EU.id }, p)).catch(() => {});
+      }
+
+      /* ---------- Início e login ---------- */
+      function lerPendente() {
+        try {
+          return JSON.parse(localStorage.getItem("missao-convite") || "null");
+        } catch (_) {
+          return null;
+        }
+      }
+      function gravarPendente(o) {
+        try {
+          o ? localStorage.setItem("missao-convite", JSON.stringify(o)) : localStorage.removeItem("missao-convite");
+        } catch (_) {}
+      }
+      function codigoDaUrl() {
+        try {
+          return (new URL(location.href).searchParams.get("convite") || "").trim().toUpperCase();
+        } catch (_) {
+          return "";
+        }
+      }
+      function limparUrl() {
+        try {
+          const u = new URL(location.href);
+          if (u.searchParams.has("convite")) {
+            u.searchParams.delete("convite");
+            history.replaceState(null, "", u.pathname + (u.search || "") + u.hash);
+          }
+        } catch (_) {}
+      }
+
+      async function iniciar() {
+        if (!configurado) return telaConfigurar();
+        if (!MOCK && !sb) return telaSemConexao();
+        api.ouvirAuth(ev => {
+          if (ev === "PASSWORD_RECOVERY") {
+            modoRecuperacao = true;
+            telaNovaSenha();
+          }
+          if (ev === "SIGNED_OUT" && EU) {
+            EU = null;
+            telaLogin();
+          }
+        });
+        carregando("", "Abrindo o jogo…");
+        let s = null;
+        try {
+          s = await api.sessao();
+        } catch (_) {}
+        if (modoRecuperacao) return telaNovaSenha();
+        const cod = codigoDaUrl();
+        if (!s) return cod ? telaCadastro(cod) : telaLogin();
+        await aposLogin();
+      }
+
+      async function aposLogin() {
+        carregando("", "Carregando seu progresso…");
+        try {
+          const s = await api.sessao();
+          if (!s) return telaLogin();
+          EU = await api.meuPerfil(s.user.id);
+          const pend = lerPendente(),
+            cod = codigoDaUrl();
+          if (!EU && pend && pend.codigo && pend.nome) {
+            try {
+              EU = await api.usarConvite(pend.codigo, pend.nome, pend.avatar);
+            } catch (e) {
+              gravarPendente(null);
+              return telaCodigo(cod || "", msgErro(e));
+            }
+          }
+          if (!EU) return telaCodigo(cod || (pend && pend.codigo) || "");
+          gravarPendente(null);
+          limparUrl();
+          await carregarTudo();
+          api.estouOnline().catch(() => {});
+          setInterval(() => {
+            if (document.visibilityState === "visible") api.estouOnline().catch(() => {});
+          }, 60000);
+          api.assinarDuelos(EU.id, aoMudarDuelo);
+          ir("home");
+        } catch (e) {
+          app.innerHTML = `<div class="auth"><div class="logo">📡</div><h1>Ops!</h1><p class="sub">${esc(msgErro(e))}</p>
+      <button class="bt pode cheio" data-a="recarregar">Tentar de novo</button><button class="link" data-a="sair">Sair da conta</button></div>`;
+        }
+      }
+
+      async function carregarTudo() {
+        const [dados, jog, aprov, duel] = await Promise.all([
+          api.carregarProgresso(EU.id).catch(() => null),
+          api.jogadores().catch(() => []),
+          api.quizzesAprovados().catch(() => []),
+          api.duelos(EU.id).catch(() => [])
+        ]);
+        JOGADORES = jog || [];
+        DUELOS = duel || [];
+        incorporarAprovados(aprov || []);
+        let local = null;
+        try {
+          local = JSON.parse(localStorage.getItem("missao-v2-" + EU.id) || "null");
+        } catch (_) {}
+        const remoto = dados && Object.keys(dados).length ? dados : null;
+        let escolhido = remoto;
+        if (local && (!remoto || (local._t || 0) > (remoto._t || 0))) escolhido = local;
+        let migrou = false;
+        if (!escolhido) {
+          try {
+            const v1 = JSON.parse(localStorage.getItem(CHAVE_V1) || "null");
+            if (v1 && v1.xp > 0) {
+              escolhido = v1;
+              delete escolhido.nome;
+              delete escolhido.ranking;
+              migrou = true;
+            }
+          } catch (_) {}
+        }
+        P = Object.assign(P_PADRAO(), escolhido || {});
+        if (migrou || (escolhido && escolhido === local)) salvar();
+        if (migrou) setTimeout(() => toast("Trouxemos para a sua conta o progresso que estava neste aparelho. 🎉"), 600);
+      }
+
+      function incorporarAprovados(lista) {
+        QUIZ_APROV = lista;
+        PERGUNTAS.splice(BASE_N);
+        lista.forEach(q => perguntasDe(q).forEach(p => PERGUNTAS.push(cartaDeQuiz(p, q, "comunidade"))));
+      }
+      const perguntasDe = q => (q.quiz_perguntas || []).slice().sort((a, b) => a.ordem - b.ordem);
+      function cartaDeQuiz(p, q, tema) {
+        let ev = null;
+        if (p.trecho) {
+          ev = "u:" + p.id;
+          EV[ev] = { f: p.fonte || "Fonte informada pelo autor", s: "Quiz “" + q.titulo + "”", x: [p.trecho] };
+        }
+        return {
+          q: p.afirmacao,
+          ok: !!p.pode,
+          e: p.explicacao,
+          ev,
+          t: tema || (TEMAS[q.tema] ? q.tema : "comunidade"),
+          ref: "quiz:" + p.id,
+          quiz: q.titulo,
+          fonte: p.fonte || null,
+          trecho: p.trecho || null
+        };
+      }
+
+      /* ---------- Telas de acesso ---------- */
+      function telaConfigurar() {
+        app.innerHTML = `<div class="auth"><div class="logo">🔧</div><h1>Falta só ligar o banco</h1>
+    <div class="cartao"><p>Abra o arquivo <b>config.js</b> e cole o <b>Project URL</b> e a <b>anon public key</b> do Supabase (o passo a passo está no LEIA-ME).</p>
+    <p class="nota">Depois de salvar, recarregue esta página.</p></div></div>`;
+      }
+      function telaSemConexao() {
+        app.innerHTML = `<div class="auth"><div class="logo">📡</div><h1>Sem conexão</h1><p class="sub">Não foi possível carregar o jogo. Confira a internet e tente de novo.</p>
+    <button class="bt pode cheio" data-a="recarregar">Tentar de novo</button></div>`;
+      }
+      function cabecalhoAuth(sub) {
+        return `<div class="logo">🎯</div><h1>Missão Anúncio</h1><p class="sub">${sub || "MedGuias · treino de revisão de anúncios"}</p>`;
+      }
+      function telaLogin(msg) {
+        telaAtual = "login";
+        app.innerHTML = `<div class="auth">${cabecalhoAuth()}
+    <form class="cartao" id="fLogin" novalidate>
+      ${msg ? `<div class="okmsg">${esc(msg)}</div>` : ""}
+      <label class="campo">E-mail<input type="email" name="email" autocomplete="email" inputmode="email" required></label>
+      <label class="campo">Senha<input type="password" name="senha" autocomplete="current-password" required></label>
+      <div class="erro-form" id="erro"></div>
+      <button class="bt pode cheio" type="submit">Entrar</button>
+    </form>
+    <button class="link" data-a="esqueci">Esqueci minha senha</button>
+    <p class="nota">Primeira vez? Abra o <b>link de convite</b> que a coordenação enviou.</p>
+    <button class="link" data-a="tenho-codigo">Tenho um código de convite</button></div>`;
+      }
+      function telaCadastro(codigo) {
+        telaAtual = "cadastro";
+        app.innerHTML = `<div class="auth">${cabecalhoAuth("Você foi convidada(o)! Crie sua conta.")}
+    <form class="cartao" id="fCadastro" novalidate>
+      <label class="campo">Código de acesso<input name="codigo" value="${esc(codigo)}" autocomplete="off" autocapitalize="characters" required placeholder="MG-XXXX-XXXX"><small>Vem no link de convite. Só pode ser usado uma vez.</small></label>
+      <label class="campo">Seu nome<input name="nome" maxlength="40" autocomplete="name" required placeholder="Como quer aparecer no ranking"></label>
+      <div class="campo">Escolha seu bichinho${seletorAvatar("🦉")}</div>
+      <label class="campo">E-mail<input type="email" name="email" autocomplete="email" inputmode="email" required></label>
+      <label class="campo">Crie uma senha<input type="password" name="senha" autocomplete="new-password" minlength="6" required><small>Pelo menos 6 caracteres.</small></label>
+      <label class="campo">Repita a senha<input type="password" name="senha2" autocomplete="new-password" required></label>
+      <div class="erro-form" id="erro"></div>
+      <button class="bt pode cheio" type="submit">Criar minha conta</button>
+    </form>
+    <button class="link" data-a="ir-login">Já tenho conta — entrar</button></div>`;
+      }
+      function telaCodigo(codigo, erro) {
+        telaAtual = "codigo";
+        app.innerHTML = `<div class="auth">${cabecalhoAuth("Falta só o seu código de convite.")}
+    <form class="cartao" id="fCodigo" novalidate>
+      <label class="campo">Código de acesso<input name="codigo" value="${esc(codigo || "")}" autocomplete="off" autocapitalize="characters" required placeholder="MG-XXXX-XXXX"></label>
+      <label class="campo">Seu nome<input name="nome" maxlength="40" value="${esc(lerPendente()?.nome || "")}" required></label>
+      <div class="campo">Escolha seu bichinho${seletorAvatar(lerPendente()?.avatar || "🦉")}</div>
+      <div class="erro-form" id="erro">${esc(erro || "")}</div>
+      <button class="bt pode cheio" type="submit">Entrar no jogo</button>
+    </form>
+    <button class="link" data-a="sair">Sair desta conta</button></div>`;
+      }
+      function telaConfirmeEmail(email) {
+        app.innerHTML = `<div class="auth">${cabecalhoAuth("Quase lá!")}
+    <div class="cartao"><div class="okmsg">📬 Enviamos um e-mail de confirmação para <b>${esc(email)}</b>.</div>
+    <ol style="margin:0;padding-left:20px;line-height:1.6"><li>Abra o e-mail (olhe também o spam).</li><li>Toque em <b>Confirm your mail</b>.</li><li>Volte aqui e entre com seu e-mail e senha.</li></ol></div>
+    <button class="bt pode cheio" data-a="ir-login">Já confirmei — entrar</button></div>`;
+      }
+      function telaEsqueci() {
+        app.innerHTML = `<div class="auth">${cabecalhoAuth("Vamos criar uma senha nova.")}
+    <form class="cartao" id="fEsqueci" novalidate>
+      <label class="campo">Seu e-mail<input type="email" name="email" autocomplete="email" required></label>
+      <div class="erro-form" id="erro"></div>
+      <button class="bt pode cheio" type="submit">Enviar link</button>
+    </form><button class="link" data-a="ir-login">Voltar</button></div>`;
+      }
+      function telaNovaSenha() {
+        app.innerHTML = `<div class="auth">${cabecalhoAuth("Escolha sua senha nova.")}
+    <form class="cartao" id="fNovaSenha" novalidate>
+      <label class="campo">Senha nova<input type="password" name="senha" autocomplete="new-password" minlength="6" required></label>
+      <label class="campo">Repita<input type="password" name="senha2" autocomplete="new-password" required></label>
+      <div class="erro-form" id="erro"></div>
+      <button class="bt pode cheio" type="submit">Salvar senha</button>
+    </form></div>`;
+      }
+
+      const FORMS = {
+        async fLogin(f, d) {
+          if (!d.email || !d.senha) return erroForm("Preencha e-mail e senha.");
+          await api.entrar(d.email.trim(), d.senha);
+          await aposLogin();
+        },
+        async fCadastro(f, d) {
+          const codigo = (d.codigo || "").trim().toUpperCase(),
+            nome = (d.nome || "").trim();
+          if (!codigo) return erroForm("Coloque o código de acesso do convite.");
+          if (nome.length < 2) return erroForm("Coloque seu nome.");
+          if (!/^\S+@\S+\.\S+$/.test(d.email || "")) return erroForm("Confira o e-mail.");
+          if ((d.senha || "").length < 6) return erroForm("A senha precisa ter pelo menos 6 caracteres.");
+          if (d.senha !== d.senha2) return erroForm("As duas senhas não estão iguais.");
+          if (!(await api.validarConvite(codigo)))
+            return erroForm("Este código não vale: já foi usado, expirou ou está digitado errado. Peça outro à coordenação.");
+          gravarPendente({ codigo, nome, avatar: avatarEscolhido() });
+          let r;
+          try {
+            r = await api.cadastrar(d.email.trim(), d.senha);
+          } catch (e) {
+            if (/already registered|already been registered/i.test(e?.message || "")) {
+              await api.entrar(d.email.trim(), d.senha);
+              return aposLogin();
+            }
+            throw e;
+          }
+          if (r && r.session) return aposLogin();
+          if (r && r.user && Array.isArray(r.user.identities) && r.user.identities.length === 0)
+            return erroForm("Este e-mail já tem conta. Use “Já tenho conta — entrar”.");
+          telaConfirmeEmail(d.email.trim());
+        },
+        async fCodigo(f, d) {
+          const codigo = (d.codigo || "").trim().toUpperCase(),
+            nome = (d.nome || "").trim();
+          if (!codigo) return erroForm("Coloque o código de acesso.");
+          if (nome.length < 2) return erroForm("Coloque seu nome.");
+          EU = await api.usarConvite(codigo, nome, avatarEscolhido());
+          gravarPendente(null);
+          await aposLogin();
+        },
+        async fEsqueci(f, d) {
+          if (!/^\S+@\S+\.\S+$/.test(d.email || "")) return erroForm("Confira o e-mail.");
+          await api.recuperar(d.email.trim());
+          telaLogin("Se este e-mail tiver conta, chegou um link para criar a senha nova. Abra o link neste aparelho.");
+        },
+        async fNovaSenha(f, d) {
+          if ((d.senha || "").length < 6) return erroForm("A senha precisa ter pelo menos 6 caracteres.");
+          if (d.senha !== d.senha2) return erroForm("As duas senhas não estão iguais.");
+          await api.novaSenha(d.senha);
+          modoRecuperacao = false;
+          if (EU) {
+            toast("Senha trocada! ✅");
+            return ir("perfil");
+          }
+          toast("Senha nova salva! ✅");
+          await aposLogin();
+        },
+        async fPerfil(f, d) {
+          const nome = (d.nome || "").trim();
+          if (nome.length < 2) return erroForm("Coloque seu nome.");
+          EU = await api.atualizarPerfil(EU.id, { nome, avatar: avatarEscolhido() });
+          const j = JOGADORES.find(x => x.id === EU.id);
+          if (j) {
+            j.nome = EU.nome;
+            j.avatar = EU.avatar;
+          }
+          toast("Perfil atualizado ✅");
+          ir("home");
+        },
+        async fConvites(f, d) {
+          const qtd = Math.max(1, Math.min(50, parseInt(d.qtd, 10) || 1));
+          const novos = await api.criarConvites(qtd, d.papel || "jogador", (d.obs || "").trim(), parseInt(d.dias, 10) || 0);
+          ADM.novos = novos || [];
+          ADM.convites = null;
+          await telaAdmin("convites");
+        }
+      };
+      document.addEventListener("submit", async e => {
+        const f = e.target,
+          fn = FORMS[f.id];
+        if (!fn) return;
+        e.preventDefault();
+        erroForm("");
+        const d = Object.fromEntries(new FormData(f).entries());
+        travaBotao(f, true);
+        try {
+          await fn(f, d);
+        } catch (err) {
+          erroForm(msgErro(err));
+        } finally {
+          if (document.body.contains(f)) travaBotao(f, false);
+        }
+      });
+
+      /* ---------- Perfil ---------- */
+      function telaPerfil() {
+        const nv = nivel();
+        app.innerHTML =
+          topo("Meu perfil") +
+          `
+    <form class="cartao" id="fPerfil" novalidate>
+      <label class="campo">Nome<input name="nome" maxlength="40" value="${esc(EU.nome)}" required></label>
+      <div class="campo">Bichinho${seletorAvatar(EU.avatar)}</div>
+      <div class="erro-form" id="erro"></div>
+      <button class="bt pode cheio" type="submit">Salvar</button>
+    </form>
+    <div class="cartao"><h3>Meus números</h3>
+      <p>🎓 Nível <b>${nv}</b> · ⭐ <b>${P.xp}</b> XP · 🎮 <b>${P.rodadas}</b> partidas · 🏆 <b>${(JOGADORES.find(j => j.id === EU.id) || EU).vitorias || 0}</b> duelos vencidos</p>
+      <p class="nota" style="text-align:left">Tudo fica salvo na sua conta: entre em qualquer celular ou computador e continue de onde parou.</p></div>
+    <div class="botoes"><button class="bt claro" data-a="trocar-senha">🔑 Trocar senha</button><button class="bt nao" data-a="sair">↩️ Sair</button></div>`;
+      }
+
+      /* ---------- Ranking ---------- */
+      let abaRanking = "equipe";
+      async function telaRanking() {
+        carregando("🏆 Ranking");
+        const abas = `<div class="abas"><button data-rk="equipe" class="${abaRanking === "equipe" ? "on" : ""}">Equipe</button><button data-rk="vitorias" class="${abaRanking === "vitorias" ? "on" : ""}">Duelos</button><button data-rk="minhas" class="${abaRanking === "minhas" ? "on" : ""}">Minhas partidas</button></div>`;
+        try {
+          let corpo = "";
+          if (abaRanking === "minhas") {
+            const l = await api.minhasPartidas(EU.id);
+            corpo = l.length
+              ? `<div class="rank">${l.map(p => `<div><span>${esc(p.modo)}${p.tema ? ` <small style="color:var(--cinza);font-weight:400">· ${esc(TEMAS[p.tema]?.n || p.tema)}</small>` : ""}<br><small style="color:var(--cinza);font-weight:400">${dataHoraBR(p.criado_em)}${p.total ? ` · ${p.acertos}/${p.total} acertos` : ""}</small></span><span>+${p.pontos}</span></div>`).join("")}</div>`
+              : `<div class="vazio">Você ainda não jogou nenhuma partida.</div>`;
+          } else {
+            let l = await api.ranking();
+            if (abaRanking === "vitorias") l = l.slice().sort((a, b) => b.vitorias - a.vitorias || b.xp - a.xp);
+            corpo = `<div class="rank">${l.map((r, i) => `<div style="${r.id === EU.id ? "background:var(--verde-cl);margin:0 -14px;padding:10px 14px" : ""}"><span>${["🥇", "🥈", "🥉"][i] || i + 1 + "º"} ${esc(r.avatar)} ${esc(r.nome)}${estaOnline(r) ? " 🟢" : ""}<br><small style="color:var(--cinza);font-weight:400">Nível ${r.nivel} · ${r.vitorias} vitória${r.vitorias === 1 ? "" : "s"}</small></span><span>${abaRanking === "vitorias" ? r.vitorias + " 🏆" : r.xp + " XP"}</span></div>`).join("")}</div>`;
+          }
+          if (telaAtual !== "ranking") return;
+          app.innerHTML = topo("🏆 Ranking") + abas + corpo;
+        } catch (e) {
+          app.innerHTML = topo("🏆 Ranking") + abas + `<div class="erro-form">${esc(msgErro(e))}</div>`;
+        }
+      }
+
+      /* ---------- Correções ---------- */
+      function abrirCorrecao(c) {
+        if (!c) return;
+        CORR_ATUAL = c;
+        modal(`<h3>🚩 Sugerir correção</h3><p style="margin:0;color:var(--cinza);font-size:14px">Achou algo ambíguo, errado ou diferente do documento? Conte para a coordenação.</p>
+    <div class="pq">“${esc(c.q)}”${c.quiz ? `<br><small style="font-weight:400;color:var(--cinza)">${esc(c.quiz)}</small>` : ""}</div>
+    <div class="chips">${TIPOS_CORR.map(([v, l], i) => `<label class="chip"><input type="radio" name="tipoCorr" value="${v}" ${i === 0 ? "checked" : ""}> ${l}</label>`).join("")}</div>
+    <label class="campo">O que precisa mudar?<textarea id="corrMsg" maxlength="1000" placeholder="Ex.: o documento diz que… / a frase dá para entender dos dois jeitos porque…"></textarea></label>
+    <div class="erro-form" id="corrErro"></div>
+    <div class="botoes"><button class="bt claro" data-a="fechar-modal">Cancelar</button><button class="bt pode" data-a="enviar-corr">Enviar</button></div>`);
+        setTimeout(() => $("#corrMsg")?.focus(), 100);
+      }
+      async function enviarCorrecao(bt) {
+        const c = CORR_ATUAL,
+          msg = ($("#corrMsg")?.value || "").trim();
+        const tipo = document.querySelector("input[name=tipoCorr]:checked")?.value || "outro";
+        if (msg.length < 3) {
+          $("#corrErro").textContent = "Escreva o que precisa mudar.";
+          return;
+        }
+        bt.disabled = true;
+        bt.textContent = "Enviando…";
+        try {
+          await api.enviarCorrecao({
+            user_id: EU.id,
+            origem: String(c.ref || "").startsWith("quiz:") ? "quiz" : "base",
+            pergunta_ref: c.ref || null,
+            pergunta: (c.q + (c.quiz ? "  [" + c.quiz + "]" : "")).slice(0, 600),
+            tipo,
+            mensagem: msg
+          });
+          fecharModal();
+          toast("Obrigada(o)! A coordenação vai analisar. 💚");
+        } catch (e) {
+          $("#corrErro").textContent = msgErro(e);
+          bt.disabled = false;
+          bt.textContent = "Enviar";
+        }
+      }
+      async function telaCorrecoes() {
+        carregando("🚩 Minhas correções");
+        try {
+          const l = await api.minhasCorrecoes(EU.id);
+          if (telaAtual !== "correcoes") return;
+          app.innerHTML =
+            topo("🚩 Minhas correções") +
+            `<p class="dica-caca">Para sugerir, toque em “🚩 Sugerir correção” depois de responder uma carta.</p>` +
+            (l.length
+              ? l
+                  .map(
+                    c => `<div class="item"><div class="tx"><h3>${esc(c.pergunta)}</h3>
+        <small>${dataBR(c.criado_em)} · ${esc((TIPOS_CORR.find(t => t[0] === c.tipo) || [0, c.tipo])[1])}</small>
+        <p style="margin:6px 0;font-size:14px">${esc(c.mensagem)}</p>
+        <span class="st ${c.status}">${{ aberta: "⏳ Em análise", resolvida: "✅ Resolvida", descartada: "➖ Mantida como está" }[c.status]}</span>
+        ${c.resposta ? `<div class="okmsg" style="margin:8px 0 0"><b>Coordenação:</b> ${esc(c.resposta)}</div>` : ""}</div></div>`
+                  )
+                  .join("")
+              : `<div class="vazio">Você ainda não enviou nenhuma correção.</div>`);
+        } catch (e) {
+          app.innerHTML = topo("🚩 Minhas correções") + `<div class="erro-form">${esc(msgErro(e))}</div>`;
+        }
+      }
+
+      /* ---------- Duelos ---------- */
+      const meuLado = d => (d.criador === EU.id ? "criador" : "desafiado");
+      const outroDe = d => (d.criador === EU.id ? d.desafiado : d.criador);
+      const jaJoguei = d => d["pontos_" + meuLado(d)] !== null && d["pontos_" + meuLado(d)] !== undefined;
+      const duelosSuaVez = () => DUELOS.filter(d => d.status === "aguardando" && !jaJoguei(d));
+      function aoMudarDuelo(p) {
+        const n = p.new || {};
+        if (!n.id) return;
+        const i = DUELOS.findIndex(d => d.id === n.id);
+        if (i >= 0) DUELOS[i] = Object.assign(DUELOS[i], n);
+        else DUELOS.unshift(n);
+        if (!JOGADORES.some(j => j.id === n.criador) || !JOGADORES.some(j => j.id === n.desafiado))
+          api
+            .jogadores()
+            .then(l => {
+              JOGADORES = l;
+            })
+            .catch(() => {});
+        if (p.eventType === "INSERT" && n.desafiado === EU.id)
+          toast(`${nomeDe(n.criador)} te desafiou para um duelo! ⚔️`, { rotulo: "Ver", fn: () => ir("duelos") });
+        else if (p.eventType === "UPDATE" && n.status === "concluido" && n.criador === EU.id)
+          toast(
+            n.vencedor === EU.id
+              ? `Você venceu o duelo contra ${nomeDe(n.desafiado)}! 🏆`
+              : n.vencedor
+                ? `${nomeDe(n.desafiado)} venceu o duelo. Revanche?`
+                : `Empate com ${nomeDe(n.desafiado)}!`,
+            { rotulo: "Ver", fn: () => ir("duelos") }
+          );
+        else if (p.eventType === "UPDATE" && n.status === "recusado" && n.criador === EU.id)
+          toast(`${nomeDe(n.desafiado)} recusou o duelo.`);
+        if (telaAtual === "home" && !J) telaHome();
+        if (telaAtual === "duelos" && !J) desenhaDuelos();
+      }
+      async function telaDuelos() {
+        carregando("⚔️ Duelos");
+        try {
+          const [d, j] = await Promise.all([api.duelos(EU.id), api.jogadores()]);
+          DUELOS = d;
+          JOGADORES = j;
+        } catch (e) {
+          toast(msgErro(e));
+        }
+        if (telaAtual === "duelos") desenhaDuelos();
+      }
+      function linhaDuelo(d) {
+        const o = outroDe(d),
+          on = estaOnline(JOGADORES.find(j => j.id === o));
+        const meu = d["pontos_" + meuLado(d)],
+          dele = d["pontos_" + (meuLado(d) === "criador" ? "desafiado" : "criador")];
+        let info = "",
+          acoes = "";
+        if (d.status === "recusado") info = "➖ Duelo recusado";
+        else if (d.status === "concluido") {
+          info = `Você <b>${meu}</b> × <b>${dele}</b> ${esc(primeiroNomeDe(o))} — ${d.vencedor === EU.id ? "🏆 Vitória" : d.vencedor ? "Derrota" : "🤝 Empate"}`;
+          acoes = `<button class="bt mini azul" data-a="revanche" data-id="${d.id}">⚔️ Revanche</button>`;
+        } else if (!jaJoguei(d)) {
+          info =
+            d.criador === EU.id
+              ? "Sua vez de jogar!"
+              : `${esc(primeiroNomeDe(o))} te desafiou${dele !== null && dele !== undefined ? " e já jogou" : ""}! Sua vez.`;
+          acoes = `<button class="bt mini pode" data-a="jogar-duelo" data-id="${d.id}">▶️ Jogar</button>${d.desafiado === EU.id ? `<button class="bt mini claro" data-a="recusar-duelo" data-id="${d.id}">Recusar</button>` : ""}`;
+        } else info = `Você fez <b>${meu}</b>. Esperando ${esc(primeiroNomeDe(o))} jogar…`;
+        return `<div class="item"><div class="av">${esc(avatarDe(o))}${on ? `<span class="on-dot"></span>` : ""}</div><div class="tx"><h3>${esc(nomeDe(o))}</h3>
+    <small>${esc(d.titulo)} · ${dataBR(d.criado_em)}</small><div style="font-size:14px;margin-top:4px">${info}</div>${acoes ? `<div class="acoes">${acoes}</div>` : ""}</div></div>`;
+      }
+      const primeiroNomeDe = id => nomeDe(id).split(" ")[0];
+      function desenhaDuelos() {
+        const vez = duelosSuaVez(),
+          esperando = DUELOS.filter(d => d.status === "aguardando" && jaJoguei(d)),
+          fim = DUELOS.filter(d => d.status !== "aguardando");
+        app.innerHTML =
+          topo("⚔️ Duelos") +
+          `<button class="bt azul cheio" data-a="novo-duelo">⚔️ Novo duelo</button>
+    <p class="dica-caca" style="margin-top:10px">Os dois respondem as mesmas ${10} cartas, ${TEMPO_DUELO}s cada. Quanto mais rápido acertar, mais pontos. Cada um joga quando puder.</p>
+    ${vez.length ? `<div class="secao-t">🔥 Sua vez</div>${vez.map(linhaDuelo).join("")}` : ""}
+    ${esperando.length ? `<div class="secao-t">⏳ Esperando o adversário</div>${esperando.map(linhaDuelo).join("")}` : ""}
+    ${fim.length ? `<div class="secao-t">📜 Encerrados</div>${fim.slice(0, 20).map(linhaDuelo).join("")}` : ""}
+    ${!DUELOS.length ? `<div class="vazio">Nenhum duelo ainda. Que tal desafiar alguém? 😉</div>` : ""}`;
+      }
+      let ND = null;
+      function telaNovoDuelo(pre) {
+        ND = Object.assign({ oponente: null, busca: "" }, pre || {});
+        desenhaNovoDuelo();
+      }
+      function desenhaNovoDuelo() {
+        if (!ND.oponente) {
+          const lista = JOGADORES.filter(j => j.id !== EU.id && (!ND.busca || j.nome.toLowerCase().includes(ND.busca.toLowerCase()))).sort(
+            (a, b) => estaOnline(b) - estaOnline(a) || a.nome.localeCompare(b.nome)
+          );
+          const n = JOGADORES.filter(j => j.id !== EU.id && estaOnline(j)).length;
+          app.innerHTML =
+            topo("⚔️ Quem você quer desafiar?") +
+            `<input class="inp busca" id="buscaJog" placeholder="🔎 Buscar pelo nome" value="${esc(ND.busca)}">
+      <p class="dica-caca">🟢 ${n} pessoa${n === 1 ? "" : "s"} on-line agora</p>` +
+            (lista.length
+              ? lista
+                  .map(
+                    j => `<button class="item" data-a="escolhe-op" data-id="${j.id}"><div class="av">${esc(j.avatar)}${estaOnline(j) ? `<span class="on-dot"></span>` : ""}</div>
+        <div class="tx"><h3>${esc(j.nome)}</h3><small>${estaOnline(j) ? "🟢 On-line agora" : "Visto " + dataHoraBR(j.visto_em)} · Nível ${Math.floor(j.xp / 100) + 1}</small></div><span style="font-size:22px">›</span></button>`
+                  )
+                  .join("")
+              : `<div class="vazio">${JOGADORES.length <= 1 ? "Ainda não tem mais ninguém na equipe. Peça para a coordenação enviar convites!" : "Ninguém com esse nome."}</div>`);
+          return;
+        }
+        if (ND.fonte) return criarDuelo(ND.fonte);
+        const temas = Object.entries(TEMAS).filter(([k]) => PERGUNTAS.filter(p => p.t === k).length >= 5);
+        const meus = MEUS_QUIZZES.filter(q => perguntasDe(q).length >= 3);
+        app.innerHTML =
+          topo("⚔️ Com quais perguntas?") +
+          `<div class="item"><div class="av">${esc(avatarDe(ND.oponente))}</div><div class="tx"><small>Desafiando</small><h3>${esc(nomeDe(ND.oponente))}</h3></div><button class="bt mini claro" data-a="troca-op">Trocar</button></div>
+    <button class="tema" data-a="fonte-duelo" data-f="todos"><span class="ic" style="background:#17302A22">🎲</span><span class="tx"><h3>Todos os temas</h3><small>Um pouco de cada</small></span></button>
+    ${temas.map(([k, t]) => `<button class="tema" data-a="fonte-duelo" data-f="tema:${k}"><span class="ic" style="background:${t.cor}22">${t.ic}</span><span class="tx"><h3>${esc(t.n)}</h3><small>${PERGUNTAS.filter(p => p.t === k).length} cartas</small></span></button>`).join("")}
+    ${meus.length ? `<div class="secao-t">✍️ Meus quizzes</div>${meus.map(q => `<button class="tema" data-a="fonte-duelo" data-f="quiz:${q.id}"><span class="ic" style="background:#0E7C8622">✍️</span><span class="tx"><h3>${esc(q.titulo)}</h3><small>${perguntasDe(q).length} perguntas</small></span></button>`).join("")}` : ""}
+    ${QUIZ_APROV.length ? `<div class="secao-t">🤝 Da equipe</div>${QUIZ_APROV.map(q => `<button class="tema" data-a="fonte-duelo" data-f="quiz:${q.id}"><span class="ic" style="background:#C98A1222">🤝</span><span class="tx"><h3>${esc(q.titulo)}</h3><small>${perguntasDe(q).length} perguntas · por ${esc(nomeDe(q.autor))}</small></span></button>`).join("")}` : ""}`;
+      }
+      function cartasDaFonte(f) {
+        if (f === "todos") return { titulo: "Todos os temas", cartas: embaralha(PERGUNTAS).slice(0, 10) };
+        if (f.startsWith("tema:")) {
+          const k = f.slice(5);
+          return { titulo: TEMAS[k].n, cartas: embaralha(PERGUNTAS.filter(p => p.t === k)).slice(0, 10) };
+        }
+        if (f.startsWith("quiz:")) {
+          const id = f.slice(5),
+            q = MEUS_QUIZZES.find(x => x.id === id) || QUIZ_APROV.find(x => x.id === id);
+          if (!q) return null;
+          return { titulo: q.titulo, quiz_id: q.id, cartas: embaralha(perguntasDe(q).map(p => cartaDeQuiz(p, q))).slice(0, 10) };
+        }
+        return null;
+      }
+      const limpaCarta = c => ({
+        q: c.q,
+        ok: c.ok,
+        e: c.e,
+        ev: c.ev || null,
+        t: c.t,
+        ref: c.ref || null,
+        quiz: c.quiz || null,
+        fonte: c.fonte || null,
+        trecho: c.trecho || null
+      });
+      async function criarDuelo(f) {
+        const src = cartasDaFonte(f);
+        if (!src || !src.cartas.length) return toast("Não encontrei perguntas para este duelo.");
+        carregando("⚔️ Novo duelo", "Criando o duelo…");
+        try {
+          const d = await api.criarDuelo({
+            criador: EU.id,
+            desafiado: ND.oponente,
+            titulo: src.titulo.slice(0, 80),
+            quiz_id: src.quiz_id || null,
+            perguntas: src.cartas.map(limpaCarta)
+          });
+          DUELOS.unshift(d);
+          ND = null;
+          toast(`Duelo criado! Agora é a sua vez. 💪`);
+          iniciarDuelo(d);
+        } catch (e) {
+          toast(msgErro(e));
+          ND.fonte = null;
+          desenhaNovoDuelo();
+        }
+      }
+      function iniciarDuelo(d) {
+        const cartas = (d.perguntas || []).map(c => {
+          if (c.ev && String(c.ev).startsWith("u:") && c.trecho)
+            EV[c.ev] = { f: c.fonte || "Fonte informada pelo autor", s: "Quiz “" + (c.quiz || d.titulo) + "”", x: [c.trecho] };
+          if (c.ev && !EV[c.ev]) c.ev = null;
+          if (!TEMAS[c.t]) c.t = "comunidade";
+          return c;
+        });
+        J = {
+          modo: "duelo",
+          duelo: d,
+          titulo: "Duelo com " + primeiroNomeDe(outroDe(d)),
+          cartas,
+          i: 0,
+          pts: 0,
+          vidas: Infinity,
+          combo: 0,
+          acertos: 0,
+          erros: [],
+          travado: false,
+          tCarta: TEMPO_DUELO
+        };
+        telaAtual = "jogo";
+        desenhaCarta();
+      }
+      function iniciarTimerDuelo() {
+        pararTimer();
+        timerId = setInterval(() => {
+          if (!J || J.modo !== "duelo" || J.travado || fbDepois) return;
+          J.tCarta--;
+          const t = $("#timer");
+          if (t) {
+            t.textContent = Math.max(0, J.tCarta) + "s";
+            t.classList.toggle("pouco", J.tCarta <= 5);
+          }
+          if (J.tCarta <= 0) {
+            pararTimer();
+            responder(null);
+          }
+        }, 1000);
+      }
+      let DUELO_PEND = null;
+      async function fimDuelo() {
+        pararTimer();
+        const d = J.duelo;
+        J.encerrado = true;
+        if (!DUELO_PEND || DUELO_PEND.id !== d.id) {
+          P.rodadas++;
+          P.xp += J.pts;
+          registraRanking(J.pts, "Duelo", d.titulo, J.acertos, J.cartas.length);
+          J.novas = checaMedalhas();
+          salvar();
+        }
+        DUELO_PEND = { id: d.id, pts: J.pts, ac: J.acertos, erros: J.erros, novas: J.novas || [], tot: J.cartas.length };
+        await enviarDuelo();
+      }
+      async function enviarDuelo() {
+        const p = DUELO_PEND;
+        if (!p) return;
+        carregando("", "Enviando sua pontuação…");
+        let r;
+        try {
+          r = await api.jogarDuelo(p.id, p.pts, p.ac);
+        } catch (e) {
+          if (/já jogou/i.test(e?.message || "")) {
+            DUELO_PEND = null;
+            toast("Esta jogada já tinha sido registrada.");
+            return ir("duelos");
+          }
+          app.innerHTML = `<div class="resultado"><div class="big">📡</div><h2>Não consegui enviar</h2><p>${esc(msgErro(e))}</p><p>Sua pontuação (<b>${p.pts}</b>) está guardada. Tente de novo quando a internet voltar.</p>
+      <button class="bt pode cheio" data-a="reenviar-duelo">Tentar de novo</button></div>`;
+          return;
+        }
+        DUELO_PEND = null;
+        const i = DUELOS.findIndex(x => x.id === r.id);
+        if (i >= 0) DUELOS[i] = r;
+        else DUELOS.unshift(r);
+        const o = outroDe(r),
+          lado = meuLado(r),
+          outroLado = lado === "criador" ? "desafiado" : "criador";
+        let topoR, msg;
+        if (r.status === "concluido") {
+          if (r.vencedor === EU.id) {
+            topoR = "🏆";
+            msg = "Você venceu o duelo!";
+            confete();
+            bip("fim");
+          } else if (r.vencedor) {
+            topoR = "💪";
+            msg = primeiroNomeDe(o) + " venceu desta vez!";
+          } else {
+            topoR = "🤝";
+            msg = "Empate!";
+            bip("fim");
+          }
+        } else {
+          topoR = "⏳";
+          msg = "Sua parte está feita!";
+        }
+        const revisao = p.erros.length
+          ? `<div class="revisao"><h3>📚 Para revisar</h3><ul>${p.erros.map(e => `<li><b>${esc(e.q)}</b>${e.ok ? "✅ Pode" : "⛔ Não pode"} — ${esc(e.e)}${verDoc(e.ev)}${corrBtn(e)}</li>`).join("")}</ul></div>`
+          : "";
+        app.innerHTML = `<div class="resultado"><div class="big">${topoR}</div><h2>${msg}</h2>
+    <div class="placar"><div><div class="av">${esc(EU.avatar)}</div><b>${r["pontos_" + lado]}</b><small>Você · ${r["acertos_" + lado]}/${p.tot}</small></div>
+      <div><div class="av">${esc(avatarDe(o))}</div><b>${r["pontos_" + outroLado] ?? "?"}</b><small>${esc(primeiroNomeDe(o))}${r["acertos_" + outroLado] != null ? " · " + r["acertos_" + outroLado] + "/" + p.tot : " · ainda não jogou"}</small></div></div>
+    ${r.status !== "concluido" ? `<p>Avisamos quando ${esc(primeiroNomeDe(o))} jogar.</p>` : ""}
+    <div class="pts">+${p.pts} XP</div>
+    ${p.novas.map(m => `<div class="medalha-nova">${m.ic} Nova conquista: <b>${m.n}</b></div>`).join("")}
+    ${revisao}
+    <div class="botoes"><button class="bt claro" data-ir="home">🏠 Início</button><button class="bt azul" data-ir="duelos">⚔️ Duelos</button></div></div>`;
+        J = null;
+        telaAtual = "resultado-duelo";
+      }
+
+      /* ---------- Meus quizzes ---------- */
+      const ROT_STATUS = {
+        privado: "🔒 Só você e quem você desafiar",
+        enviado: "⏳ Em análise pela coordenação",
+        aprovado: "✅ No jogo de toda a equipe",
+        recusado: "↩️ Precisa de ajuste"
+      };
+      async function telaQuizzes() {
+        carregando("✍️ Meus quizzes");
+        try {
+          MEUS_QUIZZES = await api.meusQuizzes(EU.id);
+        } catch (e) {
+          toast(msgErro(e));
+        }
+        if (telaAtual !== "quizzes") return;
+        app.innerHTML =
+          topo("✍️ Meus quizzes") +
+          `<button class="bt pode cheio" data-a="novo-quiz">＋ Criar quiz</button>
+    <p class="dica-caca" style="margin-top:10px">Seus quizzes ficam só para você e para quem você desafiar. Se quiser, envie para a coordenação aprovar e ele entra no jogo de toda a equipe.</p>` +
+          (MEUS_QUIZZES.length
+            ? MEUS_QUIZZES.map(q => {
+                const n = perguntasDe(q).length,
+                  st = q.status;
+                return `<div class="item"><div class="av">✍️</div><div class="tx"><h3>${esc(q.titulo)}</h3><small>${n} pergunta${n === 1 ? "" : "s"} · ${esc(TEMAS[q.tema]?.n || "Geral")}${P.estrelasQuiz[q.id] ? " · " + "★".repeat(P.estrelasQuiz[q.id]) : ""}</small>
+        <span class="st ${st}">${ROT_STATUS[st]}</span>${st === "recusado" && q.motivo ? `<div class="erro-form" style="margin:8px 0 0">Coordenação: ${esc(q.motivo)}</div>` : ""}
+        <div class="acoes"><button class="bt mini pode" data-a="jogar-quiz" data-id="${q.id}">▶️ Jogar</button>
+          <button class="bt mini azul" data-a="desafiar-quiz" data-id="${q.id}">⚔️ Desafiar</button>
+          ${st !== "aprovado" ? `<button class="bt mini claro" data-a="editar-quiz" data-id="${q.id}">✏️ Editar</button>` : `<button class="bt mini claro" data-a="copiar-quiz" data-id="${q.id}">📄 Fazer cópia</button>`}
+          ${st === "privado" || st === "recusado" ? `<button class="bt mini ouro" data-a="enviar-quiz" data-id="${q.id}">📤 Enviar p/ aprovação</button>` : ""}
+          ${st === "enviado" ? `<button class="bt mini claro" data-a="retirar-quiz" data-id="${q.id}">Retirar da análise</button>` : ""}
+          ${st !== "aprovado" ? `<button class="bt mini claro" data-a="apagar-quiz" data-id="${q.id}">🗑️</button>` : ""}</div></div></div>`;
+              }).join("")
+            : `<div class="vazio">Você ainda não criou nenhum quiz. Que tal transformar uma regra que sempre gera dúvida em pergunta?</div>`);
+      }
+      let ED = null;
+      function novaPerguntaEd() {
+        return { afirmacao: "", pode: null, explicacao: "", fonte: "", trecho: "" };
+      }
+      function abrirEditor(q, copia) {
+        ED = q
+          ? {
+              id: copia ? null : q.id,
+              titulo: q.titulo + (copia ? " (cópia)" : ""),
+              tema: q.tema,
+              descricao: q.descricao || "",
+              status: copia ? "privado" : q.status,
+              perguntas: perguntasDe(q).map(p => ({
+                afirmacao: p.afirmacao,
+                pode: p.pode,
+                explicacao: p.explicacao,
+                fonte: p.fonte || "",
+                trecho: p.trecho || ""
+              }))
+            }
+          : { id: null, titulo: "", tema: "comunidade", descricao: "", status: "privado", perguntas: [novaPerguntaEd()] };
+        telaAtual = "editor";
+        desenhaEditor();
+      }
+      function desenhaEditor(erros) {
+        erros = erros || {};
+        app.innerHTML =
+          topo(ED.id ? "✏️ Editar quiz" : "✍️ Novo quiz").replace('data-ir="home"', 'data-ir="quizzes"') +
+          `
+    <div class="cartao">
+      <label class="campo">Título do quiz<input data-ed="titulo" maxlength="80" value="${esc(ED.titulo)}" placeholder="Ex.: Pegadinhas do QR Code"></label>
+      <label class="campo">Tema<select data-ed="tema">${Object.entries(TEMAS)
+        .map(
+          ([k, t]) =>
+            `<option value="${k}" ${ED.tema === k ? "selected" : ""}>${t.ic} ${esc(k === "comunidade" ? "Geral / vários temas" : t.n)}</option>`
+        )
+        .join("")}</select></label>
+      <label class="campo">Descrição (opcional)<input data-ed="descricao" maxlength="200" value="${esc(ED.descricao)}"></label>
+    </div>
+    <p class="dica-caca">Cada pergunta é uma afirmação. Quem joga decide: <b>pode</b> ou <b>não pode</b>?</p>
+    ${ED.perguntas
+      .map(
+        (
+          p,
+          i
+        ) => `<div class="ed-q ${erros[i] ? "erro" : ""}"><div class="cab"><span>Pergunta ${i + 1}</span>${ED.perguntas.length > 1 ? `<button class="del" data-a="ed-del" data-i="${i}">Remover</button>` : ""}</div>
+      <label class="campo">Afirmação<textarea data-edp="${i}:afirmacao" maxlength="300" placeholder="Ex.: Usar QR Code azul na arte padrão preto e verde">${esc(p.afirmacao)}</textarea></label>
+      <div class="campo">Resposta certa<div class="pn-tog"><button type="button" class="s ${p.pode === true ? "sel" : ""}" data-a="ed-pode" data-i="${i}" data-v="1">👍 Pode</button><button type="button" class="n ${p.pode === false ? "sel" : ""}" data-a="ed-pode" data-i="${i}" data-v="0">✋ Não pode</button></div></div>
+      <label class="campo">Explicação (aparece depois da resposta)<textarea data-edp="${i}:explicacao" maxlength="500" placeholder="Por que pode ou não pode?">${esc(p.explicacao)}</textarea></label>
+      <details class="mais" ${p.fonte || p.trecho ? "open" : ""}><summary>📄 Fonte e trecho (opcional, vira o “Ver no documento”)</summary>
+        <label class="campo">Fonte<select data-edp="${i}:fonte"><option value="">—</option>${FONTES.map(f => `<option ${p.fonte === f ? "selected" : ""}>${esc(f)}</option>`).join("")}</select></label>
+        <label class="campo">Trecho<textarea data-edp="${i}:trecho" maxlength="800" placeholder="Cole aqui a frase do documento que comprova a resposta">${esc(p.trecho)}</textarea></label></details>
+      ${erros[i] ? `<div class="erro-form" style="margin:0">${esc(erros[i])}</div>` : ""}</div>`
+      )
+      .join("")}
+    <button class="bt claro cheio" data-a="ed-add">＋ Adicionar pergunta</button>
+    <div class="erro-form" id="erro" style="margin-top:12px">${esc(erros.geral || "")}</div>
+    <button class="bt pode cheio" data-a="ed-salvar" style="margin-top:4px">💾 Salvar quiz</button>
+    <p class="nota">${ED.status === "enviado" ? "Este quiz está em análise: as mudanças vão junto para a coordenação." : "Ao salvar, ele fica só para você e para quem você desafiar."}</p>`;
+      }
+      async function salvarEditor(bt) {
+        const erros = {};
+        if (ED.titulo.trim().length < 3) erros.geral = "Dê um título ao quiz (pelo menos 3 letras).";
+        ED.perguntas.forEach((p, i) => {
+          if (p.afirmacao.trim().length < 5) erros[i] = "Escreva a afirmação.";
+          else if (p.pode === null) erros[i] = "Marque se a resposta certa é Pode ou Não pode.";
+          else if (p.explicacao.trim().length < 5) erros[i] = "Escreva a explicação.";
+        });
+        if (Object.keys(erros).length) {
+          if (!erros.geral) erros.geral = "Falta completar algumas perguntas (marcadas em vermelho).";
+          desenhaEditor(erros);
+          return;
+        }
+        bt.disabled = true;
+        bt.textContent = "Salvando…";
+        try {
+          await api.salvarQuiz({
+            id: ED.id,
+            titulo: ED.titulo.trim(),
+            tema: ED.tema,
+            descricao: ED.descricao.trim(),
+            perguntas: ED.perguntas
+          });
+          toast(ED.status === "enviado" ? "Quiz salvo e atualizado na análise ✅" : "Quiz salvo 🔒 Só você e quem você desafiar veem.");
+          ED = null;
+          ir("quizzes");
+        } catch (e) {
+          erroForm(msgErro(e));
+          bt.disabled = false;
+          bt.textContent = "💾 Salvar quiz";
+        }
+      }
+      document.addEventListener("input", e => {
+        const t = e.target;
+        if (t.id === "buscaJog" && ND) {
+          ND.busca = t.value;
+          const pos = t.selectionStart;
+          desenhaNovoDuelo();
+          const n = $("#buscaJog");
+          n.focus();
+          n.setSelectionRange(pos, pos);
+          return;
+        }
+        if (!ED) return;
+        if (t.dataset.ed) ED[t.dataset.ed] = t.value;
+        if (t.dataset.edp) {
+          const [i, campo] = t.dataset.edp.split(":");
+          ED.perguntas[+i][campo] = t.value;
+        }
+      });
+      document.addEventListener("change", e => {
+        const t = e.target;
+        if (!ED) return;
+        if (t.dataset.ed) ED[t.dataset.ed] = t.value;
+        if (t.dataset.edp) {
+          const [i, campo] = t.dataset.edp.split(":");
+          ED.perguntas[+i][campo] = t.value;
+        }
+      });
+
+      /* ---------- Quizzes da equipe ---------- */
+      async function telaEquipe() {
+        carregando("🤝 Quizzes da equipe");
+        try {
+          incorporarAprovados(await api.quizzesAprovados());
+        } catch (e) {
+          toast(msgErro(e));
+        }
+        if (telaAtual !== "equipe") return;
+        app.innerHTML =
+          topo("🤝 Quizzes da equipe") +
+          `<p class="dica-caca">Criados por colegas e aprovados pela coordenação. As perguntas também entram no “Todos misturados” e no Relâmpago.</p>` +
+          (QUIZ_APROV.length
+            ? QUIZ_APROV.map(
+                q => `<div class="item"><div class="av">${esc(avatarDe(q.autor))}</div><div class="tx"><h3>${esc(q.titulo)}</h3>
+      <small>por ${esc(nomeDe(q.autor))} · ${perguntasDe(q).length} perguntas${P.estrelasQuiz[q.id] ? " · " + "★".repeat(P.estrelasQuiz[q.id]) : ""}</small>${q.descricao ? `<small>${esc(q.descricao)}</small>` : ""}
+      <div class="acoes"><button class="bt mini pode" data-a="jogar-quiz" data-id="${q.id}">▶️ Jogar</button><button class="bt mini azul" data-a="desafiar-quiz" data-id="${q.id}">⚔️ Desafiar</button></div></div></div>`
+              ).join("")
+            : `<div class="vazio">Ainda não há quizzes aprovados. Crie o seu em “Meus quizzes” e envie para aprovação!</div>`);
+      }
+      function acharQuiz(id) {
+        return MEUS_QUIZZES.find(q => q.id === id) || QUIZ_APROV.find(q => q.id === id);
+      }
+      function jogarQuiz(id) {
+        const q = acharQuiz(id);
+        if (!q) return;
+        const cartas = perguntasDe(q).map(p => cartaDeQuiz(p, q));
+        if (!cartas.length) return toast("Este quiz ainda não tem perguntas.");
+        telaAtual = "jogo";
+        iniciarPN("quiz", cartas, q.titulo, q.id);
+      }
+
+      /* ---------- Coordenação ---------- */
+      const ADM = { aba: "convites", convites: null, novos: [], quizzes: null, correcoes: null, filtroCorr: "aberta" };
+      async function telaAdmin(aba) {
+        if (EU.papel !== "admin") return ir("home");
+        if (typeof aba === "string") ADM.aba = aba;
+        carregando("🛠️ Coordenação");
+        try {
+          if (ADM.aba === "convites") ADM.convites = await api.convites();
+          if (ADM.aba === "quizzes") ADM.quizzes = await api.quizzesEnviados();
+          if (ADM.aba === "correcoes") ADM.correcoes = await api.correcoes();
+          if (ADM.aba === "equipe") JOGADORES = await api.jogadores();
+        } catch (e) {
+          toast(msgErro(e));
+        }
+        if (telaAtual !== "admin") return;
+        desenhaAdmin();
+      }
+      const linkConvite = c => urlBase() + "?convite=" + encodeURIComponent(c);
+      const msgConvite = c =>
+        `Oi${c.observacao ? ", " + c.observacao : ""}! Você foi convidada(o) para o *Missão Anúncio*, o jogo de treino da MedGuias 🎯\n\n1. Abra este link: ${linkConvite(c.codigo)}\n2. Crie sua conta com seu e-mail e uma senha.\nSeu código de acesso (uso único): *${c.codigo}*`;
+      function desenhaAdmin() {
+        const abas = [
+          ["convites", "🎟️ Convites"],
+          ["quizzes", "📥 Quizzes" + (ADM.quizzes && ADM.quizzes.length ? ` (${ADM.quizzes.length})` : "")],
+          ["correcoes", "🚩 Correções"],
+          ["equipe", "👥 Equipe"]
+        ];
+        let corpo = "";
+        if (ADM.aba === "convites") {
+          const agora = Date.now();
+          corpo = `<form class="cartao" id="fConvites" novalidate><h3>Gerar convites</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px"><label class="campo">Quantos<input type="number" name="qtd" min="1" max="50" value="1"></label>
+      <label class="campo">Vale por<select name="dias"><option value="7">7 dias</option><option value="30" selected>30 dias</option><option value="90">90 dias</option><option value="0">Sem prazo</option></select></label></div>
+      <label class="campo">Para quem (opcional)<input name="obs" maxlength="60" placeholder="Ex.: Júlia — diagramação"></label>
+      <label class="campo">Tipo de acesso<select name="papel"><option value="jogador">Jogador(a)</option><option value="admin">Coordenação (pode aprovar e gerar convites)</option></select></label>
+      <div class="erro-form" id="erro"></div><button class="bt pode cheio" type="submit">🎟️ Gerar</button></form>
+      ${ADM.novos.length ? `<div class="cartao" style="border:2px solid var(--verde)"><h3>✅ Convites novos — envie para cada pessoa</h3>${ADM.novos.map(c => `<div class="prev-q"><span class="cod">${esc(c.codigo)}</span>${c.observacao ? ` · ${esc(c.observacao)}` : ""}<div class="acoes" style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px"><button class="bt mini pode" data-a="copiar-msg" data-c="${esc(c.codigo)}">💬 Copiar mensagem</button><button class="bt mini claro" data-a="copiar-link" data-c="${esc(c.codigo)}">🔗 Copiar link</button></div></div>`).join("")}</div>` : ""}
+      <div class="secao-t">Todos os convites</div>
+      ${
+        (ADM.convites || [])
+          .map(c => {
+            const exp = c.expira_em && new Date(c.expira_em).getTime() < agora;
+            const st = c.usado_por
+              ? `✅ Usado por ${esc(nomeDe(c.usado_por))} em ${dataBR(c.usado_em)}`
+              : exp
+                ? "⌛ Expirou"
+                : `🟢 Disponível${c.expira_em ? " até " + dataBR(c.expira_em) : ""}`;
+            return `<div class="item"><div class="tx"><span class="cod">${esc(c.codigo)}</span>${c.papel === "admin" ? ` <span class="st enviado">coordenação</span>` : ""}<small>${c.observacao ? esc(c.observacao) + " · " : ""}${st}</small>
+          ${!c.usado_por && !exp ? `<div class="acoes"><button class="bt mini pode" data-a="copiar-msg" data-c="${esc(c.codigo)}">💬 Mensagem</button><button class="bt mini claro" data-a="copiar-link" data-c="${esc(c.codigo)}">🔗 Link</button><button class="bt mini claro" data-a="apagar-convite" data-c="${esc(c.codigo)}">🗑️</button></div>` : ""}</div></div>`;
+          })
+          .join("") || `<div class="vazio">Nenhum convite ainda.</div>`
+      }`;
+        }
+        if (ADM.aba === "quizzes") {
+          corpo = (ADM.quizzes || []).length
+            ? ADM.quizzes
+                .map(
+                  q => `<div class="cartao"><h3>${esc(q.titulo)}</h3><small style="color:var(--cinza)">por ${esc(nomeDe(q.autor))} · ${esc(TEMAS[q.tema]?.n || "Geral")} · ${perguntasDe(q).length} perguntas</small>${q.descricao ? `<p>${esc(q.descricao)}</p>` : ""}
+      <div style="margin:10px 0">${perguntasDe(q)
+        .map(
+          (p, i) =>
+            `<div class="prev-q"><b>${i + 1}.</b> ${esc(p.afirmacao)}<br><span class="r" style="color:${p.pode ? "var(--verde)" : "var(--verm)"}">${p.pode ? "✅ Pode" : "⛔ Não pode"}</span> — ${esc(p.explicacao)}${p.trecho ? `<div class="prova" style="margin:6px 0 0"><div class="fonte">📄 ${esc(p.fonte || "Fonte")}</div><blockquote>${esc(p.trecho)}</blockquote></div>` : ""}</div>`
+        )
+        .join("")}</div>
+      <label class="campo">Motivo, se for devolver para ajuste<textarea id="mot-${q.id}" maxlength="400" placeholder="Ex.: a pergunta 3 está ambígua porque…"></textarea></label>
+      <div class="botoes"><button class="bt nao" data-a="recusar-quiz" data-id="${q.id}">↩️ Devolver</button><button class="bt pode" data-a="aprovar-quiz" data-id="${q.id}">✅ Aprovar</button></div></div>`
+                )
+                .join("")
+            : `<div class="vazio">Nenhum quiz esperando aprovação. 🎉</div>`;
+        }
+        if (ADM.aba === "correcoes") {
+          const l = (ADM.correcoes || []).filter(c => ADM.filtroCorr === "todas" || c.status === ADM.filtroCorr);
+          corpo =
+            `<div class="abas"><button data-fc="aberta" class="${ADM.filtroCorr === "aberta" ? "on" : ""}">Em aberto</button><button data-fc="todas" class="${ADM.filtroCorr === "todas" ? "on" : ""}">Todas</button></div>
+      <p class="dica-caca">Perguntas da base mudam no arquivo <b>dados.js</b>; perguntas de quiz, o autor (ou você) edita.</p>` +
+            (l.length
+              ? l
+                  .map(
+                    c => `<div class="cartao"><small style="color:var(--cinza)">${esc(avatarDe(c.user_id))} ${esc(nomeDe(c.user_id))} · ${dataHoraBR(c.criado_em)} · ${esc((TIPOS_CORR.find(t => t[0] === c.tipo) || [0, c.tipo])[1])}${c.pergunta_ref ? " · ref. " + esc(c.pergunta_ref) : ""}</small>
+        <div class="pq">${esc(c.pergunta)}</div><p style="margin:0 0 10px">${esc(c.mensagem)}</p>
+        ${
+          c.status === "aberta"
+            ? `<label class="campo">Resposta para quem enviou<textarea id="resp-${c.id}" maxlength="600" placeholder="Ex.: Obrigada! Ajustamos o texto da carta."></textarea></label>
+          <div class="botoes"><button class="bt claro" data-a="descartar-corr" data-id="${c.id}">➖ Manter como está</button><button class="bt pode" data-a="resolver-corr" data-id="${c.id}">✅ Resolvida</button></div>`
+            : `<span class="st ${c.status}">${c.status === "resolvida" ? "✅ Resolvida" : "➖ Mantida"}</span>${c.resposta ? `<div class="okmsg" style="margin:8px 0 0">${esc(c.resposta)}</div>` : ""}`
+        }</div>`
+                  )
+                  .join("")
+              : `<div class="vazio">Nada por aqui. 🎉</div>`);
+        }
+        if (ADM.aba === "equipe") {
+          corpo = JOGADORES.slice()
+            .sort((a, b) => b.xp - a.xp)
+            .map(
+              j => `<div class="item"><div class="av">${esc(j.avatar)}${estaOnline(j) ? `<span class="on-dot"></span>` : ""}</div><div class="tx"><h3>${esc(j.nome)}${j.papel === "admin" ? ` <span class="st enviado">coordenação</span>` : ""}</h3>
+      <small>Nível ${Math.floor(j.xp / 100) + 1} · ${j.xp} XP · ${j.vitorias} vitória${j.vitorias === 1 ? "" : "s"} · ${estaOnline(j) ? "🟢 on-line" : "visto " + dataHoraBR(j.visto_em)}</small>
+      ${j.id !== EU.id ? `<div class="acoes"><button class="bt mini claro" data-a="papel" data-id="${j.id}" data-p="${j.papel === "admin" ? "jogador" : "admin"}">${j.papel === "admin" ? "Tirar da coordenação" : "Tornar coordenação"}</button></div>` : ""}</div></div>`
+            )
+            .join("");
+        }
+        app.innerHTML =
+          topo("🛠️ Coordenação") +
+          `<div class="abas">${abas.map(([k, r]) => `<button data-adm="${k}" class="${ADM.aba === k ? "on" : ""}">${r}</button>`).join("")}</div>` +
+          corpo;
+      }
+      function acharConvite(c) {
+        return (ADM.novos || []).find(x => x.codigo === c) || (ADM.convites || []).find(x => x.codigo === c) || { codigo: c };
+      }
+
+      /* ---------- Ações (cliques) ---------- */
+      const ACOES = {
+        recarregar: () => location.reload(),
+        sair: async () => {
+          try {
+            await api.sair();
+          } catch (_) {}
+          EU = null;
+          P = P_PADRAO();
+          J = null;
+          telaLogin();
+        },
+        esqueci: () => telaEsqueci(),
+        "ir-login": () => telaLogin(),
+        "tenho-codigo": () => telaCadastro(""),
+        "trocar-senha": () => telaNovaSenha(),
+        "fechar-modal": () => fecharModal(),
+        "enviar-corr": el => enviarCorrecao(el),
+        "novo-duelo": () => {
+          telaAtual = "novo-duelo";
+          telaNovoDuelo();
+        },
+        "escolhe-op": el => {
+          ND.oponente = el.dataset.id;
+          desenhaNovoDuelo();
+          window.scrollTo({ top: 0 });
+        },
+        "troca-op": () => {
+          ND.oponente = null;
+          desenhaNovoDuelo();
+        },
+        "fonte-duelo": el => criarDuelo(el.dataset.f),
+        "jogar-duelo": el => {
+          const d = DUELOS.find(x => x.id === el.dataset.id);
+          if (d) iniciarDuelo(d);
+        },
+        "recusar-duelo": async el => {
+          if (!confirm("Recusar este duelo?")) return;
+          try {
+            await api.recusarDuelo(el.dataset.id);
+            const d = DUELOS.find(x => x.id === el.dataset.id);
+            if (d) d.status = "recusado";
+            desenhaDuelos();
+          } catch (e) {
+            toast(msgErro(e));
+          }
+        },
+        revanche: el => {
+          const d = DUELOS.find(x => x.id === el.dataset.id);
+          if (!d) return;
+          telaAtual = "novo-duelo";
+          telaNovoDuelo({ oponente: outroDe(d) });
+        },
+        "reenviar-duelo": () => enviarDuelo(),
+        "novo-quiz": () => abrirEditor(null),
+        "editar-quiz": el => abrirEditor(acharQuiz(el.dataset.id)),
+        "copiar-quiz": el => abrirEditor(acharQuiz(el.dataset.id), true),
+        "jogar-quiz": el => jogarQuiz(el.dataset.id),
+        "desafiar-quiz": el => {
+          telaAtual = "novo-duelo";
+          telaNovoDuelo({ fonte: "quiz:" + el.dataset.id });
+        },
+        "enviar-quiz": el => {
+          const q = acharQuiz(el.dataset.id);
+          if (!q) return;
+          if (perguntasDe(q).length < 5) return toast("Para enviar à coordenação, o quiz precisa de pelo menos 5 perguntas.");
+          modal(`<h3>📤 Enviar para aprovação?</h3><p>A coordenação vai revisar <b>${esc(q.titulo)}</b>. Se aprovar, ele entra no jogo de toda a equipe com o seu nome.</p>
+      <p class="nota" style="text-align:left">Enquanto isso, você continua jogando e desafiando normalmente. Depois de aprovado, ele não pode mais ser editado (dá para fazer uma cópia).</p>
+      <div class="botoes"><button class="bt claro" data-a="fechar-modal">Agora não</button><button class="bt ouro" data-a="confirma-envio" data-id="${q.id}">📤 Enviar</button></div>`);
+        },
+        "confirma-envio": async el => {
+          try {
+            await api.statusQuiz(el.dataset.id, "enviado");
+            fecharModal();
+            toast("Enviado! Você recebe o retorno aqui mesmo. 📬");
+            telaQuizzes();
+          } catch (e) {
+            fecharModal();
+            toast(msgErro(e));
+          }
+        },
+        "retirar-quiz": async el => {
+          try {
+            await api.statusQuiz(el.dataset.id, "privado");
+            telaQuizzes();
+          } catch (e) {
+            toast(msgErro(e));
+          }
+        },
+        "apagar-quiz": async el => {
+          if (!confirm("Apagar este quiz? Não dá para desfazer.")) return;
+          try {
+            await api.apagarQuiz(el.dataset.id);
+            toast("Quiz apagado.");
+            telaQuizzes();
+          } catch (e) {
+            toast(msgErro(e));
+          }
+        },
+        "ed-add": () => {
+          ED.perguntas.push(novaPerguntaEd());
+          desenhaEditor();
+          setTimeout(() => {
+            const l = document.querySelectorAll(".ed-q");
+            l[l.length - 1]?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 50);
+        },
+        "ed-del": el => {
+          ED.perguntas.splice(+el.dataset.i, 1);
+          desenhaEditor();
+        },
+        "ed-pode": el => {
+          ED.perguntas[+el.dataset.i].pode = el.dataset.v === "1";
+          el.parentElement.querySelectorAll("button").forEach(b => b.classList.toggle("sel", b === el));
+        },
+        "ed-salvar": el => salvarEditor(el),
+        "copiar-link": async el => {
+          toast((await copiar(linkConvite(el.dataset.c))) ? "Link copiado! 🔗" : linkConvite(el.dataset.c));
+        },
+        "copiar-msg": async el => {
+          toast(
+            (await copiar(msgConvite(acharConvite(el.dataset.c))))
+              ? "Mensagem copiada! Cole no WhatsApp ou e-mail. 💬"
+              : "Não consegui copiar — use o link."
+          );
+        },
+        "apagar-convite": async el => {
+          if (!confirm("Apagar este convite?")) return;
+          try {
+            await api.apagarConvite(el.dataset.c);
+            ADM.novos = ADM.novos.filter(c => c.codigo !== el.dataset.c);
+            telaAdmin();
+          } catch (e) {
+            toast(msgErro(e));
+          }
+        },
+        "aprovar-quiz": async el => {
+          el.disabled = true;
+          try {
+            await api.moderarQuiz(el.dataset.id, true);
+            toast("Quiz aprovado! Já está no jogo de todos. ✅");
+            incorporarAprovados(await api.quizzesAprovados());
+            telaAdmin();
+          } catch (e) {
+            el.disabled = false;
+            toast(msgErro(e));
+          }
+        },
+        "recusar-quiz": async el => {
+          const m = ($("#mot-" + el.dataset.id)?.value || "").trim();
+          if (m.length < 3) {
+            toast("Escreva o motivo para o autor saber o que ajustar.");
+            $("#mot-" + el.dataset.id)?.focus();
+            return;
+          }
+          el.disabled = true;
+          try {
+            await api.moderarQuiz(el.dataset.id, false, m);
+            toast("Devolvido para o autor ajustar.");
+            telaAdmin();
+          } catch (e) {
+            el.disabled = false;
+            toast(msgErro(e));
+          }
+        },
+        "resolver-corr": el => responderCorr(el, "resolvida"),
+        "descartar-corr": el => responderCorr(el, "descartada"),
+        papel: async el => {
+          if (!confirm(el.dataset.p === "admin" ? "Dar acesso de coordenação para esta pessoa?" : "Tirar o acesso de coordenação?")) return;
+          try {
+            await api.mudarPapel(el.dataset.id, el.dataset.p);
+            telaAdmin();
+          } catch (e) {
+            toast(msgErro(e));
+          }
+        }
+      };
+      async function responderCorr(el, status) {
+        const r = ($("#resp-" + el.dataset.id)?.value || "").trim();
+        el.disabled = true;
+        try {
+          await api.responderCorrecao(+el.dataset.id, status, r, EU.id);
+          toast(status === "resolvida" ? "Marcada como resolvida ✅" : "Marcada como mantida.");
+          telaAdmin();
+        } catch (e) {
+          el.disabled = false;
+          toast(msgErro(e));
+        }
+      }
+      document.addEventListener("click", e => {
+        const t = e.target;
+        const a = t.closest("[data-a]");
+        if (a && ACOES[a.dataset.a]) {
+          e.preventDefault();
+          bip("clique");
+          ACOES[a.dataset.a](a);
+          return;
+        }
+        const av = t.closest("[data-avatar]");
+        if (av) {
+          av.parentElement.querySelectorAll("button").forEach(b => b.classList.toggle("sel", b === av));
+          return;
+        }
+        if (t.closest("#fbCorr")) {
+          abrirCorrecao(cartaAtual);
+          return;
+        }
+        const cr = t.closest("[data-corr]");
+        if (cr) {
+          abrirCorrecao(CORR_TMP[+cr.dataset.corr]);
+          return;
+        }
+        if (t.closest("[data-toast]")) {
+          const tt = $("#toast");
+          tt.classList.remove("on");
+          tt._acao && tt._acao();
+          return;
+        }
+        if (t.id === "modal") {
+          fecharModal();
+          return;
+        }
+        const rk = t.closest("[data-rk]");
+        if (rk) {
+          abaRanking = rk.dataset.rk;
+          telaRanking();
+          return;
+        }
+        const ad = t.closest("[data-adm]");
+        if (ad) {
+          ADM.novos = ad.dataset.adm === "convites" ? ADM.novos : [];
+          telaAdmin(ad.dataset.adm);
+          return;
+        }
+        const fc = t.closest("[data-fc]");
+        if (fc) {
+          ADM.filtroCorr = fc.dataset.fc;
+          desenhaAdmin();
+          return;
+        }
+      });
+      /* ================== MOTOR DO JOGO ================== */
+      const $ = s => document.querySelector(s);
+      const app = $("#app");
+      const esc = s =>
+        String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+      const embaralha = a => {
+        a = a.slice();
+        for (let i = a.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+      };
+
+      /* ---------- Progresso (salvo neste aparelho) ---------- */
+      /* ---------- Progresso (salvo na conta, com cópia neste aparelho) ---------- */
+      const CHAVE_V1 = "missao-anuncio-medguias-v1";
+      const P_PADRAO = () => ({
+        xp: 0,
+        estrelas: {},
+        estrelasQuiz: {},
+        caca: {},
+        ordem: {},
+        recordeRel: 0,
+        medalhas: {},
+        rodadas: 0,
+        som: true,
+        melhorCombo: 0,
+        _t: 0
+      });
+      let P = P_PADRAO();
+      const salvar = () => {
+        P._t = Date.now();
+        try {
+          if (EU) localStorage.setItem("missao-v2-" + EU.id, JSON.stringify(P));
+        } catch (_) {}
+        agendarSync();
+      };
+      const nivel = () => Math.floor(P.xp / 100) + 1;
+
+      /* ---------- Som ---------- */
+      let ctx;
+      function bip(tipo) {
+        if (!P.som) return;
+        try {
+          ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
+          const notas = { certo: [660, 880], errado: [220, 160], fim: [523, 659, 784, 1046], clique: [500] }[tipo] || [500];
+          notas.forEach((f, i) => {
+            const o = ctx.createOscillator(),
+              g = ctx.createGain();
+            o.type = tipo === "errado" ? "sawtooth" : "sine";
+            o.frequency.value = f;
+            g.gain.setValueAtTime(0.0001, ctx.currentTime + i * 0.09);
+            g.gain.exponentialRampToValueAtTime(0.12, ctx.currentTime + i * 0.09 + 0.02);
+            g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + i * 0.09 + 0.18);
+            o.connect(g);
+            g.connect(ctx.destination);
+            o.start(ctx.currentTime + i * 0.09);
+            o.stop(ctx.currentTime + i * 0.09 + 0.2);
+          });
+        } catch (_) {}
+      }
+      function vibra(ms) {
+        try {
+          navigator.vibrate && navigator.vibrate(ms);
+        } catch (_) {}
+      }
+      function flutua(txt, cor, x, y) {
+        const d = document.createElement("div");
+        d.className = "flutua";
+        d.textContent = txt;
+        d.style.color = cor;
+        d.style.left = (x ?? innerWidth / 2 - 30) + "px";
+        d.style.top = (y ?? innerHeight / 2 - 40) + "px";
+        document.body.appendChild(d);
+        setTimeout(() => d.remove(), 1000);
+      }
+      function confete() {
+        const cores = ["#12805F", "#DDA23A", "#D6402F", "#18A37A", "#7A4FBF"];
+        for (let i = 0; i < 70; i++) {
+          const c = document.createElement("div");
+          c.className = "confete";
+          c.style.left = Math.random() * 100 + "vw";
+          c.style.background = cores[i % cores.length];
+          c.style.animationDuration = 1.6 + Math.random() * 1.6 + "s";
+          c.style.animationDelay = Math.random() * 0.4 + "s";
+          c.style.borderRadius = Math.random() > 0.5 ? "50%" : "2px";
+          document.body.appendChild(c);
+          setTimeout(() => c.remove(), 3800);
+        }
+      }
+
+      /* ---------- Medalhas ---------- */
+      const MEDALHAS = [
+        { id: "primeira", ic: "🌱", n: "Primeiros passos", d: "Termine sua primeira rodada" },
+        { id: "gabarito", ic: "💎", n: "Gabaritou!", d: "Acerte 10 de 10 numa rodada" },
+        { id: "combo5", ic: "🔥", n: "Em chamas", d: "Faça um combo de 5 acertos seguidos" },
+        { id: "cfm", ic: "⚖️", n: "Guardião do CFM", d: "3 estrelas em Normas do CFM" },
+        { id: "todos", ic: "🏆", n: "Mestre das regras", d: "Pelo menos 1 estrela em todos os temas" },
+        { id: "cacador", ic: "🔍", n: "Olho de lince", d: "Encontre todos os erros de todos os anúncios" },
+        { id: "processo", ic: "🧩", n: "Processo na ponta da língua", d: "Monte os 2 processos sem errar" },
+        { id: "raio", ic: "⚡", n: "Relâmpago", d: "Faça 150 pontos no modo Relâmpago" },
+        { id: "nivel5", ic: "🎓", n: "Especialista MedGuias", d: "Chegue ao nível 5" }
+      ];
+      function checaMedalhas() {
+        const novas = [];
+        const ganha = id => {
+          if (!P.medalhas[id]) {
+            P.medalhas[id] = Date.now();
+            novas.push(MEDALHAS.find(m => m.id === id));
+          }
+        };
+        if (P.rodadas >= 1) ganha("primeira");
+        if (P.melhorCombo >= 5) ganha("combo5");
+        if ((P.estrelas.cfm || 0) >= 3) ganha("cfm");
+        if (
+          Object.keys(TEMAS)
+            .filter(t => t !== "comunidade")
+            .every(t => (P.estrelas[t] || 0) >= 1)
+        )
+          ganha("todos");
+        if (CACA.every((_, i) => P.caca[i])) ganha("cacador");
+        if (ORDENS.every((_, i) => P.ordem[i] === 0)) ganha("processo");
+        if (P.recordeRel >= 150) ganha("raio");
+        if (nivel() >= 5) ganha("nivel5");
+        salvar();
+        return novas;
+      }
+      function registraRanking(pts, modo, tema, acertos, total) {
+        registrarPartidaNuvem({ modo, tema: tema || null, pontos: pts || 0, acertos: acertos || 0, total: total || 0 });
+      }
+
+      /* ---------- Telas ---------- */
+      function topo(titulo, extra) {
+        return `<div class="barra-topo"><button class="voltar" data-ir="home" aria-label="Voltar">←</button><div class="tit">${titulo}</div>${extra || ""}</div>`;
+      }
+      function estrelasHtml(n) {
+        return `<span class="estrelas">${[1, 2, 3].map(i => `<span class="${i <= n ? "on" : "off"}">★</span>`).join("")}</span>`;
+      }
+
+      function telaHome() {
+        pararTimer();
+        const nv = nivel(),
+          pct = P.xp % 100,
+          vez = duelosSuaVez().length;
+        app.innerHTML = `
+    <div class="barra-topo"><button class="avatar-bt" data-ir="perfil" aria-label="Meu perfil">${esc(EU.avatar)}</button>
+      <div class="tit" style="color:var(--verde)">Olá, ${esc(primeiroNome())}!</div>
+      <span class="sync" id="sync" title="Situação do salvamento">${iconeSync()}</span>
+      <button class="som" data-som aria-label="Som">${P.som ? "🔊" : "🔇"}</button></div>
+    <div class="hero">
+      <h1>Missão Anúncio</h1>
+      <p>Aprenda as regras do CFM e da MedGuias jogando.</p>
+      <div class="nivel"><div class="circ">${nv}</div>
+        <div class="info"><b>Nível ${nv}</b> · ${P.xp} XP · faltam ${100 - pct}<div class="bar"><i style="width:${pct}%"></i></div></div></div>
+    </div>
+    <div class="modos">
+      <button class="modo largo" data-ir="temas"><span class="ic">🎯</span><div><h3>Pode ou Não Pode?</h3><p>Escolha um tema e decida: a regra deixa ou não deixa?</p></div><span class="canto" style="background:var(--verde)"></span></button>
+      <button class="modo largo" data-ir="duelos"><span class="ic">⚔️</span><div><h3>Duelos ${vez ? `<span class="badge">${vez}</span>` : ""}</h3><p>${vez ? `Você tem ${vez} duelo${vez > 1 ? "s" : ""} esperando sua jogada!` : "Desafie alguém da equipe nas mesmas perguntas."}</p></div><span class="canto" style="background:#1F6FB2"></span></button>
+      <button class="modo" data-ir="caca"><span class="ic">🔍</span><h3>Caça ao Erro</h3><p>Toque nos erros do anúncio.</p><span class="canto" style="background:var(--verm)"></span></button>
+      <button class="modo" data-ir="ordem"><span class="ic">🧩</span><h3>Monte o Processo</h3><p>Coloque as etapas na ordem.</p><span class="canto" style="background:#7A4FBF"></span></button>
+      <button class="modo largo" data-ir="relampago"><span class="ic">⚡</span><div><h3>Relâmpago</h3><p>60 segundos, todos os temas. Recorde: <b>${P.recordeRel}</b> pts</p></div><span class="canto" style="background:var(--ouro)"></span></button>
+      <button class="modo" data-ir="quizzes"><span class="ic">✍️</span><h3>Meus quizzes</h3><p>Crie perguntas e desafie colegas.</p><span class="canto" style="background:#0E7C86"></span></button>
+      <button class="modo" data-ir="equipe"><span class="ic">🤝</span><h3>Da equipe</h3><p>${QUIZ_APROV.length} quiz${QUIZ_APROV.length === 1 ? "" : "zes"} aprovado${QUIZ_APROV.length === 1 ? "" : "s"}.</p><span class="canto" style="background:#C98A12"></span></button>
+    </div>
+    <div class="rodape-home"><button data-ir="medalhas">🏅 Conquistas (${Object.keys(P.medalhas).length}/${MEDALHAS.length})</button><button data-ir="ranking">🏆 Ranking</button></div>
+    <div class="rodape-home"><button data-ir="correcoes">🚩 Minhas correções</button>${EU.papel === "admin" ? `<button data-ir="admin">🛠️ Coordenação</button>` : ""}</div>`;
+      }
+
+      function telaTemas() {
+        app.innerHTML =
+          topo("Pode ou Não Pode?") +
+          `<p class="dica-caca">10 cartas por rodada · 3 vidas · acertos seguidos valem combo</p>` +
+          Object.entries(TEMAS)
+            .filter(([k]) => PERGUNTAS.some(p => p.t === k))
+            .map(
+              ([k, t]) => `<button class="tema" data-tema="${k}">
+      <span class="ic" style="background:${t.cor}22">${t.ic}</span>
+      <span class="tx"><h3>${t.n}</h3><small>${PERGUNTAS.filter(p => p.t === k).length} cartas</small></span>${estrelasHtml(P.estrelas[k] || 0)}</button>`
+            )
+            .join("") +
+          `<button class="tema" data-tema="todos"><span class="ic" style="background:#17302A22">🎲</span><span class="tx"><h3>Todos misturados</h3><small>Um pouco de cada tema</small></span></button>`;
+      }
+
+      /* ---------- MODO: Pode ou Não Pode / Relâmpago ---------- */
+      let J = null,
+        timerId = null;
+      function pararTimer() {
+        if (timerId) {
+          clearInterval(timerId);
+          timerId = null;
+        }
+      }
+
+      function iniciarPN(tema, baralho, titulo, quizId) {
+        const base = baralho || (tema === "todos" ? PERGUNTAS : PERGUNTAS.filter(p => p.t === tema));
+        if (!base.length) return toast("Este tema ainda não tem cartas.");
+        J = {
+          modo: "pn",
+          tema,
+          baralho,
+          titulo,
+          quizId,
+          cartas: embaralha(base).slice(0, 10),
+          i: 0,
+          pts: 0,
+          vidas: 3,
+          combo: 0,
+          acertos: 0,
+          erros: [],
+          travado: false
+        };
+        desenhaCarta();
+      }
+      function iniciarRelampago() {
+        J = {
+          modo: "rel",
+          tema: "todos",
+          cartas: embaralha(PERGUNTAS),
+          i: 0,
+          pts: 0,
+          vidas: Infinity,
+          combo: 0,
+          acertos: 0,
+          erros: [],
+          tempo: 60,
+          travado: false
+        };
+        desenhaCarta();
+        pararTimer();
+        timerId = setInterval(() => {
+          J.tempo--;
+          const t = $("#timer");
+          if (t) {
+            t.textContent = J.tempo + "s";
+            t.classList.toggle("pouco", J.tempo <= 10);
+          }
+          if (J.tempo <= 0) {
+            pararTimer();
+            fimRodada();
+          }
+        }, 1000);
+      }
+      function desenhaCarta() {
+        const c = J.cartas[J.i],
+          tm = TEMAS[c.t] || TEMAS.comunidade;
+        if (J.modo === "duelo") J.tCarta = TEMPO_DUELO;
+        const hudDir =
+          J.modo === "rel"
+            ? `<div class="timer" id="timer">${J.tempo}s</div>`
+            : J.modo === "duelo"
+              ? `<div class="timer" id="timer">${J.tCarta}s</div>`
+              : `<div class="vidas">${"❤️".repeat(J.vidas)}${"🤍".repeat(3 - J.vidas)}</div>`;
+        const prog = J.modo === "rel" ? (100 * J.tempo) / 60 : (100 * J.i) / J.cartas.length;
+        const titulo =
+          J.modo === "rel"
+            ? "⚡ Relâmpago"
+            : J.modo === "duelo"
+              ? "⚔️ " + esc(J.titulo)
+              : J.titulo
+                ? "✍️ " + esc(J.titulo)
+                : J.tema === "todos"
+                  ? "🎲 Todos os temas"
+                  : tm.ic + " " + (TEMAS[J.tema] || tm).n;
+        app.innerHTML =
+          topo(titulo) +
+          `
+    <div class="hud"><span class="pill">⭐ ${J.pts}</span><div class="prog"><i style="width:${prog}%"></i></div>${hudDir}</div>
+    <div class="palco">
+      <div class="carta" id="carta">
+        <span class="selo pode">PODE</span><span class="selo nao">NÃO PODE</span>
+        <span class="tag" style="background:${tm.cor}">${tm.ic} ${esc(c.quiz || tm.n)}</span>${J.modo === "duelo" ? `<span class="contador">${J.i + 1}/${J.cartas.length}</span>` : ""}
+        <div class="q">${esc(c.q)}</div>
+        <div class="dica">Arraste para o lado ou use os botões · no computador, setas ← →</div>
+      </div>
+      <div class="combo" style="text-align:center;margin-top:10px">${J.combo >= 2 ? "🔥 combo x" + J.combo : "&nbsp;"}</div>
+      <div class="botoes"><button class="bt nao" data-resp="0">✋ Não pode</button><button class="bt pode" data-resp="1">👍 Pode</button></div>
+    </div>`;
+        ativaArraste();
+        if (J.modo === "duelo") iniciarTimerDuelo();
+      }
+      function ativaArraste() {
+        const el = $("#carta");
+        if (!el) return;
+        let x0 = null,
+          dx = 0;
+        el.addEventListener("pointerdown", e => {
+          x0 = e.clientX;
+          dx = 0;
+          el.setPointerCapture(e.pointerId);
+          el.style.transition = "none";
+        });
+        el.addEventListener("pointermove", e => {
+          if (x0 === null) return;
+          dx = e.clientX - x0;
+          el.style.transform = `translateX(${dx}px) rotate(${dx / 18}deg)`;
+          el.querySelector(".selo.pode").style.opacity = Math.max(0, dx / 90);
+          el.querySelector(".selo.nao").style.opacity = Math.max(0, -dx / 90);
+        });
+        const solta = () => {
+          if (x0 === null) return;
+          x0 = null;
+          el.style.transition = "";
+          if (Math.abs(dx) > 90) responder(dx > 0);
+          else {
+            el.style.transform = "";
+            el.querySelectorAll(".selo").forEach(s => (s.style.opacity = 0));
+          }
+        };
+        el.addEventListener("pointerup", solta);
+        el.addEventListener("pointercancel", solta);
+      }
+      function responder(pode) {
+        if (!J || J.travado) return;
+        J.travado = true;
+        if (J.modo === "duelo") pararTimer();
+        const c = J.cartas[J.i],
+          certo = pode === c.ok,
+          el = $("#carta");
+        cartaAtual = c;
+        if (el) {
+          el.style.transform = `translateX(${pode ? 110 : -110}%) rotate(${pode ? 14 : -14}deg)`;
+          el.style.opacity = "0";
+        }
+        if (certo) {
+          J.combo++;
+          J.acertos++;
+          const ganho = J.modo === "duelo" ? 10 + Math.ceil(Math.max(0, J.tCarta) / 3) : 10 + Math.min(J.combo - 1, 5) * 2;
+          J.pts += ganho;
+          P.melhorCombo = Math.max(P.melhorCombo, J.combo);
+          bip("certo");
+          vibra(20);
+          flutua("+" + ganho, "#12805F");
+        } else {
+          J.combo = 0;
+          J.erros.push(c);
+          if (J.modo === "pn") J.vidas--;
+          bip("errado");
+          vibra([60, 40, 60]);
+        }
+        if (J.modo === "rel") {
+          if (!certo) flutua("✗", "#D6402F");
+          setTimeout(() => {
+            J.travado = false;
+            proxima();
+          }, 260);
+          return;
+        }
+        mostraFeedback(
+          certo,
+          (pode === null ? "⏰ Tempo esgotado! " : "") + (c.ok ? "PODE. " : "NÃO PODE. ") + c.e,
+          () => {
+            J.travado = false;
+            proxima();
+          },
+          c.ev
+        );
+      }
+      function proxima() {
+        J.i++;
+        if (J.modo === "rel" && J.i >= J.cartas.length) {
+          J.cartas = J.cartas.concat(embaralha(PERGUNTAS));
+        }
+        if (J.modo === "pn" && (J.i >= J.cartas.length || J.vidas <= 0)) return fimRodada();
+        if (J.modo === "duelo" && J.i >= J.cartas.length) return fimDuelo();
+        desenhaCarta();
+      }
+      function provaHtml(key) {
+        const ev = EV[key];
+        if (!ev) return "";
+        return `<div class="prova ${ev.f === F_ELI ? "eli" : ""}"><div class="fonte">📄 ${esc(ev.f)}</div><div class="secao">${esc(ev.s)}</div>${ev.x.map(t => `<blockquote>${esc(t)}</blockquote>`).join("")}</div>`;
+      }
+      function verDoc(key) {
+        return EV[key] ? `<details class="ver-doc"><summary>📄 Ver no documento</summary>${provaHtml(key)}</details>` : "";
+      }
+      function mostraFeedback(certo, texto, depois, evKey) {
+        const fb = $("#fb");
+        const bd = $("#fbDoc"),
+          pv = $("#fbProva");
+        pv.className = "oculto";
+        pv.innerHTML = provaHtml(evKey);
+        bd.classList.toggle("oculto", !EV[evKey]);
+        bd.textContent = "📄 Ver no documento";
+        $("#fbCorr").classList.toggle("oculto", !cartaAtual);
+        fb.scrollTop = 0;
+        fb.className = "feedback on " + (certo ? "certo" : "errado");
+        $("#fbT").textContent = certo
+          ? ["Isso aí! 🎉", "Mandou bem! ✨", "Certinho! ✅", "Arrasou! 💚"][Math.floor(Math.random() * 4)]
+          : "Quase! 😬";
+        $("#fbP").textContent = texto;
+        $("#fbB").textContent = "Continuar";
+        fbDepois = () => {
+          fb.className = "feedback";
+          depois();
+        };
+      }
+      let fbDepois = null;
+
+      function fimRodada() {
+        pararTimer();
+        const modo = J.modo;
+        let estrelas = 0,
+          tit,
+          novaEstrela = false;
+        P.rodadas++;
+        P.xp += J.pts;
+        if (modo === "pn") {
+          const tot = J.cartas.length;
+          estrelas = J.acertos === tot ? 3 : J.acertos >= tot * 0.8 ? 2 : J.acertos >= tot * 0.6 ? 1 : 0;
+          if (J.quizId) {
+            if (estrelas > (P.estrelasQuiz[J.quizId] || 0)) {
+              P.estrelasQuiz[J.quizId] = estrelas;
+              novaEstrela = true;
+            }
+          } else if (J.tema !== "todos" && estrelas > (P.estrelas[J.tema] || 0)) {
+            P.estrelas[J.tema] = estrelas;
+            novaEstrela = true;
+          }
+          if (J.acertos === tot) P.medalhas.gabarito = P.medalhas.gabarito || Date.now();
+          tit = J.vidas <= 0 ? "Acabaram as vidas!" : estrelas === 3 ? "Gabaritou!" : estrelas >= 1 ? "Muito bem!" : "Bora tentar de novo?";
+        } else {
+          if (J.pts > P.recordeRel) P.recordeRel = J.pts;
+          tit = "Tempo esgotado!";
+        }
+        registraRanking(
+          J.pts,
+          modo === "rel" ? "Relâmpago" : J.quizId ? "Quiz" : "Pode ou Não Pode",
+          J.titulo || J.tema,
+          J.acertos,
+          modo === "rel" ? J.i : J.cartas.length
+        );
+        const novas = checaMedalhas();
+        salvar();
+        if (estrelas >= 2 || novas.length || (modo === "rel" && J.pts >= P.recordeRel && J.pts > 0)) {
+          confete();
+          bip("fim");
+        }
+        const revisao = J.erros.length
+          ? `<div class="revisao"><h3>📚 Para revisar</h3><ul>${J.erros.map(e => `<li><b>${esc(e.q)}</b>${e.ok ? "✅ Pode" : "⛔ Não pode"} — ${esc(e.e)}${verDoc(e.ev)}${corrBtn(e)}</li>`).join("")}</ul></div>`
+          : "";
+        app.innerHTML = `<div class="resultado">
+    <div class="big">${modo === "rel" ? "⚡" : estrelas === 3 ? "💎" : estrelas >= 1 ? "🎉" : "💪"}</div>
+    <h2>${tit}</h2>
+    ${modo === "pn" ? estrelasHtml(estrelas) : `<p>${J.acertos} acertos · recorde: <b>${P.recordeRel}</b></p>`}
+    <div class="pts">+${J.pts} XP</div>
+    <p style="color:var(--cinza)">${modo === "pn" ? `${J.acertos} de ${J.cartas.length} acertos` : ""} ${novaEstrela ? " · nova marca no tema!" : ""}</p>
+    ${novas.map(m => `<div class="medalha-nova">${m.ic} Nova conquista: <b>${m.n}</b></div>`).join("")}
+    ${revisao}
+    <div class="botoes"><button class="bt claro" data-ir="home">Início</button><button class="bt pode" data-de-novo="1">Jogar de novo</button></div>
+  </div>`;
+        J.encerrado = true;
+      }
+
+      /* ---------- MODO: Caça ao Erro ---------- */
+      let C = null;
+      function telaCacaLista() {
+        app.innerHTML =
+          topo("🔍 Caça ao Erro") +
+          `<p class="dica-caca">Toque em tudo o que está errado. Tocar numa parte certa custa uma vida.</p>` +
+          CACA.map((a, i) => {
+            const nErr = a.partes.filter(p => !p.ok).length;
+            return `<button class="tema" data-caca="${i}"><span class="ic" style="background:${a.tipo === "imp" ? "#D6402F22" : "#7A4FBF22"}">${a.tipo === "imp" ? "🖨️" : "🌐"}</span>
+      <span class="tx"><h3>${esc(a.tit)}</h3><small>${nErr} erros escondidos</small></span>${P.caca[i] ? "✅" : ""}</button>`;
+          }).join("");
+      }
+      function iniciarCaca(i) {
+        const a = CACA[i];
+        C = { i, a, achados: new Set(), vidas: 3, pts: 0, toques: 0, fim: false };
+        desenhaCaca();
+      }
+      function desenhaCaca() {
+        const a = C.a,
+          total = a.partes.filter(p => !p.ok).length;
+        const corpo = a.partes
+          .map((p, k) => {
+            const achou = C.achados.has(k);
+            const mostraOk = C.fim && p.ok;
+            return `<button class="parte ${p.cls} ${achou ? "achou" : ""} ${mostraOk ? "certinho" : ""}" data-parte="${k}">${esc(p.txt)}</button>`;
+          })
+          .join("");
+        app.innerHTML =
+          topo("🔍 " + esc(a.tit)) +
+          `
+    <div class="hud"><span class="pill">⭐ ${C.pts}</span><div class="restam" style="flex:1;text-align:center">Faltam ${total - C.achados.size} de ${total}</div><div class="vidas">${"❤️".repeat(C.vidas)}${"🤍".repeat(3 - C.vidas)}</div></div>
+    <div class="anuncio ${a.tipo} ${a.cor || ""}">${a.tipo === "online" ? `<div class="barra-url">🔒 medguias.com.br/...</div>` : ""}${corpo}</div>
+    <p class="dica-caca" style="margin-top:14px">${a.tipo === "imp" ? "Arte impressa — revise como se fosse para a gráfica." : "Anúncio no site / admin."}</p>`;
+      }
+      function tocarParte(k, ev) {
+        if (!C || C.fim) return;
+        const p = C.a.partes[k];
+        cartaAtual = { q: p.txt, e: p.e, ref: "caca:" + C.i + ":" + k, quiz: "Caça ao Erro — " + C.a.tit };
+        if (!p.ok) {
+          if (C.achados.has(k)) return;
+          C.achados.add(k);
+          C.pts += 15;
+          bip("certo");
+          vibra(20);
+          flutua("+15", "#12805F", ev?.clientX, ev?.clientY);
+          const total = C.a.partes.filter(x => !x.ok).length;
+          desenhaCaca();
+          mostraFeedback(
+            true,
+            p.e,
+            () => {
+              if (C.achados.size === total) fimCaca(true);
+            },
+            p.ev
+          );
+        } else {
+          C.vidas--;
+          bip("errado");
+          vibra([60, 40, 60]);
+          const el = document.querySelector(`[data-parte="${k}"]`);
+          el?.classList.add("shake");
+          desenhaCaca();
+          mostraFeedback(false, "Essa parte está correta. Procure o que fere as regras.", () => {
+            if (C.vidas <= 0) fimCaca(false);
+          });
+        }
+      }
+      function fimCaca(venceu) {
+        C.fim = true;
+        if (venceu) {
+          C.pts += C.vidas * 5;
+          P.caca[C.i] = true;
+        }
+        P.xp += C.pts;
+        P.rodadas++;
+        registraRanking(C.pts, "Caça ao Erro", C.a.tit, C.achados.size, C.a.partes.filter(x => !x.ok).length);
+        const novas = checaMedalhas();
+        salvar();
+        if (venceu) {
+          confete();
+          bip("fim");
+        }
+        const faltaram = C.a.partes.map((p, k) => ({ p, k })).filter(x => !x.p.ok && !C.achados.has(x.k));
+        app.innerHTML = `<div class="resultado">
+    <div class="big">${venceu ? "🕵️" : "💔"}</div>
+    <h2>${venceu ? "Achou todos os erros!" : "Acabaram as vidas"}</h2>
+    <div class="pts">+${C.pts} XP</div>
+    ${venceu && C.vidas === 3 ? `<p>Sem nenhum toque errado! 👏</p>` : ""}
+    ${novas.map(m => `<div class="medalha-nova">${m.ic} Nova conquista: <b>${m.n}</b></div>`).join("")}
+    ${faltaram.length ? `<div class="revisao"><h3>🔎 Erros que faltaram</h3><ul>${faltaram.map(x => `<li><b>${esc(x.p.txt)}</b>${esc(x.p.e)}${verDoc(x.p.ev)}${corrBtn({ q: x.p.txt, e: x.p.e, ref: "caca:" + C.i + ":" + x.k, quiz: "Caça ao Erro — " + C.a.tit })}</li>`).join("")}</ul></div>` : ""}
+    <div class="botoes"><button class="bt claro" data-ir="caca">Outros anúncios</button><button class="bt pode" data-caca="${C.i}">Jogar de novo</button></div>
+    <button class="bt claro" data-ir="home" style="width:100%;margin-top:12px">🏠 Início</button>
+  </div>`;
+      }
+
+      /* ---------- MODO: Monte o Processo ---------- */
+      let O = null;
+      function telaOrdemLista() {
+        app.innerHTML =
+          topo("🧩 Monte o Processo") +
+          `<p class="dica-caca">Toque nas etapas na ordem certa, da primeira à última.</p>` +
+          ORDENS.map(
+            (o, i) => `<button class="tema" data-ordem="${i}"><span class="ic" style="background:#7A4FBF22">${o.ic}</span>
+      <span class="tx"><h3>${esc(o.tit)}</h3><small>${o.passos.length} etapas</small></span>${P.ordem[i] === 0 ? "💎" : P.ordem[i] !== undefined ? "✅" : ""}</button>`
+          ).join("");
+      }
+      function iniciarOrdem(i) {
+        O = { i, o: ORDENS[i], feitos: [], resto: embaralha(ORDENS[i].passos), erros: 0, pts: 0 };
+        desenhaOrdem();
+      }
+      function desenhaOrdem() {
+        const o = O.o;
+        app.innerHTML =
+          topo("🧩 " + esc(o.tit)) +
+          `
+    <div class="hud"><span class="pill">⭐ ${O.pts}</span><div class="prog"><i style="width:${(100 * O.feitos.length) / o.passos.length}%"></i></div><span class="pill">✗ ${O.erros}</span></div>
+    <div class="slots">${o.passos.map((_, k) => `<div class="slot ${k < O.feitos.length ? "cheio" : ""}"><span class="n">${k + 1}</span>${k < O.feitos.length ? esc(O.feitos[k]) : ""}</div>`).join("")}</div>
+    <div class="opcoes">${O.resto.map((s, k) => `<button class="opc" data-passo="${k}">${esc(s)}</button>`).join("")}</div>`;
+      }
+      function tocarPasso(k) {
+        const s = O.resto[k],
+          certo = O.o.passos[O.feitos.length] === s;
+        if (certo) {
+          O.feitos.push(s);
+          O.resto.splice(k, 1);
+          O.pts += 10;
+          bip("certo");
+          vibra(15);
+          if (!O.resto.length) return fimOrdem();
+          desenhaOrdem();
+        } else {
+          O.erros++;
+          bip("errado");
+          vibra([60, 40, 60]);
+          const b = document.querySelector(`[data-passo="${k}"]`);
+          b?.classList.add("shake");
+          setTimeout(() => b?.classList.remove("shake"), 400);
+          const p = document.querySelector(".hud .pill:last-child");
+          if (p) p.textContent = "✗ " + O.erros;
+        }
+      }
+      function fimOrdem() {
+        const bonus = Math.max(0, 30 - O.erros * 10);
+        O.pts += bonus;
+        const ant = P.ordem[O.i];
+        P.ordem[O.i] = ant === undefined ? O.erros : Math.min(ant, O.erros);
+        P.xp += O.pts;
+        P.rodadas++;
+        registraRanking(O.pts, "Monte o Processo", O.o.tit, O.o.passos.length - O.erros, O.o.passos.length);
+        const novas = checaMedalhas();
+        salvar();
+        confete();
+        bip("fim");
+        app.innerHTML = `<div class="resultado">
+    <div class="big">${O.erros === 0 ? "💎" : "🧩"}</div>
+    <h2>${O.erros === 0 ? "Processo perfeito!" : "Processo montado!"}</h2>
+    <div class="pts">+${O.pts} XP</div>
+    <p>${O.erros === 0 ? "Nenhum erro." : O.erros + " toque(s) fora de ordem."}</p>
+    ${novas.map(m => `<div class="medalha-nova">${m.ic} Nova conquista: <b>${m.n}</b></div>`).join("")}
+    <div class="revisao"><h3>✅ A ordem certa</h3><ol>${O.o.passos.map(s => `<li>${esc(s)}</li>`).join("")}</ol></div>
+    <div class="botoes"><button class="bt claro" data-ir="ordem">Outro processo</button><button class="bt pode" data-ordem="${O.i}">Jogar de novo</button></div>
+    <button class="bt claro" data-ir="home" style="width:100%;margin-top:12px">🏠 Início</button>
+  </div>`;
+      }
+
+      /* ---------- Conquistas e ranking ---------- */
+      function telaMedalhas() {
+        app.innerHTML =
+          topo("🏅 Conquistas") +
+          `<div class="grade">${MEDALHAS.map(m => `<div class="med ${P.medalhas[m.id] ? "" : "bloq"}"><div class="ic">${m.ic}</div><h3>${m.n}</h3><small>${m.d}</small></div>`).join("")}</div>`;
+      }
+      /* ---------- Navegação e eventos ---------- */
+      const TELAS = {
+        home: telaHome,
+        temas: telaTemas,
+        caca: telaCacaLista,
+        ordem: telaOrdemLista,
+        relampago: iniciarRelampago,
+        medalhas: telaMedalhas
+      };
+      function ir(t) {
+        if (
+          J &&
+          J.modo === "duelo" &&
+          !J.encerrado &&
+          t !== "duelos-sair" &&
+          !confirm("Sair do duelo agora? Ele volta para a lista e você pode jogar depois do começo.")
+        )
+          return;
+        pararTimer();
+        $("#fb").className = "feedback";
+        fbDepois = null;
+        J = null;
+        cartaAtual = null;
+        CORR_TMP = [];
+        fecharModal();
+        telaAtual = TELAS[t] ? t : "home";
+        TELAS[telaAtual]();
+        window.scrollTo({ top: 0 });
+      }
+
+      document.addEventListener("click", e => {
+        const t = e.target;
+        if (t.closest("#fbB")) {
+          const f = fbDepois;
+          fbDepois = null;
+          f && f();
+          return;
+        }
+        if (t.closest("#fbDoc")) {
+          const pv = $("#fbProva"),
+            ab = pv.classList.toggle("oculto");
+          t.closest("#fbDoc").textContent = ab ? "📄 Ver no documento" : "📄 Esconder trecho";
+          if (!ab) setTimeout(() => pv.scrollIntoView({ behavior: "smooth", block: "nearest" }), 50);
+          return;
+        }
+        const g = t.closest("[data-ir]");
+        if (g) {
+          bip("clique");
+          return ir(g.dataset.ir);
+        }
+        if (t.closest("[data-som]")) {
+          P.som = !P.som;
+          salvar();
+          return telaHome();
+        }
+        const tm = t.closest("[data-tema]");
+        if (tm) {
+          bip("clique");
+          return iniciarPN(tm.dataset.tema);
+        }
+        const r = t.closest("[data-resp]");
+        if (r) return responder(r.dataset.resp === "1");
+        if (t.closest("[data-de-novo]")) {
+          return J && J.modo === "rel" ? iniciarRelampago() : J ? iniciarPN(J.tema, J.baralho, J.titulo, J.quizId) : iniciarPN("todos");
+        }
+        const cc = t.closest("[data-caca]");
+        if (cc) {
+          bip("clique");
+          return iniciarCaca(+cc.dataset.caca);
+        }
+        const pt = t.closest("[data-parte]");
+        if (pt) return tocarParte(+pt.dataset.parte, e);
+        const od = t.closest("[data-ordem]");
+        if (od) {
+          bip("clique");
+          return iniciarOrdem(+od.dataset.ordem);
+        }
+        const ps = t.closest("[data-passo]");
+        if (ps) return tocarPasso(+ps.dataset.passo);
+      });
+      document.addEventListener("keydown", e => {
+        if (/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName) || $("#modal.on")) return;
+        if (fbDepois && (e.key === "Enter" || e.key === " ")) {
+          e.preventDefault();
+          const f = fbDepois;
+          fbDepois = null;
+          return f();
+        }
+        if (J && !fbDepois && $("#carta")) {
+          if (e.key === "ArrowLeft") responder(false);
+          if (e.key === "ArrowRight") responder(true);
+        }
+      });
+      /* ================== ARRANQUE ================== */
+      Object.assign(TELAS, {
+        perfil: telaPerfil,
+        ranking: telaRanking,
+        correcoes: telaCorrecoes,
+        duelos: telaDuelos,
+        quizzes: telaQuizzes,
+        equipe: telaEquipe,
+        admin: telaAdmin
+      });
+      iniciar();
+    </script>
+  </body>
+</html>
