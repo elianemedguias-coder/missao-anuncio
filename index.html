@@ -9,6 +9,14 @@
     />
     <meta name="referrer" content="no-referrer" />
     <meta name="theme-color" content="#12805F" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="favicon-48.png" sizes="48x48" type="image/png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Missão Anúncio" />
     <title>Missão Anúncio — MedGuias</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
@@ -3951,6 +3959,27 @@
         "tenho-codigo": () => telaCadastro(""),
         "trocar-senha": () => telaNovaSenha(),
         "fechar-modal": () => fecharModal(),
+        instalar: async () => {
+          if (pedidoInstalar) {
+            const p = pedidoInstalar;
+            pedidoInstalar = null;
+            try {
+              await p.prompt();
+              await p.userChoice;
+            } catch (_) {}
+            if (telaAtual === "home" && !J) telaHome();
+            return;
+          }
+          const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+          modal(`<h3>📲 Colocar na tela inicial</h3>
+      ${
+        ios
+          ? `<ol style="line-height:1.7;padding-left:20px"><li>Abra o jogo no <b>Safari</b>.</li><li>Toque em <b>Compartilhar</b> (quadrado com seta para cima).</li><li>Toque em <b>“Adicionar à Tela de Início”</b> e depois em <b>Adicionar</b>.</li></ol>`
+          : `<ol style="line-height:1.7;padding-left:20px"><li>Toque nos <b>três pontinhos ⋮</b> do Chrome (no alto, à direita).</li><li>Toque em <b>“Instalar app”</b> ou <b>“Adicionar à tela inicial”</b>.</li><li>Confirme em <b>Instalar</b> / <b>Adicionar</b>.</li></ol>
+          <p class="nota" style="text-align:left">No Samsung Internet: menu <b>≡</b> → <b>Adicionar página a</b> → <b>Tela inicial</b>.</p>`
+      }
+      <button class="bt pode cheio" data-a="fechar-modal">Entendi</button>`);
+        },
         "enviar-corr": el => enviarCorrecao(el),
         "novo-duelo": () => {
           telaAtual = "novo-duelo";
@@ -4341,7 +4370,8 @@
       <button class="modo" data-ir="equipe"><span class="ic">🤝</span><h3>Da equipe</h3><p>${QUIZ_APROV.length} quiz${QUIZ_APROV.length === 1 ? "" : "zes"} aprovado${QUIZ_APROV.length === 1 ? "" : "s"}.</p><span class="canto" style="background:#C98A12"></span></button>
     </div>
     <div class="rodape-home"><button data-ir="medalhas">🏅 Conquistas (${Object.keys(P.medalhas).length}/${MEDALHAS.length})</button><button data-ir="ranking">🏆 Ranking</button></div>
-    <div class="rodape-home"><button data-ir="correcoes">🚩 Minhas correções</button>${EU.papel === "admin" ? `<button data-ir="admin">🛠️ Coordenação</button>` : ""}</div>`;
+    <div class="rodape-home"><button data-ir="correcoes">🚩 Minhas correções</button>${EU.papel === "admin" ? `<button data-ir="admin">🛠️ Coordenação</button>` : ""}</div>
+    ${!instalado() ? `<div class="rodape-home"><button data-a="instalar">📲 ${pedidoInstalar ? "Instalar o jogo no celular" : "Como colocar na tela inicial"}</button></div>` : ""}`;
       }
 
       function telaTemas() {
@@ -4902,6 +4932,21 @@
         equipe: telaEquipe,
         admin: telaAdmin
       });
+      /* App instalável */
+      let pedidoInstalar = null;
+      const instalado = () => matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+      window.addEventListener("beforeinstallprompt", e => {
+        e.preventDefault();
+        pedidoInstalar = e;
+        if (telaAtual === "home" && EU && !J) telaHome();
+      });
+      window.addEventListener("appinstalled", () => {
+        pedidoInstalar = null;
+        toast("Pronto! O Missão Anúncio está na sua tela inicial. 📲");
+        if (telaAtual === "home" && EU && !J) telaHome();
+      });
+      if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(() => {});
+
       iniciar();
     </script>
   </body>
