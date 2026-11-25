@@ -2648,6 +2648,415 @@
           ]
         }
       ];
+      /* ================== CONTEÚDO: OLHO NO DETALHE ==================
+   Dados corretos sempre — anúncio novo ou renda.
+   (carregado depois de dados.js e evidencias.js) */
+      (function () {
+        // Tema novo (fica antes de "Quizzes da equipe", se existir)
+        const com = TEMAS.comunidade;
+        if (com) delete TEMAS.comunidade;
+        TEMAS.detalhe = { n: "Olho no detalhe", ic: "🔎", cor: "#0E6BA8" };
+        if (com) TEMAS.comunidade = com;
+
+        Object.assign(EV, {
+          reg_2rqe: {
+            f: F_CFM,
+            s: "Art. 4º, II — RQE junto da especialidade",
+            x: [
+              "“especialidade e/ou área de atuação, quando registrada no CRM” … “seguida pelo número de Registro de Qualificação de Especialista (RQE)”",
+              "Documento de layout: “Médicos podem divulgar até 2 especialidades com RQE”",
+              "Orientação da coordenação: com dois RQEs, informe as duas especialidades — cada RQE junto da sua."
+            ]
+          },
+          orto: {
+            f: F_DOC,
+            s: "Revisão ortográfica",
+            x: [
+              "Checklist do impresso: “Revisão ortográfica completa.”",
+              "Orientação da coordenação: no anúncio on-line, revise a ortografia do texto publicado no link. Erros comuns: “Clinica” (certo: Clínica), “humanisado” (certo: humanizado)."
+            ]
+          },
+          on_galeria: {
+            f: F_DOC,
+            s: "Fotos, nomes de arquivos e ALT das imagens",
+            x: [
+              "“Toda imagem publicada no site precisa ser otimizada, tanto perfil quanto galeria.”",
+              "“Nome correto do arquivo” · “Formato adequado .Webp” · “Texto ALT preenchido (admin)”",
+              "Evite nomes genéricos como: “imagem1.webp” · “whatsapp-image-2026.webp” · “print.png”"
+            ]
+          },
+          on_seo: {
+            f: F_DOC,
+            s: "SEO (Yoast) — abaixo do texto",
+            x: [
+              "“Abaixo do texto, em SEO, altere: 1. Frase-chave de foco 2. Título SEO 3. Metadescrição”",
+              "“A meta é o resumo do texto. … Há um limite de 155 caracteres.”",
+              "“A barra verde deve indicar quando os padrões estão corretos.”"
+            ]
+          },
+          imp_proc: {
+            f: F_DOC,
+            s: "Guia de Estilo — Cirurgia e Procedimentos (impresso)",
+            x: [
+              "“Cirurgia: Apenas iniciais com letra maiúscula” · “Procedimentos: Apenas iniciais com letra maiúscula”",
+              "Correto: “Cateterismo cardíaco.” · Incorreto: “Cateterismo Cardíaco.”",
+              "Orientação da coordenação — lista de tratamentos: Lentes de contato / Cirurgia refrativa / Catarata (e não “Lentes de Contato / Cirurgia Refrativa”)."
+            ]
+          },
+          imp_area: {
+            f: F_DOC,
+            s: "Guia de Estilo — Área de Atuação",
+            x: [
+              "“Área de Atuação: Seguir padrão do CFM”",
+              "Correto: “Alergia e Imunologia Pediátrica” · Incorreto: “Alergia e imunologia pediátrica”"
+            ]
+          },
+          on_rendacheck: {
+            f: F_DOC,
+            s: "Rendas",
+            x: [
+              "“As rendas exigem atenção redobrada, principalmente com as DATAS DE VIGÊNCIA.”",
+              "“Antes de salvar ou atualizar qualquer renda, confira cuidadosamente: Data de início; Data final; Campo “Active” marcado; Plano ou figuração comprada. Outras informações enviadas no e-mail”"
+            ]
+          },
+          dados_conf: {
+            f: F_DOC,
+            s: "Registros profissionais e ordem de processo",
+            x: [
+              "“Essa etapa deve ser feita com atenção, pois evita a publicação de informações incorretas ou especialidades sem comprovação.”",
+              "“COPIAR NOME DO REGISTRO para criar a arte e cadastrar, jamais escrever, vamos evitar erros de digitação”"
+            ]
+          }
+        });
+
+        const t = "detalhe";
+        PERGUNTAS.push(
+          // RQE
+          {
+            ev: "reg_2rqe",
+            t,
+            q: "Registro “CRM-MT 1234 | RQE 5678 | RQE 9012”, sem dizer de qual especialidade é cada RQE.",
+            ok: false,
+            e: "Cada RQE pertence a uma especialidade. Informe as duas especialidades, cada uma com o seu RQE — senão o paciente não sabe no que o médico é especialista."
+          },
+          {
+            ev: "reg_2rqe",
+            t,
+            q: "Médico com RQE em Cardiologia e em Clínica Médica: o anúncio mostra as duas especialidades, cada uma com o seu RQE.",
+            ok: true,
+            e: "Certo: até 2 especialidades com RQE, e cada número junto da especialidade a que pertence."
+          },
+          // Ortografia
+          {
+            ev: "orto",
+            t,
+            q: "Publicar “Clinica Vida”, sem acento: “no Google o acento não faz diferença”.",
+            ok: false,
+            e: "Clínica tem acento. É o nome que o cliente paga para divulgar — erro de ortografia passa descuido para o paciente e para o cliente."
+          },
+          {
+            ev: "orto",
+            t,
+            q: "Corrigir “atendimento humanisado” para “atendimento humanizado” no texto do link antes de enviar ao cliente.",
+            ok: true,
+            e: "Isso mesmo: revise a ortografia do texto publicado no link antes do e-mail ao cliente."
+          },
+          // CEP / bairro
+          {
+            ev: "on_cep",
+            t,
+            q: "Publicar o bairro exatamente como veio no contrato, sem conferir o CEP no Busca CEP dos Correios.",
+            ok: false,
+            e: "Sempre confira o bairro pelo CEP no site dos Correios. Bairro errado manda o paciente para o lugar errado e bagunça o mapa."
+          },
+          {
+            ev: "on_cep",
+            t,
+            q: "O contrato diz “Centro”, mas o Busca CEP mostra outro bairro para aquele CEP. Conferir com o cliente/administrativo antes de publicar.",
+            ok: true,
+            e: "Certo: quando contrato e Correios não batem, não chute — confirme antes de publicar."
+          },
+          // Galeria / ALT
+          {
+            ev: "on_galeria",
+            t,
+            q: "Subir as fotos da galeria sem ALT: “só a foto de perfil precisa”.",
+            ok: false,
+            e: "Galeria também: cada imagem com nome descritivo em .webp e ALT preenchido. É assim que o Google e as IAs entendem as fotos."
+          },
+          {
+            ev: "on_alt",
+            t,
+            q: "ALT da foto da galeria: “Consultório da Dra. Paula Reis, dermatologista em Cuiabá/MT”.",
+            ok: true,
+            e: "ALT descritivo: quem é, especialidade e cidade."
+          },
+          {
+            ev: "on_galeria",
+            t,
+            q: "Foto da galeria com o nome “IMG_2031.png” e ALT “imagem”.",
+            ok: false,
+            e: "Nome genérico e ALT vazio de sentido. Certo: consultorio-dra-paula-reis-cuiaba.webp + ALT descritivo."
+          },
+          // SEO
+          {
+            ev: "on_seo",
+            t,
+            q: "Frase-chave de foco “cardiologista em Cuiabá” no anúncio de um cardiologista (com RQE) de Cuiabá.",
+            ok: true,
+            e: "Frase-chave = como o paciente procura: profissão + cidade."
+          },
+          {
+            ev: "on_seo",
+            t,
+            q: "Metadescrição com 230 caracteres, que aparece cortada no meio da frase no Google.",
+            ok: false,
+            e: "A metadescrição tem limite de 155 caracteres. Resuma o que o paciente encontra no anúncio."
+          },
+          {
+            ev: "on_seo",
+            t,
+            q: "Deixar a frase-chave de foco em branco porque “o anúncio já tem título”.",
+            ok: false,
+            e: "Frase-chave, título SEO e metadescrição são preenchidos em todo anúncio — a barra verde do Yoast mostra quando está certo."
+          },
+          // Palavras-chave
+          {
+            ev: "on_kwcat",
+            t,
+            q: "Palavra-chave “Cirurgia Plástica” no anúncio de uma dermatologista sem RQE em Cirurgia Plástica.",
+            ok: false,
+            e: "Especialidade como palavra-chave faz o anúncio aparecer na categoria de outro médico — e ela não tem registro nessa área."
+          },
+          {
+            ev: "on_kwesp",
+            t,
+            q: "Palavras-chave “acne, manchas na pele, dermatologista” para dermatologista com RQE.",
+            ok: true,
+            e: "Serviços que ela oferece + o nome do profissional. Sem invadir outras categorias."
+          },
+          // Impresso — maiúsculas
+          {
+            ev: "imp_proc",
+            t,
+            q: "Arte impressa com a lista “Lentes de Contato / Cirurgia Refrativa / Catarata”.",
+            ok: false,
+            e: "No impresso, tratamentos e procedimentos levam só a primeira letra maiúscula: Lentes de contato / Cirurgia refrativa / Catarata."
+          },
+          {
+            ev: "imp_proc",
+            t,
+            q: "Arte impressa: “Tratamentos e procedimentos:” seguido de “Lentes de contato”, “Cirurgia refrativa” e “Catarata”.",
+            ok: true,
+            e: "Perfeito: só a inicial de cada item em maiúscula."
+          },
+          {
+            ev: "imp_esp",
+            t,
+            q: "Arte impressa com a especialidade “Cirurgia Geral”, como está no CFM.",
+            ok: true,
+            e: "Especialidade e área de atuação seguem o padrão do CFM — aqui as iniciais ficam maiúsculas."
+          },
+          {
+            ev: "imp_area",
+            t,
+            q: "Arte impressa com a área de atuação “Alergia e imunologia pediátrica”.",
+            ok: false,
+            e: "Área de atuação segue o padrão do CFM: Alergia e Imunologia Pediátrica."
+          },
+          // Renda
+          {
+            ev: "on_rendacheck",
+            t,
+            q: "Renda: só trocar as datas e salvar, sem conferir se telefone, endereço e especialidades mudaram.",
+            ok: false,
+            e: "Renda é revisão completa. Em 18 meses muda telefone, endereço, aparece RQE novo — anúncio desatualizado é paciente perdido."
+          },
+          {
+            ev: "on_renda",
+            t,
+            q: "Renda: o médico tirou um RQE novo desde o último anúncio. Conferir no portal do CFM e incluir a especialidade.",
+            ok: true,
+            e: "Isso! Renda é a hora de atualizar o que mudou — sempre conferindo no CFM."
+          },
+          {
+            ev: "on_whats",
+            t,
+            q: "Renda: o WhatsApp antigo não abre conversa, mas publicar assim mesmo porque “estava no anúncio anterior”.",
+            ok: false,
+            e: "Teste o link do WhatsApp. Número que não funciona tem que ser corrigido com o cliente/administrativo."
+          },
+          // Importância dos dados
+          {
+            ev: "dados_conf",
+            t,
+            q: "Um dígito trocado no telefone: “é detalhe, o cliente nem vai perceber”.",
+            ok: false,
+            e: "O paciente liga e não encontra o médico: o cliente perde consultas e a MedGuias perde credibilidade. Confira dígito por dígito."
+          },
+          {
+            ev: "reg_copiar",
+            t,
+            q: "Digitar o nome do médico de cabeça, em vez de copiar do registro do conselho.",
+            ok: false,
+            e: "Copie do registro — digitar de cabeça é como nascem os erros de nome."
+          },
+          {
+            ev: "dados_conf",
+            t,
+            q: "Anúncio novo com pressa: mesmo assim conferir CRM, RQE, nome, telefone, WhatsApp, endereço e CEP antes de publicar.",
+            ok: true,
+            e: "Sempre. Um minuto de conferência evita retrabalho, reclamação do cliente e paciente no endereço errado."
+          }
+        );
+
+        CACA.push(
+          {
+            tit: "Anúncio on-line · Oftalmologista (renda)",
+            tipo: "online",
+            partes: [
+              { txt: "DR. RAFAEL COSTA", cls: "titulo", ok: true },
+              {
+                txt: "CRM-MT 4321 | RQE 1122 | RQE 3344",
+                cls: "reg",
+                ok: false,
+                ev: "reg_2rqe",
+                e: "Dois RQEs sem dizer as especialidades. Cada RQE precisa vir junto da especialidade a que pertence."
+              },
+              { txt: "Oftalmologia", cls: "sub", ok: true },
+              { txt: "Clinica Visão Clara", cls: "linha", ok: false, ev: "orto", e: "Falta o acento: Clínica." },
+              {
+                txt: "Rua das Flores, 300, Sala 4 - Centro, Cuiabá/MT · CEP 78043-000",
+                cls: "linha",
+                ok: false,
+                ev: "on_cep",
+                e: "Neste exemplo, o Busca CEP mostra outro bairro (Duque de Caxias) para esse CEP. Sempre confira o bairro pelo CEP nos Correios."
+              },
+              { txt: "Catarata; Glaucoma; Ceratocone.", cls: "linha", ok: true },
+              {
+                txt: "🖼️ Galeria: foto-2.jpg · ALT: (vazio)",
+                cls: "arquivo",
+                ok: false,
+                ev: "on_galeria",
+                e: "Galeria também precisa de nome descritivo em .webp e ALT."
+              },
+              {
+                txt: "🔑 Frase-chave de foco: (em branco)",
+                cls: "kw",
+                ok: false,
+                ev: "on_seo",
+                e: "Preencha a frase-chave, ex.: oftalmologista em Cuiabá."
+              },
+              { txt: "(65) 3322-4455 · WhatsApp (65) 99876-5432", cls: "linha", ok: true }
+            ]
+          },
+          {
+            tit: "Arte impressa · Oftalmologia (lista de tratamentos)",
+            tipo: "imp",
+            cor: "verde",
+            partes: [
+              { txt: "DR. RAFAEL COSTA", cls: "titulo", ok: true },
+              { txt: "Oftalmologista", cls: "sub", ok: true },
+              { txt: "CRM-MT 4321 | RQE 1122", cls: "reg", ok: true },
+              { txt: "Tratamentos e procedimentos:", cls: "linha", ok: true },
+              { txt: "Lentes de Contato", cls: "linha", ok: false, ev: "imp_proc", e: "Só a primeira letra maiúscula: Lentes de contato." },
+              {
+                txt: "Cirurgia Refrativa",
+                cls: "linha",
+                ok: false,
+                ev: "imp_proc",
+                e: "Só a primeira letra maiúscula: Cirurgia refrativa."
+              },
+              { txt: "Catarata", cls: "linha", ok: true },
+              { txt: "Clinica Visão Clara", cls: "linha", ok: false, ev: "orto", e: "Falta o acento: Clínica." },
+              { txt: "R. das Flores, 300, Sala 4 - Duque de Caxias, Cuiabá - MT", cls: "linha", ok: true },
+              { txt: "(65) 3322-4455", cls: "linha", ok: true },
+              { txt: "▦ QR Code", cls: "qr", ok: true }
+            ]
+          },
+          {
+            tit: "Anúncio on-line · Dermatologista (SEO e galeria)",
+            tipo: "online",
+            partes: [
+              { txt: "DRA. PAULA REIS", cls: "titulo", ok: true },
+              { txt: "CRM-MT 5566 | RQE 7788", cls: "reg", ok: true },
+              { txt: "Dermatologia", cls: "sub", ok: true },
+              {
+                txt: "Tratamento de acne, melasma e queda de cabelo, com atendimento humanisado.",
+                cls: "linha",
+                ok: false,
+                ev: "orto",
+                e: "Ortografia: “humanizado”, com z."
+              },
+              { txt: "🔑 Palavras-chave: acne, manchas na pele, dermatologista", cls: "kw", ok: true },
+              {
+                txt: "🔑 Palavra-chave: Cirurgia Plástica",
+                cls: "kw",
+                ok: false,
+                ev: "on_kwcat",
+                e: "É categoria de outra especialidade — ela não tem RQE nisso e o anúncio invade outra categoria."
+              },
+              {
+                txt: "📝 Metadescrição: 230 caracteres, cortada no Google",
+                cls: "linha",
+                ok: false,
+                ev: "on_seo",
+                e: "Limite de 155 caracteres."
+              },
+              {
+                txt: "🖼️ Galeria: consultorio-dra-paula-reis-cuiaba.webp · ALT: Consultório da Dra. Paula Reis, dermatologista em Cuiabá/MT",
+                cls: "arquivo",
+                ok: true
+              },
+              {
+                txt: "🖼️ Galeria: IMG_2031.png · ALT: imagem",
+                cls: "arquivo",
+                ok: false,
+                ev: "on_galeria",
+                e: "Nome genérico, .png e ALT sem descrição."
+              }
+            ]
+          },
+          {
+            tit: "Anúncio on-line · Renda de ortopedista",
+            tipo: "online",
+            partes: [
+              { txt: "DR. MARCELO ALVES", cls: "titulo", ok: true },
+              {
+                txt: "CRM-MT 2468 | RQE 1357 - Atende Unimed",
+                cls: "reg",
+                ok: false,
+                ev: "reg_campo",
+                e: "O campo CRM é só para o registro. “Atende Unimed” vai na descrição."
+              },
+              { txt: "Ortopedia e Traumatologia", cls: "sub", ok: true },
+              {
+                txt: "📅 Vigência: 25/11/2026 a 25/11/2027",
+                cls: "linha",
+                ok: false,
+                ev: "on_vigencia",
+                e: "Renda vale 18 meses: 25/11/2026 a 25/05/2028."
+              },
+              {
+                txt: "☐ Active (desmarcado)",
+                cls: "linha",
+                ok: false,
+                ev: "on_rendacheck",
+                e: "Na renda, o campo “Active” precisa estar marcado."
+              },
+              {
+                txt: "WhatsApp (65) 98888-0000 — número antigo, não abre conversa",
+                cls: "linha",
+                ok: false,
+                ev: "on_whats",
+                e: "Teste o link. Número que não funciona é corrigido com o cliente/administrativo."
+              },
+              { txt: "Av. Isaac Póvoas, 1200 - Centro Norte, Cuiabá/MT", cls: "linha", ok: true },
+              { txt: "Joelho; Ombro; Coluna.", cls: "linha", ok: true }
+            ]
+          }
+        );
+      })();
       /* ================== VERSÃO ON-LINE (Supabase) ================== */
       const CFG = window.MISSAO_CONFIG || {};
       const MOCK = window.MISSAO_API_MOCK || null;
