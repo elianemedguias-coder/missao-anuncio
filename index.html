@@ -2792,7 +2792,7 @@
       PERGUNTAS.forEach((p, i) => {
         p.ref = "base:" + i;
       });
-      const AVATARES = ["🦉", "🐼", "🦊", "🐯", "🐨", "🦁", "🐸", "🐙", "🦄", "🐝", "🐢", "🦜", "🌿", "🌻", "⭐", "🚀"];
+      const AVATARES = ["🦉", "🐼", "🦊", "🐯", "🐨", "🦁", "🐸", "🐙", "🦄", "🐝", "🐢", "🦜", "🌿", "🌻", "⭐", "🚀", "🦇", "🦸"];
       const TEMPO_DUELO = 15,
         ONLINE_MIN = 3;
       const TIPOS_CORR = [
@@ -2819,6 +2819,7 @@
         if (/at least 6/i.test(m)) return "A senha precisa ter pelo menos 6 caracteres.";
         if (/Email not confirmed/i.test(m)) return "Confirme seu e-mail primeiro (abra o link que chegou na sua caixa de entrada).";
         if (/rate limit|too many/i.test(m)) return "Muitas tentativas seguidas. Espere alguns minutos e tente de novo.";
+        if (/permission denied/i.test(m)) return "O banco recusou o acesso. Avise a coordenação (falta liberar permissão no Supabase).";
         if (/Failed to fetch|NetworkError|network/i.test(m)) return "Sem conexão com a internet. Confira e tente de novo.";
         if (/invalid.*email|valid email/i.test(m)) return "Confira o e-mail digitado.";
         return m || "Algo deu errado. Tente de novo.";
