@@ -1612,6 +1612,14 @@
           s: "URL (link) do anúncio",
           x: ["“Quando pedem pra colocar Dr. Dra ou reduzir/alterar o nome?”", "“Alterar somente o TÍTULO” · “Manter a URL”"]
         },
+        reg_naomed: {
+          f: F_DOC,
+          s: "Dr. e Dra. / Ordem de processo",
+          x: [
+            "“A partir de novembro de 2026 Dr. e Dra. serão usados amplamente no início dos anúncios, independente do estado e somente para médicos.”",
+            "Orientação da coordenação (25/11/2026): profissional que não é médico e não tem doutorado não usa Dr. ou Dra."
+          ]
+        },
         reg_dra: {
           f: F_DOC,
           s: "Dr. e Dra. / Ordem de processo",
@@ -2080,6 +2088,27 @@
           e: "Título de médico começa com DR. ou DRA., com ponto e gênero correto."
         },
         {
+          ev: "reg_naomed",
+          t: "restr",
+          q: "Título “DRA. ANA LIMA” no anúncio de uma cirurgiã-dentista (sem doutorado).",
+          ok: false,
+          e: "DR./DRA. é só para médicos. Dentista sem doutorado: título só com o nome — ANA LIMA."
+        },
+        {
+          ev: "reg_naomed",
+          t: "reg",
+          q: "Título “DR. MARCOS DIAS” no anúncio de um psicólogo (sem doutorado).",
+          ok: false,
+          e: "Não médico sem doutorado não usa DR./DRA. O título fica MARCOS DIAS."
+        },
+        {
+          ev: "reg_naomed",
+          t: "restr",
+          q: "Título “CAMILA ROCHA”, sem DRA., no anúncio de uma fisioterapeuta sem doutorado.",
+          ok: true,
+          e: "Certo: fisioterapeuta sem doutorado não leva DR./DRA. no título."
+        },
+        {
           ev: "reg_campo",
           t: "reg",
           q: "Campo CRM do admin: “CRM-GO 2205 | RQE 58241 – cardiologista e ecocardiografista”.",
@@ -2476,7 +2505,7 @@
           tit: "Anúncio on-line · Dentista",
           tipo: "online",
           partes: [
-            { txt: "DRA. ANA LIMA", cls: "titulo", ok: true },
+            { txt: "ANA LIMA", cls: "titulo", ok: true },
             { txt: "Cirurgiã-dentista | CRO-MT 4567", cls: "reg", ok: true },
             { txt: "Clareamento dental; Implante dentário; Restaurações.", cls: "linha", ok: true },
             {
@@ -2498,7 +2527,7 @@
               cls: "arquivo",
               ok: false,
               ev: "on_nomearq",
-              e: "Imagem em .webp e com nome descritivo: dra-ana-lima-dentista-cuiaba.webp."
+              e: "Imagem em .webp e com nome descritivo: ana-lima-dentista-cuiaba.webp."
             },
             { txt: "(65) 3322-1100 · WhatsApp (65) 99911-2233", cls: "linha", ok: true }
           ]
